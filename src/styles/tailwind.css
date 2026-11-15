@@ -1,0 +1,71 @@
+/*
+ * Tailwind CSS v4, set up to sit beside the existing hand-written CSS without changing it.
+ *
+ * - No preflight (Tailwind's global reset) is imported, so existing element styles are untouched.
+ * - No default Tailwind theme is imported, so only NearPaws tokens exist as utilities.
+ * - Tailwind's output lives in cascade layers. The existing CSS is unlayered, so on a conflict
+ *   the existing CSS wins. Remove a rule from the old CSS when you move that element to utilities.
+ * - Design tokens are defined once, here. The old CSS keeps reading them as var(--color-forest) etc.
+ */
+@layer theme, base, components, utilities;
+
+@import 'tailwindcss/utilities.css' layer(utilities) source(none);
+
+/* Scan only app source. Skip .claude/ (agent skills) and everything else. */
+@source '../../index.html';
+@source '..';
+
+@theme static {
+  /* Utilities for the 4px scale, e.g. p-4 = 1rem. */
+  --spacing: 0.25rem;
+
+  /* Breakpoints (desktop-first CSS still uses max-width; these are for new utility work). */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 56.25rem;
+  --breakpoint-lg: 75rem;
+
+  /* Color */
+  --color-cream: #fbf6ee;
+  --color-sand: #f2e8d8;
+  --color-paper: #ffffff;
+  --color-sage: #d3dfcf;
+  --color-mint: #eaf7f0;
+  --color-slate: #3e4a6b;
+  --color-purple: #6b5fa8;
+  --color-ink-deep: #1f2933;
+  --color-forest: #24473a;
+  --color-forest-deep: #183328;
+  --color-apricot: #f2a66b;
+  --color-apricot-soft: #fbe3cf;
+  --color-terracotta: #a8461f;
+  --color-ink: #2a2622;
+  --color-muted: #5e564d;
+  --color-line: #e4d8c5;
+  --color-focus: #2b59c3;
+  --color-error: #a3261b;
+  --color-success: #24473a;
+
+  /* Typography */
+  --font-display: 'Geist', 'DM Sans', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --text-2xl: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+  --text-hero: clamp(2.5rem, 1.6rem + 4vw, 4.5rem);
+
+  /* Radius */
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  /* Shadow */
+  --shadow-soft: 0 6px 20px rgba(60, 44, 24, 0.08);
+  --shadow-lift: 0 16px 40px rgba(60, 44, 24, 0.14);
+
+  /* Easing */
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.5, 1);
+}

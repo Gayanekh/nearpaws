@@ -1,37 +1,9 @@
-/* Shared design tokens. Change a value here and the whole prototype updates. */
+/*
+ * Design tokens that are not Tailwind theme values: the numbered spacing scale, layout widths and motion timing.
+ * Colors, fonts, type sizes, radii, shadows and the spring easing live in tailwind.css (@theme) and are still
+ * available everywhere as var(--color-forest), var(--text-lg), var(--radius-md) and so on.
+ */
 :root {
-  /* Color */
-  --color-cream: #fbf6ee;
-  --color-sand: #f2e8d8;
-  --color-paper: #ffffff;
-  --color-sage: #d3dfcf;
-  --color-mint: #eaf7f0;
-  --color-slate: #3e4a6b;
-  --color-purple: #6b5fa8;
-  --color-ink-deep: #1f2933;
-  --color-forest: #24473a;
-  --color-forest-deep: #183328;
-  --color-apricot: #f2a66b;
-  --color-apricot-soft: #fbe3cf;
-  --color-terracotta: #a8461f;
-  --color-ink: #2a2622;
-  --color-muted: #5e564d;
-  --color-line: #e4d8c5;
-  --color-focus: #2b59c3;
-  --color-error: #a3261b;
-  --color-success: #24473a;
-
-  /* Typography */
-  --font-display: 'Geist', 'DM Sans', system-ui, sans-serif;
-  --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --text-xs: 0.8125rem;
-  --text-sm: 0.9375rem;
-  --text-md: 1.0625rem;
-  --text-lg: 1.25rem;
-  --text-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
-  --text-2xl: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
-  --text-hero: clamp(2.5rem, 1.6rem + 4vw, 4.5rem);
-
   /* Spacing (4px scale) */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -43,16 +15,6 @@
   --space-8: 4.5rem;
   --space-9: 6.5rem;
 
-  /* Radius */
-  --radius-sm: 10px;
-  --radius-md: 18px;
-  --radius-lg: 28px;
-  --radius-pill: 999px;
-
-  /* Shadow */
-  --shadow-soft: 0 6px 20px rgba(60, 44, 24, 0.08);
-  --shadow-lift: 0 16px 40px rgba(60, 44, 24, 0.14);
-
   /* Layout */
   --width-content: 1160px;
   --width-narrow: 760px;
@@ -60,6 +22,5 @@
 
   /* Motion */
   --ease: cubic-bezier(0.22, 0.8, 0.3, 1);
-  --ease-spring: cubic-bezier(0.34, 1.4, 0.5, 1);
   --duration: 320ms;
 }
