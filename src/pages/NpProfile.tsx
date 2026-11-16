@@ -136,6 +136,7 @@ export function NpProfile() {
           </p>
           <FactList
             stacked
+            onAccent
             items={[
               { term: 'Care types', text: c.careTypes.map((t) => CARE_TYPE_LABELS[t]).join(' · ') },
               { term: 'Pet sizes', text: c.petSizes.map((s) => PET_SIZE_LABELS[s]).join(' · ') },

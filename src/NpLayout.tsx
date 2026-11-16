@@ -181,7 +181,7 @@ const footerLink =
 function Logo({ label, className = '' }: { label?: string; className?: string }) {
   return (
     <Link
-      className={`inline-flex items-baseline gap-2 font-sans text-[clamp(1.5rem,1.2rem+0.9vw,1.875rem)]/none font-bold tracking-tight text-ink no-underline ${className}`}
+      className={`-my-2.5 inline-flex items-baseline gap-2 py-2.5 font-sans text-[clamp(1.5rem,1.2rem+0.9vw,1.875rem)]/none font-bold tracking-tight text-ink no-underline ${className}`}
       to={ROUTES.home}
       aria-label={label}
     >

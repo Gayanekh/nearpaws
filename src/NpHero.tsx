@@ -81,10 +81,18 @@ export function NpHero() {
       />
 
       <div
-        className={`relative order-1 min-h-[clamp(9rem,calc(24*var(--svh)),28rem)] flex-auto overflow-hidden bg-panel composed:absolute composed:top-[4%] composed:bottom-0 composed:left-[12%] composed:z-2 composed:h-auto composed:min-h-0 composed:w-[35%] composed:overflow-visible composed:bg-transparent composed:[-webkit-mask-composite:source-in,source-in] composed:[-webkit-mask-image:linear-gradient(to_bottom,transparent_0,#000_24%),linear-gradient(to_right,transparent_0,#000_30%),linear-gradient(to_left,transparent_0,#000_9%)] composed:[mask-composite:intersect,intersect] composed:[mask-image:linear-gradient(to_bottom,transparent_0,#000_24%),linear-gradient(to_right,transparent_0,#000_30%),linear-gradient(to_left,transparent_0,#000_9%)] ${ENTER.photo}`}
+        className={`relative order-1 touch-pan-y min-h-[clamp(9rem,calc(24*var(--svh)),28rem)] flex-auto overflow-hidden bg-panel composed:absolute composed:top-[4%] composed:bottom-0 composed:left-[12%] composed:z-2 composed:h-auto composed:min-h-0 composed:w-[35%] composed:overflow-visible composed:bg-transparent composed:[-webkit-mask-composite:source-in,source-in] composed:[-webkit-mask-image:linear-gradient(to_bottom,transparent_0,#000_24%),linear-gradient(to_right,transparent_0,#000_30%),linear-gradient(to_left,transparent_0,#000_9%)] composed:[mask-composite:intersect,intersect] composed:[mask-image:linear-gradient(to_bottom,transparent_0,#000_24%),linear-gradient(to_right,transparent_0,#000_30%),linear-gradient(to_left,transparent_0,#000_9%)] ${ENTER.photo}`}
         data-enter=""
         id="heroPhoto"
-        onPointerDown={(e) => { dragStart.current = e.clientX }}
+        onPointerDown={(e) => {
+          dragStart.current = e.clientX
+          try {
+            e.currentTarget.setPointerCapture(e.pointerId)
+          } catch {
+            // no active pointer (a synthetic event): the swipe still works without capture
+          }
+        }}
+        onPointerCancel={() => { dragStart.current = null }}
         onPointerUp={(e) => {
           if (dragStart.current === null) return
           const delta = e.clientX - dragStart.current
@@ -97,6 +105,7 @@ export function NpHero() {
             key={s.src}
             className={`absolute inset-0 size-full [object-position:50%_var(--py,30%)] object-cover transition-opacity duration-550 ease-out motion-reduce:transition-none composed:[object-position:var(--px,64%)_var(--py,30%)] ${k === index ? 'opacity-100' : 'opacity-0'}`}
             src={s.src}
+            fetchPriority={k === 0 ? 'high' : 'low'}
             alt={k === index ? `${s.alt} (stock photo)` : ''}
             width={1400}
             height={1000}

@@ -65,6 +65,11 @@ body{margin:0;background:var(--color-paper)}
   .np{scroll-behavior:auto}
   :where(.np) *,
   :where(.np) *::before,
-  :where(.np) *::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+  :where(.np) *::after{
+    /* Reduced motion: fewer and gentler, not zero. Only fades and color changes keep animating (so a state change is still
+       seen); movement and size changes (transform, width, height) jump straight to the end. Keyframe animations that have no
+       gentler version of their own are skipped. */
+    transition-property:opacity,color,background-color,border-color,text-decoration-color,fill,stroke!important;
+    animation-duration:.01ms!important}
 }
 }
