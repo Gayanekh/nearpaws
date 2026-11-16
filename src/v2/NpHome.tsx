@@ -1,5 +1,6 @@
 import { NpCareOptions } from './NpCareOptions'
 import { NpCaregivers } from './NpCaregivers'
+import { NpFaq } from './NpFaq'
 import { NpHero } from './NpHero'
 import { NpHowItWorks } from './NpHowItWorks'
 import { NpReviews } from './NpReviews'
@@ -15,6 +16,7 @@ export function NpHome() {
       <NpHowItWorks />
       <NpStay />
       <NpReviews />
+      <NpFaq />
     </>
   )
 }
