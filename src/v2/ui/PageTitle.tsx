@@ -13,7 +13,7 @@ export function PageTitle({ eyebrow, title, children }: PageTitleProps) {
     <header>
       <Eyebrow>{eyebrow}</Eyebrow>
       <h1 className="font-slab text-display-lg font-light tracking-tight text-ink">{title}</h1>
-      {children && <p className="mt-6 max-w-[34rem] text-lead text-body">{children}</p>}
+      {children && <p className="mt-6 max-w-[34rem] text-lead text-copy">{children}</p>}
     </header>
   )
 }

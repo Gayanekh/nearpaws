@@ -27,7 +27,7 @@
   --color-panel: #f4f0ed;
   --color-ink: #1a170f;
   --color-accent: #e2c299;
-  --color-body: #494743;
+  --color-copy: #494743; /* body text; named copy so text-body can only mean the body font size */
   --color-muted: #6a6152;
   --color-accent-ink: #7a5c2e;
   --color-field-border: #857c70;

@@ -104,7 +104,7 @@ export function NpDirectory() {
           ) : (
             <div className="bg-panel p-8">
               <h2 className="font-slab text-display-md font-normal text-ink">No sample caregivers match</h2>
-              <p className="mt-3 mb-6 text-body">Try removing a filter to see more profiles.</p>
+              <p className="mt-3 mb-6 text-body text-copy">Try removing a filter to see more profiles.</p>
               <Button variant="secondary" onClick={reset}>Clear filters</Button>
             </div>
           )}

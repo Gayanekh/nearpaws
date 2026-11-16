@@ -1,7 +1,8 @@
 import { CARE_TYPE_LABELS, HANDOVER_LABELS } from '../../data/content'
 import type { Caregiver } from '../../types'
 import { CAREGIVER_PHOTOS } from '../data/caregiverPhotos'
-import { LegacyLink } from '../LegacyLink'
+import { Link } from 'react-router-dom'
+import { ROUTES } from '../routes'
 
 /**
  * Flat card for one sample caregiver: photograph, area, name, care style, tags and price on a panel, with no border or
@@ -29,12 +30,11 @@ export function CaregiverCard({ caregiver }: { caregiver: Caregiver }) {
       <div className="flex flex-1 flex-col p-6">
         <p className="mb-1 text-caption text-muted">{neighborhood}</p>
         <h3 className="font-slab text-title font-medium text-ink">
-          {/* To be a router link when the profile page is redesigned. */}
-          <LegacyLink to={`/caregivers/${id}`} className="no-underline outline-none after:absolute after:inset-0 after:content-['']">
+          <Link to={ROUTES.caregiver(id)} className="no-underline outline-none after:absolute after:inset-0 after:content-['']">
             {name}
-          </LegacyLink>
+          </Link>
         </h3>
-        <p className="mt-2 text-body-dense text-body">
+        <p className="mt-2 text-body-dense text-copy">
           {experienceYears} years’ experience · {careStyle}
         </p>
         <ul className="mt-4 flex flex-wrap gap-2" aria-label="Care options">
@@ -43,7 +43,7 @@ export function CaregiverCard({ caregiver }: { caregiver: Caregiver }) {
           ))}
           <li className="bg-paper px-3 py-1.5 text-label font-medium text-ink">{HANDOVER_LABELS[handover]}</li>
         </ul>
-        <p className="mt-auto pt-5 text-body-dense text-body">
+        <p className="mt-auto pt-5 text-body-dense text-copy">
           <strong className="font-slab text-title font-medium text-ink">${pricePerNight}</strong> / night{' '}
           <span className="text-caption text-muted">(sample price)</span>
         </p>

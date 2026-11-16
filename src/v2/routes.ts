@@ -5,4 +5,5 @@
 export const ROUTES = {
   home: '/v2',
   caregivers: '/v2/caregivers',
+  caregiver: (id: string) => `/v2/caregivers/${id}`,
 } as const

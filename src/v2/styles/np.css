@@ -18,7 +18,7 @@
   PROPOSED (shown here for feedback): body, muted, accent-ink, field-border, Montserrat, the type scale.
 */
 .np{--paper:var(--color-paper); --panel:var(--color-panel); --ink:var(--color-ink); --accent:var(--color-accent);
-  --body:var(--color-body); --muted:var(--color-muted); --accent-ink:var(--color-accent-ink); --field-border:var(--color-field-border);
+  --body:var(--color-copy); --muted:var(--color-muted); --accent-ink:var(--color-accent-ink); --field-border:var(--color-field-border);
   --hair:color-mix(in srgb,var(--ink) 16%,transparent);
   --slab:var(--font-slab); --sans:var(--font-sans);
   --inset:max(clamp(1rem,3vw,2.5rem),env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
