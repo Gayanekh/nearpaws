@@ -44,6 +44,7 @@
 :where(.np) :is(h1,h2,h3,h4){line-height:inherit}
 :where(.np) svg{display:inline;max-width:none}
 :where(.np) :focus-visible{border-radius:0}
+:where(.np) a{text-underline-offset:auto}
 .np{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 .np{background:var(--paper);color:var(--body);font:400 .9375rem/1.9 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 :where(.np) img{display:block;max-width:100%}
