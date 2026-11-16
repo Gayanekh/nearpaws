@@ -10,4 +10,5 @@ export const ROUTES = {
   become: '/v2/become-a-caregiver',
   status: '/v2/booking-status',
   dashboard: '/v2/caregiver-dashboard',
+  admin: '/v2/internal/admin',
 } as const

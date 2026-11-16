@@ -7,6 +7,8 @@ import { NpBookingStatus } from './pages/NpBookingStatus'
 import { NpDashboard } from './pages/NpDashboard'
 import { NpDirectory } from './pages/NpDirectory'
 import { NpProfile } from './pages/NpProfile'
+import { NpAdmin } from './pages/NpAdmin'
+import { NpNotFound } from './pages/NpNotFound'
 
 /** Routes of the redesign. They grow until the redesign covers the whole site. */
 export function App() {
@@ -21,6 +23,8 @@ export function App() {
           <Route path="become-a-caregiver" element={<NpBecome />} />
           <Route path="booking-status" element={<NpBookingStatus />} />
           <Route path="caregiver-dashboard" element={<NpDashboard />} />
+          <Route path="internal/admin" element={<NpAdmin />} />
+          <Route path="*" element={<NpNotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
