@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
-import { LegacyLink } from './LegacyLink'
 import { ROUTES } from './routes'
 import { useNpMotion } from './useNpMotion'
 
@@ -87,7 +86,7 @@ export function NpLayout() {
         <nav className="np-nav" aria-label="Main">
           <NavLink to={ROUTES.caregivers} end>Find a caregiver</NavLink>
           <a href="#how">How it works</a>
-          <LegacyLink to="/become-a-caregiver">Become a caregiver</LegacyLink>
+          <NavLink to={ROUTES.become} end>Become a caregiver</NavLink>
         </nav>
         <div className="np-tools">
           <button className="np-icon-btn" type="button" aria-label="Search (not available in the preview)">
@@ -113,7 +112,7 @@ export function NpLayout() {
         >
           <NavLink to={ROUTES.caregivers} end>Find a caregiver</NavLink>
           <a href="#how">How it works</a>
-          <LegacyLink to="/become-a-caregiver">Become a caregiver</LegacyLink>
+          <NavLink to={ROUTES.become} end>Become a caregiver</NavLink>
         </nav>
       </header>
 
@@ -134,7 +133,7 @@ export function NpLayout() {
             <ul>
               <li><Link to={ROUTES.caregivers}>Find a caregiver</Link></li>
               <li><a href="#how">How it works</a></li>
-              <li><LegacyLink to="/become-a-caregiver">Become a caregiver</LegacyLink></li>
+              <li><Link to={ROUTES.become}>Become a caregiver</Link></li>
             </ul>
           </nav>
           <div>

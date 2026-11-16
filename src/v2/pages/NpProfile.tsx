@@ -143,8 +143,7 @@ export function NpProfile() {
               { term: 'Availability', text: 'Sample only: most weekends open' },
             ]}
           />
-          {/* The booking page is still in the original site, so this is a plain link for now. */}
-          <Button variant="ink" href={`/book?caregiver=${c.id}`} className="mt-8 w-full">
+          <Button variant="ink" to={`${ROUTES.book}?caregiver=${c.id}`} className="mt-8 w-full">
             Request care with {c.name}
           </Button>
           <p className="mt-4 text-caption text-ink">Only an approximate neighborhood is shown. No request is actually sent.</p>

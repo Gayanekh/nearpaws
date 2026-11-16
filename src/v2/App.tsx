@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { NpHome } from './NpHome'
 import { NpLayout } from './NpLayout'
+import { NpBecome } from './pages/NpBecome'
+import { NpBooking } from './pages/NpBooking'
 import { NpDirectory } from './pages/NpDirectory'
 import { NpProfile } from './pages/NpProfile'
 
@@ -13,6 +15,8 @@ export function App() {
           <Route index element={<NpHome />} />
           <Route path="caregivers" element={<NpDirectory />} />
           <Route path="caregivers/:id" element={<NpProfile />} />
+          <Route path="book" element={<NpBooking />} />
+          <Route path="become-a-caregiver" element={<NpBecome />} />
         </Route>
       </Routes>
     </BrowserRouter>

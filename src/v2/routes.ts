@@ -6,4 +6,6 @@ export const ROUTES = {
   home: '/v2',
   caregivers: '/v2/caregivers',
   caregiver: (id: string) => `/v2/caregivers/${id}`,
+  book: '/v2/book',
+  become: '/v2/become-a-caregiver',
 } as const
