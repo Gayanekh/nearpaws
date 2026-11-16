@@ -22,6 +22,7 @@
 /* Scan only app source. Skip .claude/ (agent skills) and everything else. */
 @source '../../index.html';
 @source '..';
+@source not '../v2';
 
 @theme static {
   /* Utilities for the 4px scale, e.g. p-4 = 1rem. */

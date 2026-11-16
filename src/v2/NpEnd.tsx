@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { LegacyLink } from './LegacyLink'
 
 /**
  * Closing section of the approved preview: a call to action on the left, a photograph on the right and the tan
@@ -22,10 +22,10 @@ export function NpEnd() {
           style={{ objectPosition: '50% 45%' }}
         />
       </figure>
-      <Link className="np-end__cta" to="/caregivers">
+      <LegacyLink className="np-end__cta" to="/caregivers">
         <span>Find a caregiver</span>
         <svg viewBox="0 0 60 24" aria-hidden="true"><path d="M2 12h54M46 3l10 9-10 9" /></svg>
-      </Link>
+      </LegacyLink>
     </section>
   )
 }

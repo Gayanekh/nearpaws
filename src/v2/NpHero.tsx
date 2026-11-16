@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
-import { Link } from 'react-router-dom'
+import { LegacyLink } from './LegacyLink'
 import { HERO_SLIDES } from './heroData'
 
 const AUTOPLAY_MS = 6000
@@ -102,10 +102,10 @@ export function NpHero() {
         {slide.words.map((w) => <li key={w}>{w}</li>)}
       </ul>
 
-      <Link className="np-cta" to="/caregivers">
+      <LegacyLink className="np-cta" to="/caregivers">
         <span>Find a caregiver</span>
         <svg viewBox="0 0 60 24" aria-hidden="true"><path d="M2 12h54M46 3l10 9-10 9" /></svg>
-      </Link>
+      </LegacyLink>
 
       <div className="np-hero__main">
         <h1>Care, <br />close to <br />home.</h1>

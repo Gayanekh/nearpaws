@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
+import { LegacyLink } from './LegacyLink'
 import { useNpMotion } from './useNpMotion'
 
 /**
@@ -72,7 +73,10 @@ export function NpLayout() {
   return (
     <div className="np" ref={root}>
       <a className="np-skip" href="#main">Skip to main content</a>
-      <p className="np-notice" ref={notice}>
+      <p
+        ref={notice}
+        className="bg-ink px-(--inset) py-[0.625rem] text-center font-sans text-[0.8125rem] leading-[1.5] font-normal text-paper [@media(max-width:480px)]:py-2 [@media(max-width:480px)]:text-[0.75rem] [@media(max-width:480px)]:leading-[1.4]"
+      >
         Design preview of the proposed NearPaws look. This is not the live site. Caregivers, prices and reviews are fictional,
         and photos are Unsplash stock images.
       </p>
@@ -80,9 +84,9 @@ export function NpLayout() {
       <header className="np-header" ref={header}>
         <a className="np-logo" href="#top" aria-label="NearPaws, preview home">nearpaws <small>preview</small></a>
         <nav className="np-nav" aria-label="Main">
-          <Link to="/caregivers">Find a caregiver</Link>
+          <LegacyLink to="/caregivers">Find a caregiver</LegacyLink>
           <a href="#how">How it works</a>
-          <Link to="/become-a-caregiver">Become a caregiver</Link>
+          <LegacyLink to="/become-a-caregiver">Become a caregiver</LegacyLink>
         </nav>
         <div className="np-tools">
           <button className="np-icon-btn" type="button" aria-label="Search (not available in the preview)">
@@ -106,9 +110,9 @@ export function NpLayout() {
           aria-label="Menu"
           onClick={(e) => (e.target as HTMLElement).closest('a') && setOpen(false)}
         >
-          <Link to="/caregivers">Find a caregiver</Link>
+          <LegacyLink to="/caregivers">Find a caregiver</LegacyLink>
           <a href="#how">How it works</a>
-          <Link to="/become-a-caregiver">Become a caregiver</Link>
+          <LegacyLink to="/become-a-caregiver">Become a caregiver</LegacyLink>
         </nav>
       </header>
 
@@ -127,9 +131,9 @@ export function NpLayout() {
           <nav aria-label="Footer">
             <h2>Explore</h2>
             <ul>
-              <li><Link to="/caregivers">Find a caregiver</Link></li>
+              <li><LegacyLink to="/caregivers">Find a caregiver</LegacyLink></li>
               <li><a href="#how">How it works</a></li>
-              <li><Link to="/become-a-caregiver">Become a caregiver</Link></li>
+              <li><LegacyLink to="/become-a-caregiver">Become a caregiver</LegacyLink></li>
             </ul>
           </nav>
           <div>

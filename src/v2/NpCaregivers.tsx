@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { LegacyLink } from './LegacyLink'
 
 interface SampleCaregiver {
   key: 'lead' | 'a' | 'b'
@@ -83,7 +83,7 @@ export function NpCaregivers() {
               </div>
               <div className="np-pf__body">
                 <p className="np-pf__place">{c.place}</p>
-                <h3><Link to={`/caregivers/${c.slug}`}>{c.name} <Arrow /></Link></h3>
+                <h3><LegacyLink to={`/caregivers/${c.slug}`}>{c.name} <Arrow /></LegacyLink></h3>
                 <p className="np-pf__style">{c.style}</p>
                 <ul className="np-tags" aria-label="Care options">
                   {c.tags.map((t) => <li key={t}>{t}</li>)}
@@ -93,7 +93,7 @@ export function NpCaregivers() {
           ))}
         </div>
         <div className="np-profiles__foot">
-          <Link className="np-text-link" to="/caregivers"><span>Browse all sample caregivers</span><Arrow /></Link>
+          <LegacyLink className="np-text-link" to="/caregivers"><span>Browse all sample caregivers</span><Arrow /></LegacyLink>
         </div>
       </div>
     </section>
