@@ -1,5 +1,9 @@
+import { Link } from 'react-router-dom'
+
 interface SampleCaregiver {
   key: 'lead' | 'a' | 'b'
+  /** The id of this caregiver on the existing /caregivers/:id profile page. */
+  slug: 'mara' | 'priya' | 'elena'
   name: string
   price: number
   place: string
@@ -12,6 +16,7 @@ interface SampleCaregiver {
 const CAREGIVERS: SampleCaregiver[] = [
   {
     key: 'lead',
+    slug: 'mara',
     name: 'Mara',
     price: 42,
     place: 'Maple Grove, near the community garden',
@@ -21,6 +26,7 @@ const CAREGIVERS: SampleCaregiver[] = [
   },
   {
     key: 'a',
+    slug: 'priya',
     name: 'Priya',
     price: 55,
     place: 'Old Orchard, quiet residential street',
@@ -30,6 +36,7 @@ const CAREGIVERS: SampleCaregiver[] = [
   },
   {
     key: 'b',
+    slug: 'elena',
     name: 'Elena',
     price: 30,
     place: 'Cedar Park, tree-lined avenue',
@@ -45,7 +52,7 @@ const Arrow = () => (
 
 /**
  * Meet caregivers, from the approved preview: a staggered editorial spread with one large lead profile and two smaller ones.
- * The profile links are still the preview's in-page anchors; they will point at real caregiver pages when the routes are restyled.
+ * The profile names link to the existing caregiver profile pages (/caregivers/:id).
  */
 export function NpCaregivers() {
   return (
@@ -76,7 +83,7 @@ export function NpCaregivers() {
               </div>
               <div className="np-pf__body">
                 <p className="np-pf__place">{c.place}</p>
-                <h3><a href="#caregivers">{c.name} <Arrow /></a></h3>
+                <h3><Link to={`/caregivers/${c.slug}`}>{c.name} <Arrow /></Link></h3>
                 <p className="np-pf__style">{c.style}</p>
                 <ul className="np-tags" aria-label="Care options">
                   {c.tags.map((t) => <li key={t}>{t}</li>)}
@@ -86,7 +93,7 @@ export function NpCaregivers() {
           ))}
         </div>
         <div className="np-profiles__foot">
-          <a className="np-text-link" href="#caregivers"><span>Browse all sample caregivers</span><Arrow /></a>
+          <Link className="np-text-link" to="/caregivers"><span>Browse all sample caregivers</span><Arrow /></Link>
         </div>
       </div>
     </section>

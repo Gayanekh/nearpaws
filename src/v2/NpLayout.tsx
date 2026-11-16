@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 import { useNpMotion } from './useNpMotion'
 
 /**
@@ -80,9 +80,9 @@ export function NpLayout() {
       <header className="np-header" ref={header}>
         <a className="np-logo" href="#top" aria-label="NearPaws, preview home">nearpaws <small>preview</small></a>
         <nav className="np-nav" aria-label="Main">
-          <a href="#caregivers">Find a caregiver</a>
+          <Link to="/caregivers">Find a caregiver</Link>
           <a href="#how">How it works</a>
-          <a href="#become">Become a caregiver</a>
+          <Link to="/become-a-caregiver">Become a caregiver</Link>
         </nav>
         <div className="np-tools">
           <button className="np-icon-btn" type="button" aria-label="Search (not available in the preview)">
@@ -106,9 +106,9 @@ export function NpLayout() {
           aria-label="Menu"
           onClick={(e) => (e.target as HTMLElement).closest('a') && setOpen(false)}
         >
-          <a href="#caregivers">Find a caregiver</a>
+          <Link to="/caregivers">Find a caregiver</Link>
           <a href="#how">How it works</a>
-          <a href="#become">Become a caregiver</a>
+          <Link to="/become-a-caregiver">Become a caregiver</Link>
         </nav>
       </header>
 
@@ -127,9 +127,9 @@ export function NpLayout() {
           <nav aria-label="Footer">
             <h2>Explore</h2>
             <ul>
-              <li><a href="#caregivers">Find a caregiver</a></li>
+              <li><Link to="/caregivers">Find a caregiver</Link></li>
               <li><a href="#how">How it works</a></li>
-              <li><a href="#become">Become a caregiver</a></li>
+              <li><Link to="/become-a-caregiver">Become a caregiver</Link></li>
             </ul>
           </nav>
           <div>

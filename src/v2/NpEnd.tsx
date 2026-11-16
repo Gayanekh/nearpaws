@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 /**
  * Closing section of the approved preview: a call to action on the left, a photograph on the right and the tan
  * "Find a caregiver" block anchored between them. useNpMotion adds the reveal to the photograph, so only the copy carries it here.
@@ -20,10 +22,10 @@ export function NpEnd() {
           style={{ objectPosition: '50% 45%' }}
         />
       </figure>
-      <a className="np-end__cta" href="#caregivers">
+      <Link className="np-end__cta" to="/caregivers">
         <span>Find a caregiver</span>
         <svg viewBox="0 0 60 24" aria-hidden="true"><path d="M2 12h54M46 3l10 9-10 9" /></svg>
-      </a>
+      </Link>
     </section>
   )
 }

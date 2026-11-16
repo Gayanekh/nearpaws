@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const FACTS = [
   { term: 'The care space', text: 'See where your pet will sleep, play and rest, plus garden or outdoor access.' },
   { term: 'The caregiver', text: 'Read about their experience, care style and how often they send updates.' },
@@ -37,7 +39,7 @@ export function NpStay() {
               </div>
             ))}
           </dl>
-          <a className="np-btn" href="#caregivers">
+          <Link className="np-btn" to="/caregivers/mara">
             {'See a sample profile '}
             <svg
               width="36"
@@ -48,7 +50,7 @@ export function NpStay() {
             >
               <path d="M1 8h32M26 2l7 6-7 6" />
             </svg>
-          </a>
+          </Link>
         </div>
         <p className="np-stay2__note">
           Only an approximate neighborhood is ever shown. Exact addresses stay private until a stay is agreed.
