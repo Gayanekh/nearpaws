@@ -208,12 +208,6 @@ body{margin:0;background:var(--color-paper)}
 .np{--fs-lg:clamp(2.25rem,1.2rem + 2.2vw,3rem)}
 /* section H2 cap: 48px on desktop */
 :where(.np) .np-h-lg{font-size:var(--fs-lg);line-height:1.05}
-:where(.np) .np-num{font:500 clamp(1.75rem,1.2rem + 1.6vw,2.75rem)/1 var(--slab);color:var(--accent-ink);font-variant-numeric:tabular-nums}
-:where(.np) .np-btn{display:inline-flex;align-items:center;justify-content:center;gap:1rem;min-height:3rem;padding:1rem 2rem;background:var(--accent);color:var(--ink);font:500 .875rem/1.4 var(--sans);letter-spacing:.01em;text-decoration:none;transition:background .2s var(--ease-out),color .2s var(--ease-out),transform .16s var(--ease-out)}
-:where(.np) .np-btn:active{transform:scale(.97)}
-@media (hover:hover){
-  :where(.np) .np-btn:hover{background:var(--ink);color:var(--paper)}
-}
 :where(.np) .np-text-link{display:inline-flex;align-items:center;gap:.6rem;font:500 .875rem/1.4 var(--sans);color:var(--ink);text-decoration:none;padding:.75rem 0;min-height:2.75rem}
 :where(.np) .np-text-link span{background:linear-gradient(var(--accent),var(--accent)) 0 100%/100% 2px no-repeat;padding-bottom:.15rem}
 :where(.np) .np-text-link svg{width:2.25rem;height:1rem;stroke:currentColor;fill:none;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round;transition:transform .35s var(--ease-out)}
@@ -223,36 +217,6 @@ body{margin:0;background:var(--color-paper)}
 :where(.np) .np-tags{display:flex;flex-wrap:wrap;gap:.5rem}
 :where(.np) .np-tags li{background:var(--paper);color:var(--ink);font:500 .75rem/1.4 var(--sans);padding:.4rem .8rem}
 /* ---------- 1. Care options: a tall photograph that follows your choice ---------- */
-:where(.np) .np-opts{display:grid;background:var(--paper)}
-:where(.np) .np-opts__media{position:relative;aspect-ratio:4/5;max-height:46rem;width:100%;background:var(--panel);overflow:hidden}
-:where(.np) .np-opts__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s var(--ease-out)}
-:where(.np) .np-opts__media img.np-is-on{opacity:1}
-:where(.np) .np-opts__note{position:absolute;z-index:2;left:0;bottom:0;max-width:min(24rem,88%);background:var(--accent);color:var(--ink);padding:1.25rem var(--inset) 1.4rem;font:500 .9375rem/1.5 var(--sans)}
-:where(.np) .np-opts__note small{display:block;font:600 .75rem/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.3rem}
-:where(.np) .np-opts__copy{padding:clamp(3.5rem,8vw,5rem) var(--inset) clamp(4rem,9vw,6rem)}
-:where(.np) .np-opts__head{padding:clamp(4.5rem,9vw,7.5rem) var(--inset) clamp(2.5rem,4vw,4rem);display:grid;gap:1.5rem}
-:where(.np) .np-opts__head h2{font-size:var(--fs-lg);line-height:1.05;max-width:14ch}
-:where(.np) .np-opts__head .np-lead{max-width:30rem}
-:where(.np) .np-tabs{border-bottom:1px solid var(--hair)}
-:where(.np) .np-tab{position:relative;display:grid;grid-template-columns:3.5rem 1fr;align-items:baseline;gap:0 1rem;width:100%;text-align:left;padding:1.25rem 0;min-height:3.5rem;border-top:1px solid var(--hair)}
-:where(.np) .np-tab::before{content:"";position:absolute;left:0;top:-1px;height:2px;width:0;background:var(--accent);transition:width .5s var(--ease-out)}
-:where(.np) .np-tab[aria-selected="true"]::before{width:100%}
-:where(.np) .np-tab .np-num{color:var(--muted);transition:color .3s}
-:where(.np) .np-tab .np-t{font:300 clamp(1.375rem,1rem + 1.4vw,2.25rem)/1.15 var(--slab);color:var(--muted);transition:color .3s}
-:where(.np) .np-tab[aria-selected="true"] .np-num{color:var(--accent-ink)}
-:where(.np) .np-tab[aria-selected="true"] .np-t{color:var(--ink)}
-@media (hover:hover){
-  :where(.np) .np-tab:hover .np-t{color:var(--ink)}
-}
-:where(.np) .np-tabpanel{padding:0 0 1.75rem 4.5rem;max-width:36rem}
-:where(.np) .np-tabpanel[hidden]{display:none}
-@media (min-width:900px){
-  :where(.np) .np-opts{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
-  :where(.np) .np-opts__head{grid-column:1/-1;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:end;column-gap:clamp(3rem,6vw,8rem)}
-  :where(.np) .np-opts__head .np-lead{padding-bottom:.4rem}
-  :where(.np) .np-opts__media{aspect-ratio:auto;max-height:none;min-height:clamp(38rem,46vw,50rem)}
-  :where(.np) .np-opts__copy{display:flex;flex-direction:column;justify-content:center;padding-top:3rem;padding-left:clamp(3rem,6vw,8rem)}
-}
 /* ---------- 2. Caregiver profiles: a staggered editorial spread ---------- */
 :where(.np) .np-profiles{background:var(--panel);padding-block:var(--section)}
 :where(.np) .np-profiles__head{display:grid;gap:1.5rem;margin-bottom:clamp(3rem,6vw,6rem)}
@@ -292,67 +256,6 @@ body{margin:0;background:var(--color-paper)}
   :where(.np) .np-pf--b{grid-column:8/12;grid-row:2}
   :where(.np) .np-pf--b .np-pf__img{aspect-ratio:4/5}
 }
-/* ---------- 3. How it works: a wide photograph, then steps that descend like a staircase ---------- */
-/* ---------- 4. Stay and trust: a full-bleed room with a paper sheet laid over it ---------- */
-:where(.np) .np-stay2{position:relative;background:var(--panel)}
-:where(.np) .np-stay2__bg{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:50% 62%}
-:where(.np) .np-stay2__inset{display:none}
-:where(.np) .np-stay2__col{position:relative;z-index:2}
-:where(.np) .np-stay2__sheet{background:var(--ink);color:var(--paper);padding:clamp(2.5rem,6vw,4rem) var(--inset)}
-:where(.np) .np-stay2__sheet h2{font-size:var(--fs-lg);line-height:1.05;margin-bottom:1.5rem;color:var(--paper)}
-:where(.np) .np-stay2__sheet .np-eyebrow{display:inline-block;background:var(--paper);color:var(--ink);padding:.45rem .85rem;margin-bottom:1.5rem}
-:where(.np) .np-stay2__sheet .np-eyebrow::before{display:none}
-:where(.np) .np-stay2__sheet .np-lead{color:color-mix(in srgb,var(--paper) 88%,transparent)}
-:where(.np) .np-facts{margin:2.25rem 0 2.5rem}
-:where(.np) .np-facts div{display:grid;gap:.25rem 1.5rem;padding:1.15rem 0;border-top:1px solid color-mix(in srgb,var(--paper) 24%,transparent)}
-:where(.np) .np-facts div:last-child{border-bottom:1px solid color-mix(in srgb,var(--paper) 24%,transparent)}
-:where(.np) .np-facts dt{font:600 .75rem/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
-:where(.np) .np-facts dd{color:color-mix(in srgb,var(--paper) 86%,transparent);font-size:.9375rem;line-height:1.55}
-@media (min-width:640px){
-  :where(.np) .np-facts div{grid-template-columns:10rem 1fr}
-}
-:where(.np) .np-stay2__note{background:var(--accent);color:var(--ink);padding:1.5rem var(--inset);font:500 .9375rem/1.6 var(--sans)}
-@media (min-width:900px){
-  :where(.np) .np-stay2{display:flex;justify-content:flex-start;align-items:flex-end;min-height:clamp(46rem,62vw,64rem);padding:clamp(4rem,7vw,7rem) var(--inset)}
-  :where(.np) .np-stay2__bg{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-position:50% 58%}
-  :where(.np) .np-stay2__col{width:min(48%,45rem)}
-  :where(.np) .np-stay2__sheet{padding:clamp(2.5rem,4vw,3.5rem);background:color-mix(in srgb,var(--ink) 62%,transparent);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px)}
-  :where(.np) .np-facts{display:grid;grid-template-columns:1fr 1fr;column-gap:2rem;margin:2rem 0 2.25rem}
-  :where(.np) .np-facts div{grid-template-columns:1fr}
-  :where(.np) .np-facts div:nth-last-child(2){border-bottom:1px solid color-mix(in srgb,var(--paper) 24%,transparent)}
-  :where(.np) .np-stay2__note{padding:1.5rem clamp(2.5rem,4vw,3.5rem)}
-  :where(.np) .np-stay2__inset{display:block;position:absolute;z-index:2;right:var(--inset);bottom:clamp(2.5rem,5vw,4.5rem);width:min(21vw,18rem);aspect-ratio:4/5;margin:0;background:var(--paper);padding:.625rem}
-  :where(.np) .np-stay2__inset img{width:100%;height:100%;object-fit:cover}
-}
-@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
-  :where(.np) .np-stay2__sheet{background:color-mix(in srgb,var(--ink) 90%,transparent)}
-}
-/* ---------- 5. Reviews: a large quotation beside a tall portrait that changes with it ---------- */
-:where(.np) .np-rev{background:var(--paper);padding-block:var(--section);overflow:hidden}
-:where(.np) .np-rev__grid{display:grid;gap:3rem;max-width:90rem;margin-inline:auto;padding-inline:var(--inset)}
-:where(.np) .np-rev__photo{position:relative;margin:0;aspect-ratio:4/5;background:var(--panel);overflow:hidden}
-:where(.np) .np-rev__photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s var(--ease-out)}
-:where(.np) .np-rev__photo img.np-is-on{opacity:1}
-:where(.np) .np-rev__tag{position:absolute;z-index:2;left:0;bottom:0;background:var(--accent);color:var(--ink);padding:1rem 1.5rem}
-:where(.np) .np-reviews__count{font:500 1.75rem/1 var(--slab);color:var(--ink);font-variant-numeric:tabular-nums}
-:where(.np) .np-reviews__count small{font:400 .875rem/1 var(--sans);color:var(--ink)}
-:where(.np) .np-rev__mark{display:block;font:300 clamp(8rem,17vw,16rem)/1 var(--slab);color:var(--accent);height:.5em;margin:1.25rem 0 .5rem;overflow:visible}
-:where(.np) .np-quote{font:300 clamp(1.75rem,1rem + 2.8vw,3.5rem)/1.2 var(--slab);color:var(--ink);letter-spacing:-.01em;min-height:4.8em}
-:where(.np) .np-quote-by{margin-top:1.5rem;font:500 .875rem/1.5 var(--sans);color:var(--ink)}
-:where(.np) .np-quote-by span{display:block;font-weight:400;color:var(--muted);font-size:.8125rem}
-:where(.np) .np-reviews__ctrl{display:flex;align-items:center;gap:.25rem;margin:1.75rem 0 2rem -.75rem}
-:where(.np) .np-arrow{width:2.75rem;height:2.75rem;display:grid;place-items:center;color:var(--ink)}
-:where(.np) .np-arrow svg{width:1.25rem;height:1.25rem;stroke:currentColor;fill:none;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s var(--ease-out)}
-@media (hover:hover){
-  :where(.np) .np-arrow--next:hover svg{transform:translateX(3px)}
-  :where(.np) .np-arrow--prev:hover svg{transform:translateX(-3px)}
-}
-@media (min-width:900px){
-  :where(.np) .np-rev__grid{grid-template-columns:7fr 5fr;gap:clamp(3rem,7vw,8rem);align-items:center}
-  :where(.np) .np-rev__photo{margin-right:calc(var(--inset) * -1)}
-}
-/* ---------- 6. FAQ: sticky heading and portrait beside large numbered questions ---------- */
-/* ---------- 7. Closing: the hero's composition, mirrored ---------- */
 /* ---------- 8. Footer: links above, one very large light wordmark below ---------- */
 :where(.np) .np-footer{background:var(--panel);padding:clamp(4rem,8vw,7rem) var(--inset) 2rem;overflow:hidden}
 :where(.np) .np-footer__grid{display:grid;gap:2.5rem;max-width:90rem;margin-inline:auto}
@@ -376,7 +279,6 @@ body{margin:0;background:var(--color-paper)}
 @keyframes m-fade{from{opacity:0}}
 @keyframes m-rule{from{transform:scaleX(0)}}
 @keyframes m-pop{from{opacity:0;transform:translateY(-6px)}}
-@keyframes m-tab{from{opacity:0;transform:translateY(6px)}}
 /* 1. Hero entrance: plays once on load. Lead (headline) first, then text, rule, meta, button, peek, controls.
       fill-mode "backwards" only: after the run the elements return to their normal styles, so hover and press still work. */
 :where(.np) .np-hero__panel-bg{animation:m-fade .6s var(--ease-out) backwards}
@@ -394,11 +296,6 @@ body{margin:0;background:var(--color-paper)}
 /* 3. Photographs settle from a slight zoom (the script runs it). The Stay room is the Get Started pattern:
       the picture settles from 1.2x and slightly above, and the panel only fades in (0.2s later), with no movement. */
 /* 4. Micro-interactions */
-:where(.np) .np-btn svg{transition:transform .3s var(--ease-out)}
-@media (hover:hover) and (pointer:fine){
-  :where(.np) .np-btn:hover svg{transform:translateX(.35rem)}
-}
-:where(.np) .np-tabpanel:not([hidden]){animation:m-tab .24s var(--ease-out) backwards}
 :where(.np) .np-mobile-nav.np-is-open{animation:m-pop .22s var(--ease-out)}
 @media (prefers-reduced-motion:reduce){
   .np{scroll-behavior:auto}
@@ -417,7 +314,6 @@ body{margin:0;background:var(--color-paper)}
   :where(.np) .np-hero .np-cta,
   :where(.np) .np-hero__peek,
   :where(.np) .np-hero__controls{animation:m-fade .35s linear backwards!important}
-  :where(.np) .np-tabpanel:not([hidden]),
   :where(.np) .np-mobile-nav.np-is-open{animation:m-fade .2s linear!important}
 }
 }

@@ -5,7 +5,7 @@ type Variant = 'primary' | 'secondary' | 'ink'
 
 const base =
   'inline-flex min-h-12 items-center justify-center gap-4 px-8 py-4 font-sans text-ui font-medium tracking-ui no-underline ' +
-  'transition-[background-color,color,transform] duration-200 ease-out active:scale-[0.97] ' +
+  'transition-[background-color,color,transform] [transition-duration:200ms,200ms,160ms] ease-out active:scale-[0.97] ' +
   'disabled:pointer-events-none disabled:bg-panel disabled:text-muted'
 
 const variants: Record<Variant, string> = {

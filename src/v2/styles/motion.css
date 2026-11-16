@@ -9,6 +9,7 @@
 /* Spring: stiffness 150, damping 40, mass 1 (the values the Pawluxe reference uses). Overdamped, so no bounce; sampled as a CSS easing. */
 .np{--spring:linear(0,0.0397,0.1176,0.2032,0.2856,0.3613,0.4298,0.4911,0.546,0.595,0.6387,0.6777,0.7125,0.7435,0.7712,0.7959,0.8179,0.8376,0.8551,0.8708,0.8847,0.8972,0.9083,0.9182,0.927,0.9349,0.9419,0.9482,0.9538,0.9588,0.9632,0.9672,0.9707,0.9739,0.9767,0.9792,0.9815,0.9835,0.9853,0.9868,0.9883,0.9895,0.9907,0.9917,1)}
 @keyframes m-fade{from{opacity:0}}
+@keyframes m-tab{from{opacity:0;transform:translateY(6px)}}
 /* Scroll reveal, once: fade + a 40px rise; items in the same moment follow at 0.15s steps (set by the script). */
 :where(.np) [data-rv]{opacity:0;transform:translate(var(--rv-x,0),var(--rv-y,40px));transition:opacity .8s var(--spring),transform .8s var(--spring)}
 :where(.np) [data-rv][data-in]{opacity:1;transform:none}
@@ -23,6 +24,8 @@
 .np[data-mo] [data-rv="fade"]{transform:none;transition:opacity .8s var(--spring) .15s}
 .np[data-mo] [data-rv="fade"]:not([data-in])~[data-after-reveal]{opacity:0}
 :where(.np) [data-rv="fade"][data-in]~[data-after-reveal]{animation:m-fade .8s var(--spring) .3s backwards}
+/* A newly shown tab panel eases in. */
+:where(.np) [role="tabpanel"]:not([hidden]){animation:m-tab .24s var(--ease-out) backwards}
 /* The FAQ answer opens by height where the browser can animate to auto. */
 @supports (interpolate-size:allow-keywords){
   :where(.np) [data-accordion] details{interpolate-size:allow-keywords}
@@ -31,5 +34,6 @@
 }
 @media (prefers-reduced-motion:reduce){
   :where(.np) [data-rv]{opacity:1;transform:none}
+  :where(.np) [role="tabpanel"]:not([hidden]){animation:m-fade .2s linear!important}
 }
 }

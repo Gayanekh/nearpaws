@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { ArrowButton } from './ui/ArrowButton'
+import { Eyebrow } from './ui/Eyebrow'
 
 interface SampleReview {
   quote: string
@@ -51,36 +53,32 @@ export function NpReviews() {
   const show = (n: number) => setIndex((n + count) % count)
 
   return (
-    <section className="np-rev" aria-labelledby="rev-h">
-      <div className="np-rev__grid">
-        <div className="np-rev__text">
-          <p className="np-eyebrow" data-rv="l">Illustrative reviews</p>
-          <h2 id="rev-h" className="np-h-lg" data-rv="l">What owners might say.</h2>
+    <section className="overflow-hidden bg-paper py-(--section)" aria-labelledby="rev-h">
+      <div className="mx-auto grid max-w-360 gap-12 px-(--inset) md:grid-cols-[7fr_5fr] md:items-center md:gap-[clamp(3rem,7vw,8rem)]">
+        <div>
+          <Eyebrow data-rv="l">Illustrative reviews</Eyebrow>
+          <h2 id="rev-h" className="text-section" data-rv="l">What owners might say.</h2>
           <div data-rv="l" id="reviewBox">
-            <span className="np-rev__mark" aria-hidden="true">&ldquo;</span>
-            <blockquote className="np-quote" id="quote">{review.quote}</blockquote>
-            <p className="np-quote-by" id="quoteBy">
+            <span className="mt-5 mb-2 block h-[0.5em] overflow-visible font-slab text-[clamp(8rem,17vw,16rem)] leading-none font-light text-accent" aria-hidden="true">&ldquo;</span>
+            <blockquote className="min-h-[4.8em] font-slab text-[clamp(1.75rem,1rem+2.8vw,3.5rem)] leading-[1.2] font-light tracking-tight text-ink" id="quote">{review.quote}</blockquote>
+            <p className="mt-6 font-sans text-ui/[1.5] font-medium text-ink" id="quoteBy">
               {review.by}
-              <span>{`${review.about} · sample review`}</span>
+              <span className="block text-caption font-normal text-muted">{`${review.about} · sample review`}</span>
             </p>
-            <div className="np-reviews__ctrl">
-              <button className="np-arrow np-arrow--prev" type="button" id="revPrev" aria-label="Previous review" onClick={() => show(index - 1)}>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4-8 8 8 8" /></svg>
-              </button>
-              <button className="np-arrow np-arrow--next" type="button" id="revNext" aria-label="Next review" onClick={() => show(index + 1)}>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 4 8 8-8 8" /></svg>
-              </button>
+            <div className="mt-7 mb-8 -ml-3 flex items-center gap-1">
+              <ArrowButton direction="prev" id="revPrev" aria-label="Previous review" onClick={() => show(index - 1)} />
+              <ArrowButton direction="next" id="revNext" aria-label="Next review" onClick={() => show(index + 1)} />
             </div>
-            <p className="np-caption" style={{ maxWidth: '24rem' }}>
+            <p className="max-w-[24rem] font-sans text-caption text-muted">
               Invented quotes that show how reviews would look. They are not from real people.
             </p>
           </div>
         </div>
-        <figure className="np-rev__photo" id="revPhoto" data-rv="r" data-ph="">
+        <figure className="relative m-0 aspect-[4/5] overflow-hidden bg-panel md:mr-[calc(var(--inset)*-1)]" id="revPhoto" data-rv="r" data-ph="">
           {REVIEWS.map((r, k) => (
             <img
               key={r.photo.src}
-              className={k === index ? 'np-is-on' : undefined}
+              className={`absolute inset-0 size-full object-cover transition-opacity duration-600 ease-out ${k === index ? 'opacity-100' : 'opacity-0'}`}
               src={r.photo.src}
               alt={r.photo.alt}
               width={r.photo.width}
@@ -90,10 +88,10 @@ export function NpReviews() {
               style={{ objectPosition: r.photo.position }}
             />
           ))}
-          <figcaption className="np-rev__tag">
-            <span className="np-reviews__count" id="revCount" aria-hidden="true">
+          <figcaption className="absolute bottom-0 left-0 z-2 bg-accent px-6 py-4 text-ink">
+            <span className="font-slab text-[1.75rem] leading-none font-medium text-ink tabular-nums" id="revCount" aria-hidden="true">
               {`${pad(index + 1)} `}
-              <small>{`/ ${pad(count)}`}</small>
+              <small className="font-sans text-[0.875rem] leading-none font-normal text-ink normal-nums">{`/ ${pad(count)}`}</small>
             </span>
           </figcaption>
         </figure>

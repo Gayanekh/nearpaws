@@ -1,5 +1,6 @@
 import { Fragment, useRef, useState } from 'react'
 import type { KeyboardEvent } from 'react'
+import { Eyebrow } from './ui/Eyebrow'
 
 interface CareOption {
   title: string
@@ -59,22 +60,26 @@ export function NpCareOptions() {
   }
 
   return (
-    <section className="np-opts" data-clip="" aria-labelledby="options-h">
-      <div className="np-opts__head">
+    <section
+      className="grid bg-paper group-data-[mo]/np:overflow-x-clip md:grid-cols-2"
+      aria-labelledby="options-h"
+      data-clip=""
+    >
+      <div className="grid gap-6 px-(--inset) pt-[clamp(4.5rem,9vw,7.5rem)] pb-[clamp(2.5rem,4vw,4rem)] md:col-span-full md:grid-cols-2 md:items-end md:gap-x-[clamp(3rem,6vw,8rem)]">
         <div>
-          <p className="np-eyebrow" data-rv="">Care options</p>
-          <h2 id="options-h" data-rv="">Care that fits your pet, not the other way round.</h2>
+          <Eyebrow data-rv="">Care options</Eyebrow>
+          <h2 id="options-h" className="max-w-[14ch] text-section" data-rv="">Care that fits your pet, not the other way round.</h2>
         </div>
-        <p className="np-lead" data-rv="">
+        <p className="max-w-[30rem] text-lead md:pb-[0.4rem]" data-rv="">
           Choose where your pet is most comfortable, and how handover works. Every profile says exactly what is offered.
         </p>
       </div>
 
-      <div className="np-opts__media" data-rv="l" data-ph="">
+      <div className="relative aspect-[4/5] max-h-184 w-full overflow-hidden bg-panel md:aspect-auto md:max-h-none md:min-h-[clamp(38rem,46vw,50rem)]" data-rv="l" data-ph="">
         {OPTIONS.map((o, k) => (
           <img
             key={o.photo.src}
-            className={k === selected ? 'np-is-on' : undefined}
+            className={`absolute inset-0 size-full object-cover transition-opacity duration-700 ease-out ${k === selected ? 'opacity-100' : 'opacity-0'}`}
             src={o.photo.src}
             alt={o.photo.alt}
             width={o.photo.width}
@@ -84,15 +89,18 @@ export function NpCareOptions() {
             style={{ objectPosition: o.photo.position }}
           />
         ))}
-        <p className="np-opts__note"><small>At a glance</small><span id="optNote">{OPTIONS[selected]!.glance}</span></p>
+        <p className="absolute bottom-0 left-0 z-2 max-w-[min(24rem,88%)] bg-accent px-(--inset) pt-5 pb-[1.4rem] font-sans text-[0.9375rem]/[1.5] font-medium text-ink">
+          <small className="mb-[0.3rem] block text-label font-semibold tracking-label uppercase">At a glance</small>
+          <span id="optNote">{OPTIONS[selected]!.glance}</span>
+        </p>
       </div>
 
-      <div className="np-opts__copy">
-        <div className="np-tabs" data-rv="r" role="tablist" aria-label="Care options" aria-orientation="vertical">
+      <div className="px-(--inset) pt-[clamp(3.5rem,8vw,5rem)] pb-[clamp(4rem,9vw,6rem)] md:flex md:flex-col md:justify-center md:pt-12 md:pl-[clamp(3rem,6vw,8rem)]">
+        <div className="border-b border-hair" role="tablist" aria-label="Care options" aria-orientation="vertical" data-rv="r">
           {OPTIONS.map((o, k) => (
             <Fragment key={o.title}>
               <button
-                className="np-tab"
+                className="group relative grid min-h-14 w-full grid-cols-[3.5rem_1fr] items-baseline gap-x-4 border-t border-hair py-5 text-left before:absolute before:top-[-1px] before:left-0 before:h-0.5 before:w-0 before:bg-accent before:transition-[width] before:duration-500 before:ease-out before:content-[''] aria-selected:before:w-full"
                 type="button"
                 role="tab"
                 id={`tab-${k}`}
@@ -103,10 +111,10 @@ export function NpCareOptions() {
                 onClick={() => select(k)}
                 onKeyDown={(e) => onKeyDown(e, k)}
               >
-                <span className="np-num">{String(k + 1).padStart(2, '0')}</span>
-                <span className="np-t">{o.title}</span>
+                <span className="font-slab text-numeral font-medium text-muted tabular-nums transition-colors duration-300 group-aria-selected:text-accent-ink">{String(k + 1).padStart(2, '0')}</span>
+                <span className="font-slab text-[clamp(1.375rem,1rem+1.4vw,2.25rem)]/[1.15] font-light text-muted transition-colors duration-300 group-hover:text-ink group-aria-selected:text-ink">{o.title}</span>
               </button>
-              <div className="np-tabpanel" role="tabpanel" id={`tp-${k}`} aria-labelledby={`tab-${k}`} hidden={k !== selected}>
+              <div className="max-w-[36rem] pb-7 pl-18" role="tabpanel" id={`tp-${k}`} aria-labelledby={`tab-${k}`} hidden={k !== selected}>
                 <p>{o.description}</p>
               </div>
             </Fragment>
