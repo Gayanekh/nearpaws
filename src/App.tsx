@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
+import { NpFoundation } from './v2/NpFoundation'
+import { NpLayout } from './v2/NpLayout'
 import { BecomeCaregiverPage } from './pages/BecomeCaregiverPage'
 import { AdminPage } from './pages/AdminPage'
 import { BookingStatusPage } from './pages/BookingStatusPage'
@@ -14,6 +16,10 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Redesign work in progress: replaces the routes below once approved. */}
+        <Route path="/v2" element={<NpLayout />}>
+          <Route index element={<NpFoundation />} />
+        </Route>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/caregivers" element={<DirectoryPage />} />

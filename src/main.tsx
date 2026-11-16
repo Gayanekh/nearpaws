@@ -8,6 +8,7 @@ import './styles/sections.css'
 import './styles/pages.css'
 import './styles/motion.css'
 import './styles/slider.css'
+import './v2/styles/np.css'
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
