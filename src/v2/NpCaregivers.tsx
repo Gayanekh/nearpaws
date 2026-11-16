@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ROUTES } from './routes'
 import { Eyebrow } from './ui/Eyebrow'
+import { TextLink } from './ui/TextLink'
 
 interface SampleCaregiver {
   key: 'lead' | 'a' | 'b'
@@ -131,10 +132,7 @@ export function NpCaregivers() {
           })}
         </div>
         <div className="mt-12">
-          <Link className="group inline-flex min-h-11 items-center gap-[0.6rem] py-3 font-sans text-ui font-medium text-ink no-underline" to={ROUTES.caregivers}>
-            <span className="pb-[0.15rem] [background:linear-gradient(var(--color-accent),var(--color-accent))_0_100%/100%_2px_no-repeat]">Browse all sample caregivers</span>
-            <Arrow className="h-4 w-9 transition-transform duration-350 group-hover:translate-x-[0.35rem]" />
-          </Link>
+          <TextLink to={ROUTES.caregivers}>Browse all sample caregivers</TextLink>
         </div>
       </div>
     </section>

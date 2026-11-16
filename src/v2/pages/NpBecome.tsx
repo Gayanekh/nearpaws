@@ -13,6 +13,7 @@ import { PageTitle } from '../ui/PageTitle'
 import { SelectField } from '../ui/SelectField'
 import { TextAreaField } from '../ui/TextAreaField'
 import { TextField } from '../ui/TextField'
+import { TextLink } from '../ui/TextLink'
 
 const page = 'mx-auto w-full max-w-360 px-(--inset) pt-16 pb-(--section) md:pt-24'
 const row = 'grid gap-x-6 sm:grid-cols-2'
@@ -53,6 +54,9 @@ export function NpBecome() {
         >
           <p className="max-w-[34rem] text-body text-copy">
             Thanks, {values.name}. In a real service, this is where the team would review your application and follow up.
+          </p>
+          <p className="mt-6">
+            <TextLink to={ROUTES.dashboard}>See a sample caregiver dashboard</TextLink>
           </p>
         </MockConfirmation>
       </section>

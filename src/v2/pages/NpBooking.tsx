@@ -15,6 +15,7 @@ import { MockConfirmation } from '../ui/MockConfirmation'
 import { PageTitle } from '../ui/PageTitle'
 import { SelectField } from '../ui/SelectField'
 import { StepIndicator } from '../ui/StepIndicator'
+import { TextLink } from '../ui/TextLink'
 import { TextAreaField } from '../ui/TextAreaField'
 import { TextField } from '../ui/TextField'
 
@@ -80,6 +81,9 @@ export function NpBooking() {
               ]}
             />
           </div>
+          <p className="mt-8">
+            <TextLink to={ROUTES.status}>See a sample booking status</TextLink>
+          </p>
         </MockConfirmation>
       </section>
     )
