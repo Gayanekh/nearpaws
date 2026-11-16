@@ -21,9 +21,10 @@ export function useNpMotion(rootRef: RefObject<HTMLElement | null>, resetKey: st
     const q = (selector: string) => Array.from(root.querySelectorAll<HTMLElement>(selector))
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const motion = !reduced && 'IntersectionObserver' in window
+    if (reduced) root.classList.add('np-has-reduced') // hides the hero Play button, as in the preview
     if (!motion) {
       q('.np-rv').forEach((e) => e.classList.add('np-in'))
-      return
+      return () => root.classList.remove('np-has-reduced')
     }
 
     // Direction pairs and spring-matched step delays.
@@ -95,7 +96,7 @@ export function useNpMotion(rootRef: RefObject<HTMLElement | null>, resetKey: st
       revealObserver.disconnect()
       photoObserver?.disconnect()
       window.clearTimeout(heroDone)
-      root.classList.remove('np-mo', 'np-hero-done')
+      root.classList.remove('np-mo', 'np-hero-done', 'np-has-reduced')
     }
   }, [rootRef, resetKey])
 }

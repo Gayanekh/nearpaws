@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
-import { NpFoundation } from './v2/NpFoundation'
+import { NpHome } from './v2/NpHome'
 import { NpLayout } from './v2/NpLayout'
 import { BecomeCaregiverPage } from './pages/BecomeCaregiverPage'
 import { AdminPage } from './pages/AdminPage'
@@ -18,7 +18,7 @@ export default function App() {
       <Routes>
         {/* Redesign work in progress: replaces the routes below once approved. */}
         <Route path="/v2" element={<NpLayout />}>
-          <Route index element={<NpFoundation />} />
+          <Route index element={<NpHome />} />
         </Route>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />

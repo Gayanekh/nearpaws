@@ -151,7 +151,7 @@
 :where(.np) .np-pager button[aria-current="true"]::before{content:"";position:absolute;left:50%;top:50%;width:1.75rem;height:1.75rem;margin:-.875rem 0 0 -.875rem;border:1px solid var(--ink);border-radius:50%}
 :where(.np) .np-pager button[aria-current="true"]::after{content:"";position:absolute;left:50%;top:50%;width:5px;height:5px;margin:-2.5px 0 0 -2.5px;border-radius:50%;background:var(--ink)}
 :where(.np) .np-play{font:500 .8125rem/1.4 var(--sans);color:var(--ink);text-decoration:underline;text-underline-offset:.3em;text-decoration-color:var(--accent);text-decoration-thickness:2px;padding:.75rem .25rem;min-height:2.75rem}
-:where(.np) .np-has-reduced .np-play{display:none}
+.np.np-has-reduced .np-play{display:none}
 /* stacked layout: let the headline wrap naturally instead of the forced 3-line break */
 @media not all and (min-width:900px) and (min-aspect-ratio:5/4){
   :where(.np) .np-hero__main h1 br{display:none}
