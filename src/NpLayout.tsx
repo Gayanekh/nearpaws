@@ -15,6 +15,15 @@ export function NpLayout() {
   const header = useRef<HTMLElement>(null)
   const menuButton = useRef<HTMLButtonElement>(null)
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  // The header is flat at the top of the page and becomes a floating pill as soon as the page is scrolled.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   // A link with a #section scrolls to it; any other navigation (including the logo on the home page) goes back to the top.
   useEffect(() => {
@@ -34,7 +43,7 @@ export function NpLayout() {
     const setChrome = () => {
       const height = header.current?.offsetHeight ?? 0
       element.style.setProperty('--chrome-h', `${height}px`)
-      document.documentElement.style.scrollPaddingTop = `${height}px`
+      document.documentElement.style.scrollPaddingTop = `${height + 12}px`
     }
     setChrome()
     window.addEventListener('resize', setChrome)
@@ -80,7 +89,14 @@ export function NpLayout() {
         Skip to main content
       </a>
 
-      <header className="sticky top-0 z-20 grid h-(--header-h) grid-cols-[1fr_auto_1fr] items-center bg-paper px-(--inset)" ref={header}>
+      <header
+        className="pointer-events-none sticky top-0 z-20 flow-root h-16 px-[max(0.5rem,calc(var(--inset)_-_1.25rem))] md:h-20"
+        ref={header}
+      >
+        <div
+          className="pointer-events-auto mx-auto grid h-full max-w-[92.5rem] grid-cols-[1fr_auto_1fr] items-center border border-transparent border-b-hair bg-paper/62 px-5 backdrop-blur-[16px] transition-[margin,border-radius,border-color,box-shadow] duration-500 ease-out data-[scrolled]:mt-2.5 data-[scrolled]:rounded-[1.625rem] data-[scrolled]:border-hair data-[scrolled]:shadow-[0_10px_30px_color-mix(in_srgb,var(--color-ink)_8%,transparent)]"
+          data-scrolled={scrolled ? '' : undefined}
+        >
         <Logo label="NearPaws, home" className="justify-self-start" />
         <nav className="hidden md:flex md:justify-self-center md:gap-[clamp(1.75rem,4.6vw,5.5rem)]" aria-label="Main">
           <NavLink className={navLink} to={ROUTES.caregivers} end>Find a caregiver</NavLink>
@@ -109,8 +125,9 @@ export function NpLayout() {
             </span>
           </button>
         </div>
+        </div>
         <nav
-          className={`absolute top-full right-0 left-0 border-t border-hair bg-paper px-(--inset) pt-2 pb-6 ${open ? 'block' : 'hidden'}`}
+          className={`pointer-events-auto absolute top-full right-0 left-0 mx-[max(0.5rem,calc(var(--inset)_-_1.25rem))] mt-4 rounded-[1.625rem] border border-hair bg-paper/90 px-6 pt-2 pb-4 backdrop-blur-[16px] ${open ? 'block' : 'hidden'}`}
           id="mobileNav"
           aria-label="Menu"
           data-menu=""
@@ -174,7 +191,7 @@ function Logo({ label, className = '', onPanel = false }: { label?: string; clas
       aria-label={label ?? 'NearPaws, home'}
     >
       <BrandLogo
-        className={`${onPanel ? 'h-20 [--logo-counter:var(--color-panel)]' : 'h-[clamp(2.75rem,calc(var(--header-h)_-_1.25rem),4.5rem)]'}`}
+        className={`${onPanel ? 'h-20 [--logo-counter:var(--color-panel)]' : 'h-12 md:h-16'}`}
       />
     </Link>
   )

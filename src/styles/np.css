@@ -1,7 +1,7 @@
 /*
  * NearPaws redesign: base layer only. There are no component classes left; every component is styled with Tailwind
  * utilities in its own file (src), and the scroll and entrance motion lives in motion.css.
- * What stays here: the self-hosted fonts, the CSS variables the utilities read (--inset, --section, --header-h,
+ * What stays here: the self-hosted fonts, the CSS variables the utilities read (--inset, --section,
  * --chrome-h, --hero-min, --svh), the document and reset rules, and the generic reduced-motion rule.
  * Element selectors are scoped with :where(.np), which adds no specificity. Ported once from the frozen preview
  * (git tag preview-approved).
@@ -22,7 +22,6 @@
   --hair:color-mix(in srgb,var(--ink) 16%,transparent);
   --slab:var(--font-slab); --sans:var(--font-sans);
   --inset:max(clamp(1rem,3vw,2.5rem),env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
-  --header-h:clamp(4.5rem,9vw,8rem);
   --chrome-h:11rem;      /* notice + header height; measured by script on load and resize */
   --hero-min:28rem;      /* the composed hero never gets shorter than this: content wins over fitting */
   --section:clamp(5rem,10vw,10rem);
@@ -30,7 +29,7 @@
   --svh:1vh;             /* one percent of the small viewport height */
   }
 @supports (height:100svh){
-  .np{--svh:1svh;--header-h:clamp(3.75rem,min(9vw,14svh),8rem)}
+  .np{--svh:1svh}
 }
 :where(.np) *,
 :where(.np) *::before,
