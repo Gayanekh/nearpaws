@@ -11,6 +11,14 @@
 
 @import 'tailwindcss/utilities.css' layer(utilities) source(none);
 
+/*
+ * Fix: the legacy .container class (components.css) sets its own width. Tailwind finds the word "container" in the
+ * source and generates its built-in container utility, which adds breakpoint max-widths (40rem, 56.25rem, 75rem)
+ * and narrowed every page between 640px and 1200px. This unlayered rule outranks the layered utility.
+ * A tw: prefix was tried first and rejected: it renames every theme variable to --tw-*, which breaks the old CSS.
+ */
+.container { max-width: none; }
+
 /* Scan only app source. Skip .claude/ (agent skills) and everything else. */
 @source '../../index.html';
 @source '..';
