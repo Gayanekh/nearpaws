@@ -19,7 +19,7 @@ npm run lint
 
 | Route | Screen |
 | --- | --- |
-| `/` | Landing page |
+| `/` | Home: hero slider, care options, caregivers, how it works, reviews, FAQ |
 | `/caregivers` | Directory with area, care-type and pet-size filters |
 | `/caregivers/:id` | Caregiver profile |
 | `/book` | 3-step booking and pet-intake form, mock confirmation |
@@ -27,17 +27,28 @@ npm run lint
 | `/booking-status` | Request status with all four states (requested, more info, confirmed, declined) |
 | `/caregiver-dashboard` | Caregiver view: requests, pet details, availability, updates |
 | `/internal/admin` | Admin review of applications and support cases (not linked publicly) |
+| `*` | 404 |
+
+The sample booking status and caregiver dashboard are linked from the confirmation screens of the booking and caregiver forms.
 
 ## Where things live
 
-- `src/data/content.ts`: brand name and **all** sample content. Edit here.
-- `src/styles/tokens.css`: colors, fonts, spacing, radius, shadows, widths, motion.
-- `src/components/`: reusable UI (Button, Container, SectionHeading, CaregiverCard, ServiceCard, TrustPoint, form fields, header, footer).
-- `src/sections/`: landing-page sections only.
-- `src/pages/`: one file per screen.
+React + Tailwind CSS v4 utilities + design tokens. There is no BEM and no component stylesheet: every component is
+styled with utilities in its own file.
 
-Motion is limited to a gentle scroll fade-in, hover lift and two floating hero tags. All of it is disabled when the
-visitor's system has "reduce motion" turned on.
+- `src/data/content.ts`: brand name, the prototype notice and the sample caregivers. `src/data/operations.ts` holds the sample
+  requests, applications and support cases. Edit here.
+- `src/styles/tailwind.css`: **the design tokens** (colors, fonts, type scale, breakpoints, the hero's layout variants).
+  `np.css` is a small base layer (self-hosted fonts, CSS variables, reset); `motion.css` holds the scroll-reveal and hero entrance
+  motion, driven by `data-` attributes.
+- `src/ui/`: design-system primitives (Button, TextLink, Eyebrow, PageTitle, form fields, Badge, StatusBadge, FactList, ...).
+- `src/pages/`: one file per screen. `src/Np*.tsx`: the shell (`NpLayout`) and the home-page sections.
+- `src/forms/`: validation and empty values for the booking and caregiver forms. `src/useNpMotion.ts`: scroll motion.
+- `DESIGN.md`: the design specification. `design-preview/index.html` (git tag `preview-approved`) is the frozen visual and
+  motion reference the home page was built to match.
+
+Motion is a scroll reveal, a hero entrance, photographs that settle, and small hover effects. All of it is reduced or off
+when the visitor's system has "reduce motion" turned on.
 
 ## Deploy (Vercel)
 

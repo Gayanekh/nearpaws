@@ -1,29 +1,30 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Layout } from './components/Layout'
-import { BecomeCaregiverPage } from './pages/BecomeCaregiverPage'
-import { AdminPage } from './pages/AdminPage'
-import { BookingStatusPage } from './pages/BookingStatusPage'
-import { CaregiverDashboardPage } from './pages/CaregiverDashboardPage'
-import { BookingPage } from './pages/BookingPage'
-import { DirectoryPage } from './pages/DirectoryPage'
-import { HomePage } from './pages/HomePage'
-import { NotFoundPage } from './pages/NotFoundPage'
-import { ProfilePage } from './pages/ProfilePage'
+import { NpHome } from './NpHome'
+import { NpLayout } from './NpLayout'
+import { NpBecome } from './pages/NpBecome'
+import { NpBooking } from './pages/NpBooking'
+import { NpBookingStatus } from './pages/NpBookingStatus'
+import { NpDashboard } from './pages/NpDashboard'
+import { NpDirectory } from './pages/NpDirectory'
+import { NpProfile } from './pages/NpProfile'
+import { NpAdmin } from './pages/NpAdmin'
+import { NpNotFound } from './pages/NpNotFound'
 
-export default function App() {
+/** Routes of the redesign. They grow until the redesign covers the whole site. */
+export function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/caregivers" element={<DirectoryPage />} />
-          <Route path="/caregivers/:id" element={<ProfilePage />} />
-          <Route path="/book" element={<BookingPage />} />
-          <Route path="/become-a-caregiver" element={<BecomeCaregiverPage />} />
-          <Route path="/booking-status" element={<BookingStatusPage />} />
-          <Route path="/caregiver-dashboard" element={<CaregiverDashboardPage />} />
-          <Route path="/internal/admin" element={<AdminPage />} />
-          <Route path="*" element={<NotFoundPage />} />
+        <Route path="/" element={<NpLayout />}>
+          <Route index element={<NpHome />} />
+          <Route path="caregivers" element={<NpDirectory />} />
+          <Route path="caregivers/:id" element={<NpProfile />} />
+          <Route path="book" element={<NpBooking />} />
+          <Route path="become-a-caregiver" element={<NpBecome />} />
+          <Route path="booking-status" element={<NpBookingStatus />} />
+          <Route path="caregiver-dashboard" element={<NpDashboard />} />
+          <Route path="internal/admin" element={<NpAdmin />} />
+          <Route path="*" element={<NpNotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

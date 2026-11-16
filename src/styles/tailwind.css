@@ -1,80 +1,87 @@
 /*
- * Tailwind CSS v4, set up to sit beside the existing hand-written CSS without changing it.
- *
- * - No preflight (Tailwind's global reset) is imported, so existing element styles are untouched.
- * - No default Tailwind theme is imported, so only NearPaws tokens exist as utilities.
- * - Tailwind's output lives in cascade layers. The existing CSS is unlayered, so on a conflict
- *   the existing CSS wins. Remove a rule from the old CSS when you move that element to utilities.
- * - Design tokens are defined once, here. The old CSS keeps reading them as var(--color-forest) etc.
+ * Tailwind CSS v4 for the redesign. This is the single place the design tokens are defined.
+ * - Only the utilities layer is imported, no default theme and no preflight, so the only colors, fonts and sizes that
+ *   exist as utilities (bg-paper, text-ink, font-slab, text-display-lg, ...) are the approved NearPaws ones.
+ * - Utilities are scanned from src (every .tsx file).
+ * - np.css (the sections not yet converted to utilities) reads these tokens through var(--color-*).
+ * Values come from DESIGN.md: paper, panel, ink and accent are APPROVED; the rest are the PROPOSED supporting tokens
+ * and the proposed type scale.
  */
-@layer theme, base, components, utilities;
+@layer theme, base, np, components, utilities;
 
 @import 'tailwindcss/utilities.css' layer(utilities) source(none);
 
-/*
- * Fix: the legacy .container class (components.css) sets its own width. Tailwind finds the word "container" in the
- * source and generates its built-in container utility, which adds breakpoint max-widths (40rem, 56.25rem, 75rem)
- * and narrowed every page between 640px and 1200px. This unlayered rule outranks the layered utility.
- * A tw: prefix was tried first and rejected: it renames every theme variable to --tw-*, which breaks the old CSS.
- */
-.container { max-width: none; }
+/* The hero has two layouts. "composed" is the wide landscape composition (Reference 02); "stacked" is everything else.
+   The hero is a size container named "hero", so the two short variants react to its own height. */
+@custom-variant composed (@media (min-width: 900px) and (min-aspect-ratio: 5/4));
+@custom-variant stacked (@media not all and (min-width: 900px) and (min-aspect-ratio: 5/4));
+@custom-variant hero-short (@container hero (max-height: 600px));
+@custom-variant hero-tiny (@container hero (max-height: 470px));
 
-/* Scan only app source. Skip .claude/ (agent skills) and everything else. */
-@source '../../index.html';
-@source '..';
-@source not '../v2';
+@source '../**/*.tsx';
 
 @theme static {
-  /* Utilities for the 4px scale, e.g. p-4 = 1rem. */
   --spacing: 0.25rem;
 
-  /* Breakpoints (desktop-first CSS still uses max-width; these are for new utility work). */
+  /* Breakpoints (DESIGN.md Layout). */
   --breakpoint-sm: 40rem;
   --breakpoint-md: 56.25rem;
   --breakpoint-lg: 75rem;
+  --breakpoint-xl: 80rem;
 
   /* Color */
-  --color-cream: #fbf6ee;
-  --color-sand: #f2e8d8;
-  --color-paper: #ffffff;
-  --color-sage: #d3dfcf;
-  --color-mint: #eaf7f0;
-  --color-slate: #3e4a6b;
-  --color-purple: #6b5fa8;
-  --color-ink-deep: #1f2933;
-  --color-forest: #24473a;
-  --color-forest-deep: #183328;
-  --color-apricot: #f2a66b;
-  --color-apricot-soft: #fbe3cf;
-  --color-terracotta: #a8461f;
-  --color-ink: #2a2622;
-  --color-muted: #5e564d;
-  --color-line: #e4d8c5;
-  --color-focus: #2b59c3;
+  --color-paper: #fcf8f5;
+  --color-panel: #f4f0ed;
+  --color-ink: #1a170f;
+  --color-accent: #e2c299;
+  --color-copy: #494743; /* body text; named copy so text-body can only mean the body font size */
+  --color-muted: #6a6152;
+  --color-accent-ink: #7a5c2e;
+  --color-field-border: #857c70;
   --color-error: #a3261b;
-  --color-success: #24473a;
+  --color-success: #2f6b4f;
+  --color-hair: color-mix(in srgb, var(--color-ink) 16%, transparent); /* hairline rules */
 
-  /* Typography */
-  --font-display: 'Geist', 'DM Sans', system-ui, sans-serif;
-  --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --text-xs: 0.8125rem;
-  --text-sm: 0.9375rem;
-  --text-md: 1.0625rem;
-  --text-lg: 1.25rem;
-  --text-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
-  --text-2xl: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
-  --text-hero: clamp(2.5rem, 1.6rem + 4vw, 4.5rem);
+  /* Type: families and weights */
+  --font-slab: 'Roboto Slab', Georgia, serif;
+  --font-sans: 'Montserrat', system-ui, sans-serif;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
 
-  /* Radius */
-  --radius-sm: 10px;
-  --radius-md: 18px;
-  --radius-lg: 28px;
-  --radius-pill: 999px;
+  /* Type scale (DESIGN.md Typography). Each size comes with its line height: text-display-lg sets both. */
+  --text-display-xl: clamp(2.75rem, 1.2rem + 7vw, 8.5rem);
+  --text-display-xl--line-height: 0.98;
+  --text-display-lg: clamp(2.25rem, 1.2rem + 3.6vw, 4.5rem);
+  --text-display-lg--line-height: 1.05;
+  --text-section: clamp(2.25rem, 1.2rem + 2.2vw, 3rem); /* section h2: capped near 48px on desktop */
+  --text-section--line-height: 1.05;
+  --text-display-md: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
+  --text-display-md--line-height: 1.15;
+  --text-title: 1.25rem;
+  --text-title--line-height: 1.3;
+  --text-numeral: clamp(1.75rem, 1.2rem + 1.6vw, 2.75rem);
+  --text-numeral--line-height: 1;
+  --text-lead: 1.0625rem;
+  --text-lead--line-height: 1.9;
+  --text-body: 0.9375rem;
+  --text-body--line-height: 1.9;
+  --text-body-dense: 0.9375rem;
+  --text-body-dense--line-height: 1.6;
+  --text-ui: 0.875rem;
+  --text-ui--line-height: 1.4;
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.5;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.4;
 
-  /* Shadow */
-  --shadow-soft: 0 6px 20px rgba(60, 44, 24, 0.08);
-  --shadow-lift: 0 16px 40px rgba(60, 44, 24, 0.14);
+  /* Letter spacing */
+  --tracking-tight: -0.01em;
+  --tracking-ui: 0.01em;
+  --tracking-label: 0.14em;
 
-  /* Easing */
-  --ease-spring: cubic-bezier(0.34, 1.4, 0.5, 1);
+  /* Motion */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }

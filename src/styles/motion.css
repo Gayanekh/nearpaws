@@ -1,74 +1,52 @@
-/* Hero, photo marquee, stats, reviews, FAQ and CTA. Motion here is disabled or simplified under "reduce motion". */
-
-/* ---------- Hero ---------- */
-.hero { padding-block: var(--space-8) var(--space-7); background: radial-gradient(70% 60% at 50% 0%, var(--color-mint), transparent 75%), var(--color-cream); overflow: hidden; }
-.hero__copy { display: flex; flex-direction: column; align-items: center; text-align: center; }
-.hero__copy h1 { max-width: 16ch; text-wrap: balance; }
-.hero__lead { font-size: var(--text-lg); color: var(--color-muted); max-width: 36rem; text-wrap: pretty; }
-.hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-block: var(--space-5); justify-content: center; }
-.hero__assurances { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2) var(--space-5); font-size: var(--text-sm); font-weight: 500; padding: 0; list-style: none; }
-.hero__assurances li { display: flex; align-items: center; gap: var(--space-2); }
-.hero__assurances svg { color: var(--color-forest); }
-.hero__rise { animation: rise 800ms var(--ease-spring) both; }
-@keyframes rise { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: none; } }
-
-
-/* ---------- Stock photos ---------- */
-.photo { position: relative; margin: 0; background: var(--color-sand); overflow: hidden; }
-.photo img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 700ms var(--ease); }
-.card:hover .photo img, .photo:hover img { transform: scale(1.06); }
-.photo__tag { position: absolute; left: 10px; bottom: 10px; background: rgba(255, 255, 255, 0.92); color: var(--color-muted); font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.6rem; border-radius: var(--radius-pill); }
-
-/* ---------- Scroll reveal: spring-like rise and settle ---------- */
-.reveal { opacity: 0; transform: translateY(40px) scale(0.97); transition: opacity 700ms var(--ease), transform 800ms var(--ease-spring); height: 100%; }
-.reveal--in { opacity: 1; transform: none; }
-
-/* ---------- Colored care-option cards ---------- */
-.service-card { color: #fff; border: 0; border-radius: var(--radius-lg); }
-.service-card h3, .service-card p { color: #fff; }
-.service-card p { opacity: 0.92; }
-.service-card--green { background: var(--color-forest); }
-.service-card--blue { background: var(--color-slate); }
-.service-card--orange { background: var(--color-terracotta); }
-.service-card .service-card__icon { background: rgba(255, 255, 255, 0.16); color: #fff; }
-.service-card .service-card__detail { color: #fff; opacity: 1; border-top: 1px solid rgba(255, 255, 255, 0.3); padding-top: var(--space-3); }
-
-
-/* ---------- Reviews slider ---------- */
-.reviews__head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-5); flex-wrap: wrap; }
-.reviews__nav { display: flex; gap: var(--space-2); margin-bottom: var(--space-6); }
-.icon-btn { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--color-forest); background: #fff; color: var(--color-forest); font: inherit; font-size: 1.25rem; cursor: pointer; transition: background var(--duration), color var(--duration), transform var(--duration) var(--ease-spring); }
-.icon-btn:hover { background: var(--color-forest); color: #fff; transform: scale(1.08); }
-.reviews__track { display: flex; gap: var(--space-5); overflow-x: auto; scroll-snap-type: x mandatory; padding: var(--space-3) max(var(--gutter), calc((100vw - var(--width-content)) / 2 + var(--gutter))) var(--space-5); scroll-padding-inline: var(--gutter); scrollbar-width: none; }
-.reviews__track::-webkit-scrollbar { display: none; }
-.review-card { flex: none; width: min(420px, 82vw); scroll-snap-align: start; margin: 0; background: var(--color-sage); border-radius: var(--radius-lg); padding: var(--space-6); display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-5); }
-.review-card blockquote { margin: 0; font: 500 var(--text-lg)/1.45 var(--font-display); color: var(--color-forest-deep); letter-spacing: -0.01em; }
-.review-card figcaption { display: grid; gap: 2px; font-size: var(--text-sm); }
-.review-card figcaption span { color: var(--color-muted); }
-
-/* ---------- FAQ accordion ---------- */
-.faq { display: grid; gap: var(--space-3); }
-.faq-item { background: #fff; border-radius: var(--radius-md); padding: 0 var(--space-5); box-shadow: var(--shadow-soft); transition: box-shadow var(--duration); }
-.faq-item[open] { box-shadow: var(--shadow-lift); }
-.faq-item summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); padding: var(--space-4) 0; font: 600 var(--text-md) var(--font-display); color: var(--color-forest-deep); border-radius: var(--radius-sm); }
-.faq-item summary::-webkit-details-marker { display: none; }
-.faq-item summary::after { content: '+'; flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--color-sage); font-size: 1.25rem; transition: transform 400ms var(--ease-spring), background var(--duration); }
-.faq-item[open] summary::after { transform: rotate(135deg); background: var(--color-apricot-soft); }
-.faq-item p { margin: 0 0 var(--space-4); color: var(--color-muted); animation: rise 500ms var(--ease-spring) both; }
-
-/* ---------- Final CTA ---------- */
-.final-cta-wrap { padding: var(--space-8) 0; }
-.final-cta { position: relative; overflow: hidden; text-align: center; background: var(--color-forest-deep); color: var(--color-cream); border-radius: 48px; padding: var(--space-8) var(--gutter); }
-.final-cta h2 { color: var(--color-cream); max-width: 18ch; margin-inline: auto; text-wrap: balance; position: relative; }
-.final-cta p { font-size: var(--text-lg); opacity: 0.9; max-width: 34rem; margin-inline: auto; position: relative; }
-.final-cta__actions { justify-content: center; position: relative; }
-.final-cta__paw { position: absolute; right: -40px; bottom: -60px; color: rgba(255, 255, 255, 0.06); rotate: -18deg; animation: float 9s ease-in-out infinite; }
-@keyframes float { 50% { transform: translateY(-12px); } }
-@media (max-width: 640px) {
-  .final-cta { border-radius: 32px; padding-block: var(--space-7); }
+/*
+ * Scroll-reveal and photo motion of the approved preview. Attribute hooks (no class names), driven by useNpMotion:
+ *   data-rv="" | "l" | "r" | "fade"   fades in and rises (or slides in from the side on desktop); data-in is set once it has played
+ *   data-rv-delay="150"               fixed transition delay in ms
+ *   data-ph / data-ph-img             photographs that settle from a slight zoom (the script runs it)
+ * Strong ease-out, transform and opacity only. Nothing here changes how the page looks at rest.
+ */
+@layer np{
+/* Spring: stiffness 150, damping 40, mass 1 (the values the Pawluxe reference uses). Overdamped, so no bounce; sampled as a CSS easing. */
+.np{--spring:linear(0,0.0397,0.1176,0.2032,0.2856,0.3613,0.4298,0.4911,0.546,0.595,0.6387,0.6777,0.7125,0.7435,0.7712,0.7959,0.8179,0.8376,0.8551,0.8708,0.8847,0.8972,0.9083,0.9182,0.927,0.9349,0.9419,0.9482,0.9538,0.9588,0.9632,0.9672,0.9707,0.9739,0.9767,0.9792,0.9815,0.9835,0.9853,0.9868,0.9883,0.9895,0.9907,0.9917,1)}
+@keyframes m-fade{from{opacity:0}}
+@keyframes m-rise{from{opacity:0;transform:translateY(var(--m-y,12px))}}
+@keyframes m-rule{from{transform:scaleX(0)}}
+@keyframes m-pop{from{opacity:0;transform:translateY(-6px)}}
+@keyframes m-tab{from{opacity:0;transform:translateY(6px)}}
+/* Scroll reveal, once: fade + a 40px rise; items in the same moment follow at 0.15s steps (set by the script). */
+:where(.np) [data-rv]{opacity:0;transform:translate(var(--rv-x,0),var(--rv-y,40px));transition:opacity .8s var(--spring),transform .8s var(--spring)}
+:where(.np) [data-rv][data-in]{opacity:1;transform:none}
+@media (min-width:900px){
+  :where(.np) [data-rv="l"]{--rv-x:-40px;--rv-y:0px}
+  :where(.np) [data-rv="r"]{--rv-x:40px;--rv-y:0px}
 }
-
-/* ---------- Reduced motion: no auto-scroll, no spring, content visible ---------- */
-@media (prefers-reduced-motion: reduce) {
-  .hero__rise, .faq-item p, .final-cta__paw { animation: none !important; }
+/* The 40px side-slide must never create a horizontal scrollbar. */
+.np[data-mo] [data-clip]{overflow-x:clip}
+.np[data-mo] [data-ph="stay"]{overflow:clip}
+/* The Stay room: the picture settles from 1.2x, the panel only fades in (0.2s later), with no movement. */
+.np[data-mo] [data-rv="fade"]{transform:none;transition:opacity .8s var(--spring) .15s}
+.np[data-mo] [data-rv="fade"]:not([data-in])~[data-after-reveal]{opacity:0}
+:where(.np) [data-rv="fade"][data-in]~[data-after-reveal]{animation:m-fade .8s var(--spring) .3s backwards}
+/* Hero entrance: plays once on load (the parameters are set per part with --enter-*): the headline first, then text, rule,
+   pet details, button, peek card and controls. fill-mode "backwards" only: afterwards the parts return to their normal styles,
+   so hover and press still work. Once it has played the script sets data-hero-done, so a resize never replays it. */
+:where(.np) [data-enter]{animation:var(--enter-name) var(--enter-dur) var(--ease-out) var(--enter-delay,0s) backwards}
+.np[data-hero-done] [data-enter]{animation:none!important}
+/* The mobile menu drops in. */
+:where(.np) [data-menu][data-open]{animation:m-pop .22s var(--ease-out)}
+/* A newly shown tab panel eases in. */
+:where(.np) [role="tabpanel"]:not([hidden]){animation:m-tab .24s var(--ease-out) backwards}
+/* The FAQ answer opens by height where the browser can animate to auto. */
+@supports (interpolate-size:allow-keywords){
+  :where(.np) [data-accordion] details{interpolate-size:allow-keywords}
+  :where(.np) [data-accordion] details::details-content{height:0;overflow:clip;transition:height .3s var(--ease-out),content-visibility .3s allow-discrete}
+  :where(.np) [data-accordion] details[open]::details-content{height:auto}
+}
+@media (prefers-reduced-motion:reduce){
+  /* reduced motion: gentler, not zero. The hero simply fades in together; no movement, no stagger. */
+  :where(.np) [data-enter]{animation:m-fade .35s linear backwards!important}
+  :where(.np) [data-rv]{opacity:1;transform:none}
+  :where(.np) [role="tabpanel"]:not([hidden]),
+  :where(.np) [data-menu][data-open]{animation:m-fade .2s linear!important}
+}
 }

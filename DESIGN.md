@@ -414,23 +414,25 @@ I have not assumed any approval beyond the ones you listed. Everything below nee
 19. **Dark mode** is not in the references and is out of scope unless you ask.
 20. **Armenian name and bilingual text** remain out of scope unless you say otherwise.
 
-## Implementation sequence (BEM to Tailwind v4, together with the redesign)
+## Implementation record (BEM to Tailwind v4, together with the redesign)
 
-Each step is one commit on a branch, redesigns and migrates in the same pass, and deletes the legacy CSS it replaces. This sequence needs your approval before it starts, along with the new development dependencies it implies (Playwright, `clsx`, `tailwind-merge`, and optionally a class-sorting formatter).
+Status: done. The redesign was built on a branch beside the original site, checked against the frozen preview, and then
+replaced it. What was actually done differs from the plan that stood here earlier:
 
-| Step | Work | Legacy CSS removed | Verification |
-|---|---|---|---|
-| 0 | Branch, baseline, Playwright smoke tests for the existing flows, fix the UTC date bug in `todayIso` | none | Tests pass on the current site |
-| 1 | Tokens: `@theme` from the frontmatter above, fonts, Tailwind base, keyframes | `tokens.css`, start of `base.css` | Build, lint |
-| 2 | Primitives: Button, Container, SectionHeading, Icon, Photo, Reveal, CountUp, StatusBadge, SafetyNote, Checklist, FaqItem, `cn()` helper | Matching `components.css` rules | Screenshots, contrast |
-| 3 | Shell: Layout, header, footer, skip link, mobile menu | Header and footer rules, rest of `base.css` | Keyboard, 390px |
-| 4 | Form primitives and the mock confirmation | Form and choice rules | Trigger every error state |
-| 5 | Landing hero and slider | Hero part of `slider.css` | Slider tests (keys, pause, swipe, reduced motion) |
-| 6 | The other 11 landing sections, in three groups | `motion.css`, `sections.css`, rest of `slider.css` | Per-group screenshots |
-| 7 | Directory, profile and their cards | Directory and profile rules | Every filter combination |
-| 8 | Booking and become-a-caregiver | Form rules | Empty, partial and valid submissions |
-| 9 | Status, dashboard, admin, 404 | Remaining `pages.css` | Click every state |
-| 10 | Cleanup: last CSS, README, lint scope | Last legacy file | Zero BEM classes remain |
-| 11 | Refinement with Impeccable (`critique`, `audit`, `polish`) and the Emil `review-animations` check | none | Re-run Playwright, preview deploy |
+- **Verification** used a small headless-browser harness (Edge over the DevTools protocol, no Playwright): full-page pixel
+  diffs against `design-preview/index.html` at 1440, 1366, 1024, 820, 390 and 360px (the home page was identical, pixel for
+  pixel), computed-style comparisons, and scripted behavior comparisons of every page against the original. `clsx` and
+  `tailwind-merge` were not needed.
+- **Tokens** live in `src/styles/tailwind.css` (`@theme`). The type scale gained `text-section` (the capped section heading)
+  and the hairline color `hair`. The hero's two layouts are the custom variants `composed` and `stacked`.
+- **Layers**: `@layer theme, base, np, components, utilities`. The small base stylesheet sits in the `np` layer so utilities always win.
+- **Motion hooks** are data attributes (`data-rv`, `data-ph`, `data-enter`, ...), not class names.
+- **Pages**: home, directory, profile, booking, become a caregiver, booking status, caregiver dashboard, admin and 404, all in
+  Tailwind with no BEM. Shared validation lives in `src/forms`.
+- **Cut over**: the original site (its pages, sections, components and stylesheets) was deleted. The notice, footer and logo
+  tag now say "prototype" instead of "design preview", each page sets its own title, and the sample booking status and
+  caregiver dashboard are linked from the two confirmation screens (the footer stays as in the approved preview).
+- **Not done yet**: a refinement pass with Impeccable (`critique`, `audit`, `polish`) and the Emil `review-animations` check, and a
+  preview deployment.
 
 **Notes on tooling.** Impeccable's `document` command also writes a `DESIGN.md` at the project root. This file is a hand-written specification, so running that command must not silently replace it: it asks before overwriting, and the right choice then is merge or skip. The numeric values in this document come from pixel sampling and proportion measurements of two low-resolution mockups, so treat them as close estimates.
