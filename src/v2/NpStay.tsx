@@ -15,9 +15,10 @@ const FACTS = [
  */
 export function NpStay() {
   return (
-    <section className="np-stay2" id="become" aria-labelledby="stay-h">
+    <section className="np-stay2" id="become" data-ph="stay" aria-labelledby="stay-h">
       <img
         className="np-stay2__bg"
+        data-ph-img=""
         src="/img/stay-big.jpg"
         alt="A calm living room with a grey sofa and a knitted throw (stock photo)"
         width={2000}
@@ -28,7 +29,7 @@ export function NpStay() {
         <img src="/img/home-chair.jpg" alt="" width={900} height={1125} loading="lazy" />
       </figure>
       <div className="np-stay2__col">
-        <div className="np-stay2__sheet np-rv">
+        <div className="np-stay2__sheet" data-rv="fade">
           <p className="np-eyebrow">Know before you go</p>
           <h2 id="stay-h">Know where your pet will stay, and with whom.</h2>
           <p className="np-lead">Every profile answers the questions owners usually ask first.</p>
@@ -53,7 +54,7 @@ export function NpStay() {
             </svg>
           </Link>
         </div>
-        <p className="np-stay2__note">
+        <p className="np-stay2__note" data-after-reveal="">
           Only an approximate neighborhood is ever shown. Exact addresses stay private until a stay is agreed.
         </p>
       </div>

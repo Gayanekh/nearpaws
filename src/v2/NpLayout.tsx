@@ -71,7 +71,7 @@ export function NpLayout() {
   useNpMotion(root, pathname)
 
   return (
-    <div className="np" ref={root}>
+    <div className="np group/np" ref={root}>
       <a className="np-skip" href="#main">Skip to main content</a>
       <p
         ref={notice}

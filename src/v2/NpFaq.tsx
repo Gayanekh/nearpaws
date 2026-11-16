@@ -1,3 +1,5 @@
+import { Eyebrow } from './ui/Eyebrow'
+
 const FAQS = [
   {
     q: 'Is this a real booking service?',
@@ -28,15 +30,20 @@ const FAQS = [
  */
 export function NpFaq() {
   return (
-    <section className="np-faq2" aria-labelledby="faq-h">
-      <div className="np-wrap np-faq2__grid">
-        <div className="np-faq2__side">
-          <div className="np-rv">
-            <p className="np-eyebrow">Questions</p>
-            <h2 id="faq-h" className="np-h-lg">Frequently asked questions.</h2>
+    <section
+      className="bg-panel py-(--section) group-data-[mo]/np:overflow-x-clip"
+      aria-labelledby="faq-h"
+      data-clip=""
+    >
+      <div className="mx-auto grid max-w-360 gap-12 px-(--inset) md:grid-cols-[5fr_7fr] md:items-start md:gap-[clamp(3rem,7vw,9rem)]">
+        <div className="md:sticky md:top-8">
+          <div data-rv="l">
+            <Eyebrow>Questions</Eyebrow>
+            <h2 id="faq-h" className="text-section">Frequently asked questions.</h2>
           </div>
-          <figure className="np-faq2__photo np-rv">
+          <figure className="relative mt-10 aspect-[4/5] max-w-[26rem] overflow-hidden bg-paper" data-rv="l" data-ph="">
             <img
+              className="absolute inset-0 size-full object-cover object-[50%_40%]"
               src="/img/faq-cat.jpg"
               alt="A ginger cat lying on a wooden floor (stock photo)"
               width={1200}
@@ -45,14 +52,14 @@ export function NpFaq() {
             />
           </figure>
         </div>
-        <div className="np-faq2__list np-rv">
+        <div className="border-b border-hair" data-rv="r" data-accordion="">
           {FAQS.map((f, k) => (
-            <details key={f.q} name="faq" open={k === 0}>
-              <summary>
-                <span className="np-num">{String(k + 1).padStart(2, '0')}</span>
+            <details key={f.q} name="faq" open={k === 0} className="group/faq border-t border-hair">
+              <summary className="grid min-h-14 cursor-pointer list-none grid-cols-[3.25rem_1fr_auto] items-baseline gap-x-4 py-[1.6rem] font-slab text-[clamp(1.25rem,1rem+0.9vw,1.75rem)] leading-[1.25] font-light text-ink after:size-5 after:self-center after:transition-transform after:duration-350 after:ease-out after:content-[''] after:[background:linear-gradient(var(--color-ink),var(--color-ink))_center/100%_1.5px_no-repeat,linear-gradient(var(--color-ink),var(--color-ink))_center/1.5px_100%_no-repeat] group-open/faq:after:rotate-135 [&::-webkit-details-marker]:hidden">
+                <span className="font-slab text-[1.25rem] leading-none font-medium text-accent-ink tabular-nums">{String(k + 1).padStart(2, '0')}</span>
                 <span>{f.q}</span>
               </summary>
-              <p>{f.a}</p>
+              <p className="max-w-[42rem] pr-12 pb-[1.9rem] pl-17">{f.a}</p>
             </details>
           ))}
         </div>

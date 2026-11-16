@@ -59,18 +59,18 @@ export function NpCareOptions() {
   }
 
   return (
-    <section className="np-opts" aria-labelledby="options-h">
+    <section className="np-opts" data-clip="" aria-labelledby="options-h">
       <div className="np-opts__head">
         <div>
-          <p className="np-eyebrow np-rv">Care options</p>
-          <h2 id="options-h" className="np-rv">Care that fits your pet, not the other way round.</h2>
+          <p className="np-eyebrow" data-rv="">Care options</p>
+          <h2 id="options-h" data-rv="">Care that fits your pet, not the other way round.</h2>
         </div>
-        <p className="np-lead np-rv">
+        <p className="np-lead" data-rv="">
           Choose where your pet is most comfortable, and how handover works. Every profile says exactly what is offered.
         </p>
       </div>
 
-      <div className="np-opts__media np-rv">
+      <div className="np-opts__media" data-rv="l" data-ph="">
         {OPTIONS.map((o, k) => (
           <img
             key={o.photo.src}
@@ -88,7 +88,7 @@ export function NpCareOptions() {
       </div>
 
       <div className="np-opts__copy">
-        <div className="np-tabs np-rv" role="tablist" aria-label="Care options" aria-orientation="vertical">
+        <div className="np-tabs" data-rv="r" role="tablist" aria-label="Care options" aria-orientation="vertical">
           {OPTIONS.map((o, k) => (
             <Fragment key={o.title}>
               <button

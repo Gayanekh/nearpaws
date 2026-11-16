@@ -4,9 +4,9 @@ import type { RefObject } from 'react'
 /**
  * Scroll motion of the approved design preview, ported as one hook.
  * Spring: stiffness 150, damping 40, mass 1, sampled as a CSS easing (also in np.css as --spring).
- * - Reveal: .np-rv elements fade and rise once. Elements entering in the same moment follow each other 0.15s apart (max 0.3s).
- * - Direction pairs (.np-rv-l / .np-rv-r) slide in from the side on desktop. Cards and steps get fixed steps.
- * - Photographs (.np-ph) settle from a slight zoom.
+ * - Reveal: [data-rv] elements fade and rise once ("l" and "r" slide in from the side on desktop, "fade" only fades). Elements entering in the same moment follow each other 0.15s apart (max 0.3s).
+ * - Cards and steps get fixed steps (data-rv-delay).
+ * - Photographs ([data-ph]) settle from a slight zoom; in the Stay room the image is [data-ph-img].
  * - The hero entrance plays from CSS, and .np-hero-done stops it from replaying.
  * Under "reduce motion" (or without IntersectionObserver) everything is shown immediately and none of this runs.
  * It works on the DOM inside the .np root, so the elements it touches must not have a React-controlled className
@@ -23,20 +23,12 @@ export function useNpMotion(rootRef: RefObject<HTMLElement | null>, resetKey: st
     const motion = !reduced && 'IntersectionObserver' in window
     if (reduced) root.classList.add('np-has-reduced') // hides the hero Play button, as in the preview
     if (!motion) {
-      q('.np-rv').forEach((e) => e.classList.add('np-in'))
+      q('[data-rv]').forEach((e) => e.setAttribute('data-in', ''))
       return () => root.classList.remove('np-has-reduced')
     }
 
-    // Direction pairs and spring-matched step delays.
-    q('.np-opts__media, .np-rev__text .np-rv, .np-faq2__side .np-rv, .np-end__copy').forEach((e) => e.classList.add('np-rv-l'))
-    q('.np-tabs, .np-rev__photo, .np-faq2__list, .np-end__photo').forEach((e) => e.classList.add('np-rv-r'))
-    const endPhoto = root.querySelector('.np-end__photo')
-    if (endPhoto) endPhoto.classList.add('np-rv')
-    ;[['.np-pf--a', 150], ['.np-pf--b', 300]].forEach(([selector, ms]) => {
-      const e = root.querySelector<HTMLElement>(selector as string)
-      if (e) e.style.transitionDelay = `${ms}ms`
-    })
-    q('.np-st').forEach((e, i) => { e.style.transitionDelay = `${i * 150}ms` })
+    // Spring-matched fixed delays: cards and steps follow each other (data-rv-delay is in milliseconds).
+    q('[data-rv-delay]').forEach((e) => { e.style.transitionDelay = `${e.dataset.rvDelay}ms` })
 
     const revealObserver = new IntersectionObserver(
       (entries) => {
@@ -45,7 +37,7 @@ export function useNpMotion(rootRef: RefObject<HTMLElement | null>, resetKey: st
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left)
         batch.forEach((entry, i) => {
           const target = entry.target as HTMLElement
-          if (i > 0 && !target.style.transitionDelay && !target.classList.contains('np-stay2__sheet')) {
+          if (i > 0 && !target.style.transitionDelay && target.dataset.rv !== 'fade') {
             target.style.transitionDelay = `${Math.min(i * 150, 300)}ms`
             const clear = (ev: TransitionEvent) => {
               if (ev.propertyName === 'transform') {
@@ -55,28 +47,27 @@ export function useNpMotion(rootRef: RefObject<HTMLElement | null>, resetKey: st
             }
             target.addEventListener('transitionend', clear)
           }
-          target.classList.add('np-in')
+          target.setAttribute('data-in', '')
           revealObserver.unobserve(target)
         })
       },
       { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
     )
-    q('.np-rv').forEach((e) => revealObserver.observe(e))
+    q('[data-rv]').forEach((e) => revealObserver.observe(e))
 
     // Photographs settle once.
     let photoObserver: IntersectionObserver | undefined
     if ('animate' in Element.prototype) {
       const ease = window.CSS?.supports?.('animation-timing-function', SPRING) ? SPRING : 'cubic-bezier(0.23,1,0.32,1)'
-      const frames = q('.np-opts__media, .np-how__photo, .np-rev__photo, .np-faq2__photo, .np-end__photo, .np-stay2, .np-pf__img')
-      frames.forEach((f) => f.classList.add('np-ph'))
-      root.classList.add('np-mo')
+      const frames = q('[data-ph]')
+      root.setAttribute('data-mo', '')
       photoObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (!entry.isIntersecting) return
             const frame = entry.target as HTMLElement
-            const stay = frame.classList.contains('np-stay2')
-            Array.from(frame.querySelectorAll<HTMLElement>(stay ? '.np-stay2__bg' : 'img')).forEach((img) => {
+            const stay = frame.dataset.ph === 'stay'
+            Array.from(frame.querySelectorAll<HTMLElement>(stay ? '[data-ph-img]' : 'img')).forEach((img) => {
               img.animate(
                 stay ? [{ transform: 'translateY(-8%) scale(1.2)' }, { transform: 'none' }] : [{ scale: 1.15 }, { scale: 1 }],
                 { duration: 800, easing: ease },
@@ -96,7 +87,8 @@ export function useNpMotion(rootRef: RefObject<HTMLElement | null>, resetKey: st
       revealObserver.disconnect()
       photoObserver?.disconnect()
       window.clearTimeout(heroDone)
-      root.classList.remove('np-mo', 'np-hero-done', 'np-has-reduced')
+      root.removeAttribute('data-mo')
+      root.classList.remove('np-hero-done', 'np-has-reduced')
     }
   }, [rootRef, resetKey])
 }

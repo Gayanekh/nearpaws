@@ -60,18 +60,18 @@ export function NpCaregivers() {
     <section className="np-profiles" id="caregivers" aria-labelledby="cg-h">
       <div className="np-wrap">
         <header className="np-profiles__head">
-          <div className="np-rv">
+          <div data-rv="">
             <p className="np-eyebrow">Meet caregivers</p>
             <h2 id="cg-h" className="np-h-lg">Real homes, real routines.</h2>
           </div>
-          <p className="np-lead np-rv">
+          <p className="np-lead" data-rv="">
             Sample profiles for this preview. Names, prices and reviews are illustrative, and only an approximate neighborhood is ever shown.
           </p>
         </header>
         <div className="np-profiles__grid">
           {CAREGIVERS.map((c) => (
-            <article key={c.name} className={`np-pf np-pf--${c.key} np-rv`}>
-              <div className="np-pf__img">
+            <article key={c.name} className={`np-pf np-pf--${c.key}`} data-rv="" data-rv-delay={c.key === 'a' ? 150 : c.key === 'b' ? 300 : undefined}>
+              <div className="np-pf__img" data-ph="">
                 <img
                   src={c.photo.src}
                   alt={c.photo.alt}

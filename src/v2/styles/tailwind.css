@@ -33,6 +33,7 @@
   --color-field-border: #857c70;
   --color-error: #a3261b;
   --color-success: #2f6b4f;
+  --color-hair: color-mix(in srgb, var(--color-ink) 16%, transparent); /* hairline rules */
 
   /* Type: families and weights */
   --font-slab: 'Roboto Slab', Georgia, serif;
@@ -48,6 +49,8 @@
   --text-display-xl--line-height: 0.98;
   --text-display-lg: clamp(2.25rem, 1.2rem + 3.6vw, 4.5rem);
   --text-display-lg--line-height: 1.05;
+  --text-section: clamp(2.25rem, 1.2rem + 2.2vw, 3rem); /* section h2: capped near 48px on desktop */
+  --text-section--line-height: 1.05;
   --text-display-md: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
   --text-display-md--line-height: 1.15;
   --text-title: 1.25rem;

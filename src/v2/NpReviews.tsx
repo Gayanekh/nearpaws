@@ -54,9 +54,9 @@ export function NpReviews() {
     <section className="np-rev" aria-labelledby="rev-h">
       <div className="np-rev__grid">
         <div className="np-rev__text">
-          <p className="np-eyebrow np-rv">Illustrative reviews</p>
-          <h2 id="rev-h" className="np-h-lg np-rv">What owners might say.</h2>
-          <div className="np-rv" id="reviewBox">
+          <p className="np-eyebrow" data-rv="l">Illustrative reviews</p>
+          <h2 id="rev-h" className="np-h-lg" data-rv="l">What owners might say.</h2>
+          <div data-rv="l" id="reviewBox">
             <span className="np-rev__mark" aria-hidden="true">&ldquo;</span>
             <blockquote className="np-quote" id="quote">{review.quote}</blockquote>
             <p className="np-quote-by" id="quoteBy">
@@ -76,7 +76,7 @@ export function NpReviews() {
             </p>
           </div>
         </div>
-        <figure className="np-rev__photo np-rv" id="revPhoto">
+        <figure className="np-rev__photo" id="revPhoto" data-rv="r" data-ph="">
           {REVIEWS.map((r, k) => (
             <img
               key={r.photo.src}
