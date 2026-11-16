@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ROUTES } from './routes'
+import { Eyebrow } from './ui/Eyebrow'
 
 interface SampleCaregiver {
   key: 'lead' | 'a' | 'b'
@@ -47,54 +48,93 @@ const CAREGIVERS: SampleCaregiver[] = [
   },
 ]
 
-const Arrow = () => (
-  <svg viewBox="0 0 36 16" aria-hidden="true"><path d="M1 8h32M26 2l7 6-7 6" /></svg>
+/** Per-profile composition: lead is large and spans two rows on wide screens, the two others sit staggered beside it. */
+const LAYOUT = {
+  lead: {
+    card: 'md:col-[1/8] md:row-[1/3]',
+    image: 'md:aspect-[5/6]',
+    price: 'px-7 py-[1.15rem]',
+    amount: 'text-[2.5rem]',
+    name: 'text-[clamp(2.25rem,1.2rem+3vw,4rem)]/[1.1]',
+  },
+  a: { card: 'md:col-[9/13] md:row-[1]', image: 'md:aspect-square', price: 'px-5 py-[0.85rem]', amount: 'text-[1.75rem]', name: 'text-display-md/[1.1]' },
+  b: { card: 'md:col-[8/12] md:row-[2]', image: 'md:aspect-[4/5]', price: 'px-5 py-[0.85rem]', amount: 'text-[1.75rem]', name: 'text-display-md/[1.1]' },
+} as const
+
+const Arrow = ({ className }: { className: string }) => (
+  <svg viewBox="0 0 36 16" aria-hidden="true" className={`fill-none stroke-current stroke-[1.25] ease-out ${className}`}>
+    <path d="M1 8h32M26 2l7 6-7 6" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
 )
 
 /**
  * Meet caregivers, from the approved preview: a staggered editorial spread with one large lead profile and two smaller ones.
- * The profile names link to the existing caregiver profile pages (/caregivers/:id).
+ * The profile names link to the existing caregiver profile pages (/caregivers/:id); the whole card is the link's target.
  */
 export function NpCaregivers() {
   return (
-    <section className="np-profiles" id="caregivers" aria-labelledby="cg-h">
-      <div className="np-wrap">
-        <header className="np-profiles__head">
+    <section className="bg-panel py-(--section)" id="caregivers" aria-labelledby="cg-h">
+      <div className="mx-auto max-w-360 px-(--inset)">
+        <header className="mb-[clamp(3rem,6vw,6rem)] grid gap-6 md:grid-cols-[7fr_5fr] md:items-end">
           <div data-rv="">
-            <p className="np-eyebrow">Meet caregivers</p>
-            <h2 id="cg-h" className="np-h-lg">Real homes, real routines.</h2>
+            <Eyebrow>Meet caregivers</Eyebrow>
+            <h2 id="cg-h" className="text-section">Real homes, real routines.</h2>
           </div>
-          <p className="np-lead" data-rv="">
+          <p className="max-w-[30rem] text-lead" data-rv="">
             Sample profiles for this preview. Names, prices and reviews are illustrative, and only an approximate neighborhood is ever shown.
           </p>
         </header>
-        <div className="np-profiles__grid">
-          {CAREGIVERS.map((c) => (
-            <article key={c.name} className={`np-pf np-pf--${c.key}`} data-rv="" data-rv-delay={c.key === 'a' ? 150 : c.key === 'b' ? 300 : undefined}>
-              <div className="np-pf__img" data-ph="">
-                <img
-                  src={c.photo.src}
-                  alt={c.photo.alt}
-                  width={c.photo.width}
-                  height={c.photo.height}
-                  loading="lazy"
-                  style={{ objectPosition: c.photo.position }}
-                />
-                <p className="np-pf__price"><b>{`$${c.price}`}</b><span>/ night &middot; sample price</span></p>
-              </div>
-              <div className="np-pf__body">
-                <p className="np-pf__place">{c.place}</p>
-                <h3><Link to={ROUTES.caregiver(c.slug)}>{c.name} <Arrow /></Link></h3>
-                <p className="np-pf__style">{c.style}</p>
-                <ul className="np-tags" aria-label="Care options">
-                  {c.tags.map((t) => <li key={t}>{t}</li>)}
-                </ul>
-              </div>
-            </article>
-          ))}
+        <div className="grid gap-x-8 gap-y-14 md:grid-cols-[repeat(12,1fr)] md:items-start md:gap-y-20">
+          {CAREGIVERS.map((c) => {
+            const layout = LAYOUT[c.key]
+            return (
+              <article
+                key={c.name}
+                className={`group/pf relative focus-within:outline-2 focus-within:outline-offset-[6px] focus-within:outline-ink ${layout.card}`}
+                data-rv=""
+                data-rv-delay={c.key === 'a' ? 150 : c.key === 'b' ? 300 : undefined}
+              >
+                <div className={`relative aspect-[4/5] overflow-hidden bg-paper ${layout.image}`} data-ph="">
+                  <img
+                    className="absolute inset-0 size-full object-cover transition-transform duration-1000 ease-out group-hover/pf:scale-[1.04]"
+                    src={c.photo.src}
+                    alt={c.photo.alt}
+                    width={c.photo.width}
+                    height={c.photo.height}
+                    loading="lazy"
+                    style={{ objectPosition: c.photo.position }}
+                  />
+                  <p className={`absolute bottom-0 left-0 z-2 flex items-baseline gap-[0.6rem] bg-accent font-sans text-label/[1.3] font-medium text-ink ${layout.price}`}>
+                    <b className={`font-slab leading-none font-medium tabular-nums ${layout.amount}`}>{`$${c.price}`}</b>
+                    <span>/ night &middot; sample price</span>
+                  </p>
+                </div>
+                <div className="pt-6">
+                  <p className="mb-[0.6rem] font-sans text-label font-semibold tracking-label text-accent-ink uppercase">{c.place}</p>
+                  <h3 className={`mb-3 font-slab font-light ${layout.name}`}>
+                    <Link
+                      className="inline-flex items-center gap-3 no-underline after:absolute after:inset-0 after:content-[''] focus-visible:outline-0"
+                      to={ROUTES.caregiver(c.slug)}
+                    >
+                      {c.name} <Arrow className="h-[0.9rem] w-7 flex-none transition-transform duration-400 group-hover/pf:translate-x-2" />
+                    </Link>
+                  </h3>
+                  <p className="mb-5 max-w-[30rem]">{c.style}</p>
+                  <ul className="flex flex-wrap gap-2" aria-label="Care options">
+                    {c.tags.map((tag) => (
+                      <li key={tag} className="bg-paper px-[0.8rem] py-[0.4rem] font-sans text-label font-medium text-ink">{tag}</li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            )
+          })}
         </div>
-        <div className="np-profiles__foot">
-          <Link className="np-text-link" to={ROUTES.caregivers}><span>Browse all sample caregivers</span><Arrow /></Link>
+        <div className="mt-12">
+          <Link className="group inline-flex min-h-11 items-center gap-[0.6rem] py-3 font-sans text-ui font-medium text-ink no-underline" to={ROUTES.caregivers}>
+            <span className="pb-[0.15rem] [background:linear-gradient(var(--color-accent),var(--color-accent))_0_100%/100%_2px_no-repeat]">Browse all sample caregivers</span>
+            <Arrow className="h-4 w-9 transition-transform duration-350 group-hover:translate-x-[0.35rem]" />
+          </Link>
         </div>
       </div>
     </section>
