@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom'
 import { LegacyLink } from './LegacyLink'
+import { ROUTES } from './routes'
 
 interface SampleCaregiver {
   key: 'lead' | 'a' | 'b'
@@ -93,7 +95,7 @@ export function NpCaregivers() {
           ))}
         </div>
         <div className="np-profiles__foot">
-          <LegacyLink className="np-text-link" to="/caregivers"><span>Browse all sample caregivers</span><Arrow /></LegacyLink>
+          <Link className="np-text-link" to={ROUTES.caregivers}><span>Browse all sample caregivers</span><Arrow /></Link>
         </div>
       </div>
     </section>

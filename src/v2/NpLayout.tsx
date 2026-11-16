@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { LegacyLink } from './LegacyLink'
+import { ROUTES } from './routes'
 import { useNpMotion } from './useNpMotion'
 
 /**
@@ -84,7 +85,7 @@ export function NpLayout() {
       <header className="np-header" ref={header}>
         <a className="np-logo" href="#top" aria-label="NearPaws, preview home">nearpaws <small>preview</small></a>
         <nav className="np-nav" aria-label="Main">
-          <LegacyLink to="/caregivers">Find a caregiver</LegacyLink>
+          <NavLink to={ROUTES.caregivers} end>Find a caregiver</NavLink>
           <a href="#how">How it works</a>
           <LegacyLink to="/become-a-caregiver">Become a caregiver</LegacyLink>
         </nav>
@@ -110,7 +111,7 @@ export function NpLayout() {
           aria-label="Menu"
           onClick={(e) => (e.target as HTMLElement).closest('a') && setOpen(false)}
         >
-          <LegacyLink to="/caregivers">Find a caregiver</LegacyLink>
+          <NavLink to={ROUTES.caregivers} end>Find a caregiver</NavLink>
           <a href="#how">How it works</a>
           <LegacyLink to="/become-a-caregiver">Become a caregiver</LegacyLink>
         </nav>
@@ -131,7 +132,7 @@ export function NpLayout() {
           <nav aria-label="Footer">
             <h2>Explore</h2>
             <ul>
-              <li><LegacyLink to="/caregivers">Find a caregiver</LegacyLink></li>
+              <li><Link to={ROUTES.caregivers}>Find a caregiver</Link></li>
               <li><a href="#how">How it works</a></li>
               <li><LegacyLink to="/become-a-caregiver">Become a caregiver</LegacyLink></li>
             </ul>

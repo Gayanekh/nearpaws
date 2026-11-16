@@ -9,6 +9,9 @@
 @font-face{font-family:'Montserrat';font-style:normal;font-weight:400 700;font-display:swap;src:url("/fonts/montserrat-latin.woff2") format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 @font-face{font-family:'Roboto Slab';font-style:normal;font-weight:300 500;font-display:swap;src:url("/fonts/roboto-slab-latin.woff2") format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 
+/* Everything below sits in the "np" cascade layer, which Tailwind's utilities layer outranks. Unlayered CSS would beat
+   utilities regardless of specificity (for example the reset margin or button padding would cancel mt-6 or px-8). */
+@layer np{
 /*
   NearPaws design preview. Standalone: plain CSS, no framework, not connected to the app.
   Every value comes from DESIGN.md. APPROVED: paper, panel, ink, accent, Roboto Slab Light.
@@ -76,7 +79,7 @@ body{margin:0;background:var(--color-paper)}
 :where(.np) .np-logo small{font:600 .75rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink)}
 :where(.np) .np-nav{display:none}
 :where(.np) .np-nav a{display:inline-block;font:500 .875rem/1.4 var(--sans);letter-spacing:.01em;color:var(--ink);text-decoration:none;padding:.875rem 0;background:linear-gradient(var(--accent),var(--accent)) 0 calc(100% - .5rem)/0 2px no-repeat;transition:background-size .28s var(--ease-out)}
-:where(.np) .np-nav a:focus-visible{background-size:100% 2px}
+:where(.np) .np-nav a:focus-visible,:where(.np) .np-nav a[aria-current="page"]{background-size:100% 2px}
 @media (hover:hover){
   :where(.np) .np-nav a:hover{background-size:100% 2px}
 }
@@ -490,4 +493,5 @@ body{margin:0;background:var(--color-paper)}
   :where(.np) .np-hero__controls{animation:m-fade .35s linear backwards!important}
   :where(.np) .np-tabpanel:not([hidden]),
   :where(.np) .np-mobile-nav.np-is-open{animation:m-fade .2s linear!important}
+}
 }
