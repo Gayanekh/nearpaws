@@ -1,5 +1,5 @@
-import { STATUS_LABELS } from './statusLabels'
-import type { RequestStatus } from './statusLabels'
+import { STATUS_LABELS } from '../data/statusLabels'
+import type { RequestStatus } from '../data/statusLabels'
 
 /** Booking request status. The text always carries the meaning; color is secondary. */
 export function StatusBadge({ status }: { status: RequestStatus }) {

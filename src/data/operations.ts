@@ -1,5 +1,5 @@
 // Fictional sample data for the status, caregiver-dashboard and admin screens.
-import type { RequestStatus } from '../components/statusLabels'
+import type { RequestStatus } from './statusLabels'
 
 export interface SamplePet {
   name: string

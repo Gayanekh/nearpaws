@@ -3,6 +3,8 @@ import { NpHome } from './NpHome'
 import { NpLayout } from './NpLayout'
 import { NpBecome } from './pages/NpBecome'
 import { NpBooking } from './pages/NpBooking'
+import { NpBookingStatus } from './pages/NpBookingStatus'
+import { NpDashboard } from './pages/NpDashboard'
 import { NpDirectory } from './pages/NpDirectory'
 import { NpProfile } from './pages/NpProfile'
 
@@ -17,6 +19,8 @@ export function App() {
           <Route path="caregivers/:id" element={<NpProfile />} />
           <Route path="book" element={<NpBooking />} />
           <Route path="become-a-caregiver" element={<NpBecome />} />
+          <Route path="booking-status" element={<NpBookingStatus />} />
+          <Route path="caregiver-dashboard" element={<NpDashboard />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -5,8 +5,8 @@ import { Container } from '../components/Container'
 import { SafetyNote } from '../components/SafetyNote'
 import { SectionHeading } from '../components/SectionHeading'
 import { StatusBadge } from '../components/StatusBadge'
-import { STATUS_LABELS } from '../components/statusLabels'
-import type { RequestStatus } from '../components/statusLabels'
+import { STATUS_LABELS } from '../data/statusLabels'
+import type { RequestStatus } from '../data/statusLabels'
 
 const STATES: RequestStatus[] = ['requested', 'more-info', 'confirmed', 'declined']
 
