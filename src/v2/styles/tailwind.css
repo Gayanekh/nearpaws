@@ -11,6 +11,13 @@
 
 @import 'tailwindcss/utilities.css' layer(utilities) source(none);
 
+/* The hero has two layouts. "composed" is the wide landscape composition (Reference 02); "stacked" is everything else.
+   The hero is a size container named "hero", so the two short variants react to its own height. */
+@custom-variant composed (@media (min-width: 900px) and (min-aspect-ratio: 5/4));
+@custom-variant stacked (@media not all and (min-width: 900px) and (min-aspect-ratio: 5/4));
+@custom-variant hero-short (@container hero (max-height: 600px));
+@custom-variant hero-tiny (@container hero (max-height: 470px));
+
 @source '../**/*.tsx';
 
 @theme static {

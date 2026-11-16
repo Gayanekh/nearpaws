@@ -7,7 +7,7 @@ import type { RefObject } from 'react'
  * - Reveal: [data-rv] elements fade and rise once ("l" and "r" slide in from the side on desktop, "fade" only fades). Elements entering in the same moment follow each other 0.15s apart (max 0.3s).
  * - Cards and steps get fixed steps (data-rv-delay).
  * - Photographs ([data-ph]) settle from a slight zoom; in the Stay room the image is [data-ph-img].
- * - The hero entrance plays from CSS, and .np-hero-done stops it from replaying.
+ * - The hero entrance plays from CSS, and [data-hero-done] stops it from replaying.
  * Under "reduce motion" (or without IntersectionObserver) everything is shown immediately and none of this runs.
  * It works on the DOM inside the .np root, so the elements it touches must not have a React-controlled className
  * that changes later.
@@ -21,10 +21,10 @@ export function useNpMotion(rootRef: RefObject<HTMLElement | null>, resetKey: st
     const q = (selector: string) => Array.from(root.querySelectorAll<HTMLElement>(selector))
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const motion = !reduced && 'IntersectionObserver' in window
-    if (reduced) root.classList.add('np-has-reduced') // hides the hero Play button, as in the preview
+    if (reduced) root.setAttribute('data-reduced', '') // hides the hero Play button, as in the preview
     if (!motion) {
       q('[data-rv]').forEach((e) => e.setAttribute('data-in', ''))
-      return () => root.classList.remove('np-has-reduced')
+      return () => root.removeAttribute('data-reduced')
     }
 
     // Spring-matched fixed delays: cards and steps follow each other (data-rv-delay is in milliseconds).
@@ -81,14 +81,15 @@ export function useNpMotion(rootRef: RefObject<HTMLElement | null>, resetKey: st
       frames.forEach((f) => photoObserver?.observe(f))
     }
 
-    const heroDone = window.setTimeout(() => root.classList.add('np-hero-done'), 1800)
+    const heroDone = window.setTimeout(() => root.setAttribute('data-hero-done', ''), 1800)
 
     return () => {
       revealObserver.disconnect()
       photoObserver?.disconnect()
       window.clearTimeout(heroDone)
       root.removeAttribute('data-mo')
-      root.classList.remove('np-hero-done', 'np-has-reduced')
+      root.removeAttribute('data-hero-done')
+      root.removeAttribute('data-reduced')
     }
   }, [rootRef, resetKey])
 }
