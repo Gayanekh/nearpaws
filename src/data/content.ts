@@ -8,9 +8,6 @@ export const BRAND = {
   note: 'Temporary brand name',
 }
 
-export const PROTOTYPE_NOTICE =
-  'Interactive prototype. Caregivers, prices, reviews and availability are illustrative. Nothing you enter is sent or saved.'
-
 export const AREAS = ['Maple Grove', 'Riverside', 'Old Orchard', 'Harbor Hill', 'Cedar Park']
 
 export const CARE_TYPE_LABELS = {

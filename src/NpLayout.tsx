@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
-import { BRAND, PROTOTYPE_NOTICE } from './data/content'
+import { BRAND } from './data/content'
 import { ROUTES } from './routes'
+import { BrandLogo } from './ui/BrandLogo'
 import { useNpMotion } from './useNpMotion'
 
 /**
- * Shell of the app: prototype notice, header, main and footer, from the approved design preview. It also moves the page
+ * Shell of the app: a header that stays at the top while the page scrolls, main and footer, from the approved design preview. It also moves the page
  * on navigation: to the #section a link names, or back to the top.
  */
 export function NpLayout() {
   const { pathname, hash, key } = useLocation()
   const root = useRef<HTMLDivElement>(null)
-  const notice = useRef<HTMLParagraphElement>(null)
   const header = useRef<HTMLElement>(null)
   const menuButton = useRef<HTMLButtonElement>(null)
   const [open, setOpen] = useState(false)
@@ -26,23 +26,27 @@ export function NpLayout() {
     window.scrollTo(0, 0)
   }, [pathname, hash, key])
 
-  // Tell the CSS how tall the notice and header are, so the first screen can fill the viewport.
+  // Tell the CSS how tall the header is, so the first screen can fill the viewport, and keep in-page anchors from landing
+  // underneath the fixed header.
   useEffect(() => {
     const element = root.current
-    if (!element || !notice.current || !header.current) return
-    const setChrome = () =>
-      element.style.setProperty('--chrome-h', `${(notice.current?.offsetHeight ?? 0) + (header.current?.offsetHeight ?? 0)}px`)
+    if (!element || !header.current) return
+    const setChrome = () => {
+      const height = header.current?.offsetHeight ?? 0
+      element.style.setProperty('--chrome-h', `${height}px`)
+      document.documentElement.style.scrollPaddingTop = `${height}px`
+    }
     setChrome()
     window.addEventListener('resize', setChrome)
     window.addEventListener('load', setChrome)
     document.fonts?.ready.then(setChrome)
     const observer = 'ResizeObserver' in window ? new ResizeObserver(setChrome) : undefined
-    observer?.observe(notice.current)
     observer?.observe(header.current)
     return () => {
       window.removeEventListener('resize', setChrome)
       window.removeEventListener('load', setChrome)
       observer?.disconnect()
+      document.documentElement.style.scrollPaddingTop = ''
     }
   }, [])
 
@@ -75,21 +79,15 @@ export function NpLayout() {
       >
         Skip to main content
       </a>
-      <p
-        ref={notice}
-        className="bg-ink px-(--inset) py-[0.625rem] text-center font-sans text-[0.8125rem] leading-[1.5] font-normal text-paper [@media(max-width:480px)]:py-2 [@media(max-width:480px)]:text-[0.75rem] [@media(max-width:480px)]:leading-[1.4]"
-      >
-        {PROTOTYPE_NOTICE} Photos are Unsplash stock images.
-      </p>
 
-      <header className="relative z-20 grid h-(--header-h) grid-cols-[1fr_auto_1fr] items-center bg-paper px-(--inset)" ref={header}>
+      <header className="sticky top-0 z-20 grid h-(--header-h) grid-cols-[1fr_auto_1fr] items-center bg-paper px-(--inset)" ref={header}>
         <Logo label="NearPaws, home" className="justify-self-start" />
         <nav className="hidden md:flex md:justify-self-center md:gap-[clamp(1.75rem,4.6vw,5.5rem)]" aria-label="Main">
           <NavLink className={navLink} to={ROUTES.caregivers} end>Find a caregiver</NavLink>
           <Link className={navLink} to={`${ROUTES.home}#how`}>How it works</Link>
           <NavLink className={navLink} to={ROUTES.become} end>Become a caregiver</NavLink>
         </nav>
-        <div className="flex items-center gap-1 justify-self-end">
+        <div className="col-start-3 flex items-center gap-1 justify-self-end">
           <button className={iconButton} type="button" aria-label="Search (not available in this prototype)">
             <svg viewBox="0 0 24 24" aria-hidden="true" className={iconStroke}>
               <circle cx="10.5" cy="10.5" r="6.5" />
@@ -132,7 +130,7 @@ export function NpLayout() {
       <footer className="overflow-hidden bg-panel px-(--inset) pt-[clamp(4rem,8vw,7rem)] pb-8">
         <div className="mx-auto grid max-w-360 gap-10 min-[800px]:grid-cols-[5fr_3fr_4fr]">
           <div>
-            <Logo />
+            <Logo onPanel />
             <p className="mt-5 max-w-[26rem]">
               {BRAND.tagline}. &ldquo;{BRAND.name}&rdquo; is a temporary brand name for this prototype.
             </p>
@@ -153,16 +151,6 @@ export function NpLayout() {
             </p>
           </div>
         </div>
-        <div
-          className="mx-auto mt-[clamp(3rem,7vw,6rem)] mb-5 max-w-360 pb-[0.2em] font-slab text-[clamp(4rem,19.5vw,21rem)]/[0.8] font-light tracking-[-0.045em] whitespace-nowrap text-accent select-none"
-          aria-hidden="true"
-        >
-          nearpaws
-        </div>
-        <div className="mx-auto flex max-w-360 flex-wrap justify-between gap-4 border-t border-hair pt-6 font-sans text-caption text-muted">
-          <span>Prototype &middot; not a live service</span>
-          <span>Photos: Unsplash stock images</span>
-        </div>
       </footer>
     </div>
   )
@@ -177,15 +165,17 @@ const footerHeading = 'mb-4 font-sans text-label font-semibold tracking-label te
 const footerLink =
   'inline-block py-2 font-medium text-ink no-underline hover:underline hover:decoration-accent hover:decoration-2 hover:underline-offset-[0.3em]'
 
-/** The wordmark: "nearpaws" with the small "preview" tag. */
-function Logo({ label, className = '' }: { label?: string; className?: string }) {
+/** The NearPaws logo as a link to the home page. In the footer it sits on the panel color, so its cut-outs take that color. */
+function Logo({ label, className = '', onPanel = false }: { label?: string; className?: string; onPanel?: boolean }) {
   return (
     <Link
-      className={`-my-2.5 inline-flex items-baseline gap-2 py-2.5 font-sans text-[clamp(1.5rem,1.2rem+0.9vw,1.875rem)]/none font-bold tracking-tight text-ink no-underline ${className}`}
+      className={`inline-flex items-center no-underline ${className}`}
       to={ROUTES.home}
-      aria-label={label}
+      aria-label={label ?? 'NearPaws, home'}
     >
-      nearpaws <small className="font-sans text-label/none font-semibold tracking-label text-accent-ink uppercase">prototype</small>
+      <BrandLogo
+        className={`${onPanel ? 'h-20 [--logo-counter:var(--color-panel)]' : 'h-[clamp(2.75rem,calc(var(--header-h)_-_1.25rem),4.5rem)]'}`}
+      />
     </Link>
   )
 }
