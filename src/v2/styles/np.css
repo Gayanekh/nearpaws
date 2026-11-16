@@ -61,35 +61,11 @@ body{margin:0;background:var(--color-paper)}
 :where(.np) ul{list-style:none;padding:0}
 :where(.np) :focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 :where(.np) .np-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-:where(.np) .np-skip{position:absolute;left:var(--inset);top:-5rem;z-index:100;background:var(--ink);color:var(--paper);padding:.75rem 1.25rem;font:500 .875rem/1.4 var(--sans)}
-:where(.np) .np-skip:focus{top:.75rem}
 :where(.np) h1,
 :where(.np) h2,
 :where(.np) h3{font-family:var(--slab);color:var(--ink);font-weight:300;letter-spacing:-.01em}
 :where(.np) .np-rule{display:block;width:5.5rem;height:2px;background:var(--accent);border:0}
 :where(.np) .np-caption{font:400 .8125rem/1.5 var(--sans);color:var(--muted)}
-/* ---------- Header ---------- */
-:where(.np) .np-header{position:relative;z-index:20;height:var(--header-h);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding-inline:var(--inset);background:var(--paper)}
-:where(.np) .np-logo{justify-self:start;display:inline-flex;align-items:baseline;gap:.5rem;text-decoration:none;color:var(--ink);font:700 clamp(1.5rem,1.2rem + .9vw,1.875rem)/1 var(--sans);letter-spacing:-.01em}
-:where(.np) .np-logo small{font:600 .75rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink)}
-:where(.np) .np-nav{display:none}
-:where(.np) .np-nav a{display:inline-block;font:500 .875rem/1.4 var(--sans);letter-spacing:.01em;color:var(--ink);text-decoration:none;padding:.875rem 0;background:linear-gradient(var(--accent),var(--accent)) 0 calc(100% - .5rem)/0 2px no-repeat;transition:background-size .28s var(--ease-out)}
-:where(.np) .np-nav a:focus-visible,:where(.np) .np-nav a[aria-current="page"]{background-size:100% 2px}
-@media (hover:hover){
-  :where(.np) .np-nav a:hover{background-size:100% 2px}
-}
-:where(.np) .np-tools{justify-self:end;display:flex;align-items:center;gap:.25rem}
-:where(.np) .np-icon-btn{width:2.75rem;height:2.75rem;display:grid;place-items:center;color:var(--ink)}
-:where(.np) .np-icon-btn svg{width:1.375rem;height:1.375rem;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-:where(.np) .np-menu-lines{display:grid;gap:.4rem;justify-items:end;width:1.5rem}
-:where(.np) .np-menu-lines span{display:block;height:1.5px;background:var(--ink);width:100%}
-:where(.np) .np-menu-lines span+span{width:62%}
-@media (min-width:900px){
-  :where(.np) .np-nav{display:flex;gap:clamp(1.75rem,4.6vw,5.5rem);justify-self:center}
-}
-:where(.np) .np-mobile-nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--paper);padding:.5rem var(--inset) 1.5rem;border-top:1px solid var(--hair);box-shadow:none}
-:where(.np) .np-mobile-nav.np-is-open{display:block}
-:where(.np) .np-mobile-nav a{display:block;padding:1rem 0;border-bottom:1px solid var(--hair);font:500 1rem/1.4 var(--sans);color:var(--ink);text-decoration:none}
 /* ---------- Hero (Reference 02 composition, Reference 01 slider structure) ----------
    First screen: notice + header + hero fill the visible viewport (hero = 100svh - --chrome-h) and the next section
    starts right below. svh is the SMALL viewport height: it stays correct while mobile browser bars are showing and
@@ -199,19 +175,6 @@ body{margin:0;background:var(--color-paper)}
    BELOW THE HERO: editorial sections. One system (flat planes, light slab headlines, tan used only as
    a flat block or rule, photographs that break their frames), eight different compositions.
    ===================================================================== */
-/* ---------- 8. Footer: links above, one very large light wordmark below ---------- */
-:where(.np) .np-footer{background:var(--panel);padding:clamp(4rem,8vw,7rem) var(--inset) 2rem;overflow:hidden}
-:where(.np) .np-footer__grid{display:grid;gap:2.5rem;max-width:90rem;margin-inline:auto}
-@media (min-width:800px){
-  :where(.np) .np-footer__grid{grid-template-columns:5fr 3fr 4fr}
-}
-:where(.np) .np-footer h2{font:600 .75rem/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:1rem}
-:where(.np) .np-footer li a{display:inline-block;padding:.5rem 0;text-decoration:none;color:var(--ink);font-weight:500}
-@media (hover:hover){
-  :where(.np) .np-footer li a:hover{text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:.3em}
-}
-:where(.np) .np-footer__mark{max-width:90rem;margin:clamp(3rem,7vw,6rem) auto 1.25rem;font:300 clamp(4rem,19.5vw,21rem)/.8 var(--slab);letter-spacing:-.045em;color:var(--accent);white-space:nowrap;user-select:none;padding-bottom:.2em}
-:where(.np) .np-footer__base{max-width:90rem;margin:0 auto;padding-top:1.5rem;border-top:1px solid var(--hair);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 /* =====================================================================
    MOTION LAYER. One system: strong ease-out (--ease-out), transform + opacity only,
    a lead that moves first and furthest, support that follows, decoration that only fades.
@@ -221,7 +184,6 @@ body{margin:0;background:var(--color-paper)}
 @keyframes m-rise{from{opacity:0;transform:translateY(var(--m-y,12px))}}
 @keyframes m-fade{from{opacity:0}}
 @keyframes m-rule{from{transform:scaleX(0)}}
-@keyframes m-pop{from{opacity:0;transform:translateY(-6px)}}
 /* 1. Hero entrance: plays once on load. Lead (headline) first, then text, rule, meta, button, peek, controls.
       fill-mode "backwards" only: after the run the elements return to their normal styles, so hover and press still work. */
 :where(.np) .np-hero__panel-bg{animation:m-fade .6s var(--ease-out) backwards}
@@ -239,7 +201,6 @@ body{margin:0;background:var(--color-paper)}
 /* 3. Photographs settle from a slight zoom (the script runs it). The Stay room is the Get Started pattern:
       the picture settles from 1.2x and slightly above, and the panel only fades in (0.2s later), with no movement. */
 /* 4. Micro-interactions */
-:where(.np) .np-mobile-nav.np-is-open{animation:m-pop .22s var(--ease-out)}
 @media (prefers-reduced-motion:reduce){
   .np{scroll-behavior:auto}
   :where(.np) *,
@@ -257,6 +218,5 @@ body{margin:0;background:var(--color-paper)}
   :where(.np) .np-hero .np-cta,
   :where(.np) .np-hero__peek,
   :where(.np) .np-hero__controls{animation:m-fade .35s linear backwards!important}
-  :where(.np) .np-mobile-nav.np-is-open{animation:m-fade .2s linear!important}
 }
 }

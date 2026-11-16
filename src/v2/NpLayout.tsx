@@ -72,7 +72,12 @@ export function NpLayout() {
 
   return (
     <div className="np group/np" ref={root}>
-      <a className="np-skip" href="#main">Skip to main content</a>
+      <a
+        className="absolute top-[-5rem] left-(--inset) z-100 bg-ink px-5 py-3 font-sans text-ui font-medium text-paper focus:top-3"
+        href="#main"
+      >
+        Skip to main content
+      </a>
       <p
         ref={notice}
         className="bg-ink px-(--inset) py-[0.625rem] text-center font-sans text-[0.8125rem] leading-[1.5] font-normal text-paper [@media(max-width:480px)]:py-2 [@media(max-width:480px)]:text-[0.75rem] [@media(max-width:480px)]:leading-[1.4]"
@@ -81,19 +86,22 @@ export function NpLayout() {
         and photos are Unsplash stock images.
       </p>
 
-      <header className="np-header" ref={header}>
-        <a className="np-logo" href="#top" aria-label="NearPaws, preview home">nearpaws <small>preview</small></a>
-        <nav className="np-nav" aria-label="Main">
-          <NavLink to={ROUTES.caregivers} end>Find a caregiver</NavLink>
-          <a href="#how">How it works</a>
-          <NavLink to={ROUTES.become} end>Become a caregiver</NavLink>
+      <header className="relative z-20 grid h-(--header-h) grid-cols-[1fr_auto_1fr] items-center bg-paper px-(--inset)" ref={header}>
+        <Logo label="NearPaws, preview home" className="justify-self-start" />
+        <nav className="hidden md:flex md:justify-self-center md:gap-[clamp(1.75rem,4.6vw,5.5rem)]" aria-label="Main">
+          <NavLink className={navLink} to={ROUTES.caregivers} end>Find a caregiver</NavLink>
+          <a className={navLink} href="#how">How it works</a>
+          <NavLink className={navLink} to={ROUTES.become} end>Become a caregiver</NavLink>
         </nav>
-        <div className="np-tools">
-          <button className="np-icon-btn" type="button" aria-label="Search (not available in the preview)">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 5 5" /></svg>
+        <div className="flex items-center gap-1 justify-self-end">
+          <button className={iconButton} type="button" aria-label="Search (not available in the preview)">
+            <svg viewBox="0 0 24 24" aria-hidden="true" className={iconStroke}>
+              <circle cx="10.5" cy="10.5" r="6.5" />
+              <path d="m15.5 15.5 5 5" />
+            </svg>
           </button>
           <button
-            className="np-icon-btn"
+            className={iconButton}
             type="button"
             ref={menuButton}
             aria-expanded={open}
@@ -101,18 +109,23 @@ export function NpLayout() {
             aria-label="Menu"
             onClick={() => setOpen((o) => !o)}
           >
-            <span className="np-menu-lines" aria-hidden="true"><span /><span /></span>
+            <span className="grid w-6 justify-items-end gap-[0.4rem]" aria-hidden="true">
+              <span className="block h-[1.5px] w-full bg-ink" />
+              <span className="block h-[1.5px] w-[62%] bg-ink" />
+            </span>
           </button>
         </div>
         <nav
-          className={`np-mobile-nav${open ? ' np-is-open' : ''}`}
+          className={`absolute top-full right-0 left-0 border-t border-hair bg-paper px-(--inset) pt-2 pb-6 ${open ? 'block' : 'hidden'}`}
           id="mobileNav"
           aria-label="Menu"
+          data-menu=""
+          data-open={open ? '' : undefined}
           onClick={(e) => (e.target as HTMLElement).closest('a') && setOpen(false)}
         >
-          <NavLink to={ROUTES.caregivers} end>Find a caregiver</NavLink>
-          <a href="#how">How it works</a>
-          <NavLink to={ROUTES.become} end>Become a caregiver</NavLink>
+          <NavLink className={mobileLink} to={ROUTES.caregivers} end>Find a caregiver</NavLink>
+          <a className={mobileLink} href="#how">How it works</a>
+          <NavLink className={mobileLink} to={ROUTES.become} end>Become a caregiver</NavLink>
         </nav>
       </header>
 
@@ -120,36 +133,63 @@ export function NpLayout() {
         <Outlet />
       </main>
 
-      <footer className="np-footer">
-        <div className="np-footer__grid">
+      <footer className="overflow-hidden bg-panel px-(--inset) pt-[clamp(4rem,8vw,7rem)] pb-8">
+        <div className="mx-auto grid max-w-360 gap-10 min-[800px]:grid-cols-[5fr_3fr_4fr]">
           <div>
-            <a className="np-logo" href="#top">nearpaws <small>preview</small></a>
-            <p style={{ marginTop: '1.25rem', maxWidth: '26rem' }}>
+            <Logo />
+            <p className="mt-5 max-w-[26rem]">
               Trusted care for your pet, while you are away. &ldquo;NearPaws&rdquo; is a temporary brand name.
             </p>
           </div>
           <nav aria-label="Footer">
-            <h2>Explore</h2>
+            <h2 className={footerHeading}>Explore</h2>
             <ul>
-              <li><Link to={ROUTES.caregivers}>Find a caregiver</Link></li>
-              <li><a href="#how">How it works</a></li>
-              <li><Link to={ROUTES.become}>Become a caregiver</Link></li>
+              <li><Link className={footerLink} to={ROUTES.caregivers}>Find a caregiver</Link></li>
+              <li><a className={footerLink} href="#how">How it works</a></li>
+              <li><Link className={footerLink} to={ROUTES.become}>Become a caregiver</Link></li>
             </ul>
           </nav>
           <div>
-            <h2>About this preview</h2>
+            <h2 className={footerHeading}>About this preview</h2>
             <p>
               A visual design preview only. There is no backend, payment, real booking or messaging, and all caregivers,
               prices and reviews are fictional.
             </p>
           </div>
         </div>
-        <div className="np-footer__mark" aria-hidden="true">nearpaws</div>
-        <div className="np-footer__base np-caption">
+        <div
+          className="mx-auto mt-[clamp(3rem,7vw,6rem)] mb-5 max-w-360 pb-[0.2em] font-slab text-[clamp(4rem,19.5vw,21rem)]/[0.8] font-light tracking-[-0.045em] whitespace-nowrap text-accent select-none"
+          aria-hidden="true"
+        >
+          nearpaws
+        </div>
+        <div className="mx-auto flex max-w-360 flex-wrap justify-between gap-4 border-t border-hair pt-6 font-sans text-caption text-muted">
           <span>Design preview &middot; not the live site</span>
           <span>Photos: Unsplash stock images</span>
         </div>
       </footer>
     </div>
+  )
+}
+
+const navLink =
+  'inline-block py-[0.875rem] font-sans text-ui font-medium tracking-ui text-ink no-underline transition-[background-size] duration-280 ease-out [background:linear-gradient(var(--color-accent),var(--color-accent))_0_calc(100%-0.5rem)/0_2px_no-repeat] hover:[background-size:100%_2px] focus-visible:[background-size:100%_2px] aria-[current=page]:[background-size:100%_2px]'
+const mobileLink = 'block border-b border-hair py-4 font-sans text-[1rem]/[1.4] font-medium text-ink no-underline'
+const iconButton = 'grid size-11 place-items-center text-ink'
+const iconStroke = 'size-[1.375rem] fill-none stroke-current stroke-[1.5] [stroke-linecap:round] [stroke-linejoin:round]'
+const footerHeading = 'mb-4 font-sans text-label font-semibold tracking-label text-accent-ink uppercase'
+const footerLink =
+  'inline-block py-2 font-medium text-ink no-underline hover:underline hover:decoration-accent hover:decoration-2 hover:underline-offset-[0.3em]'
+
+/** The wordmark: "nearpaws" with the small "preview" tag. */
+function Logo({ label, className = '' }: { label?: string; className?: string }) {
+  return (
+    <a
+      className={`inline-flex items-baseline gap-2 font-sans text-[clamp(1.5rem,1.2rem+0.9vw,1.875rem)]/none font-bold tracking-tight text-ink no-underline ${className}`}
+      href="#top"
+      aria-label={label}
+    >
+      nearpaws <small className="font-sans text-label/none font-semibold tracking-label text-accent-ink uppercase">preview</small>
+    </a>
   )
 }
