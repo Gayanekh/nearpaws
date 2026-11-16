@@ -1,10 +1,10 @@
 /*
- * NearPaws redesign: the approved design-preview/index.html stylesheet, ported mechanically.
- * - Every class is prefixed np- so it can never collide with the legacy CSS (.btn, .hero, .section ...).
- * - Element selectors and the reset are scoped with :where(.np), which adds no specificity, so the cascade behaves
- *   exactly as in the preview. :root / html / body rules apply to the .np wrapper.
- * - State classes the preview toggled on <html> (mo, hero-done) are np-mo / np-hero-done on the .np wrapper.
- * Generated once from the frozen preview (git tag preview-approved); edit by hand from here on.
+ * NearPaws redesign: base layer only. There are no component classes left; every component is styled with Tailwind
+ * utilities in its own file (src/v2), and the scroll and entrance motion lives in motion.css.
+ * What stays here: the self-hosted fonts, the CSS variables the utilities read (--inset, --section, --header-h,
+ * --chrome-h, --hero-min, --svh), the document and reset rules, and the generic reduced-motion rule.
+ * Element selectors are scoped with :where(.np), which adds no specificity. Ported once from the frozen preview
+ * (git tag preview-approved).
  */
 @font-face{font-family:'Montserrat';font-style:normal;font-weight:400 700;font-display:swap;src:url("/fonts/montserrat-latin.woff2") format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 @font-face{font-family:'Roboto Slab';font-style:normal;font-weight:300 500;font-display:swap;src:url("/fonts/roboto-slab-latin.woff2") format("woff2");unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
