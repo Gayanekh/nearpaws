@@ -43,7 +43,7 @@ export function NpLayout() {
     const setChrome = () => {
       const height = header.current?.offsetHeight ?? 0
       element.style.setProperty('--chrome-h', `${height}px`)
-      document.documentElement.style.scrollPaddingTop = `${height + 12}px`
+      document.documentElement.style.scrollPaddingTop = `${height + 8}px`
     }
     setChrome()
     window.addEventListener('resize', setChrome)
@@ -90,11 +90,11 @@ export function NpLayout() {
       </a>
 
       <header
-        className="pointer-events-none sticky top-0 z-20 flow-root h-16 px-[max(0.5rem,calc(var(--inset)_-_1.25rem))] md:h-20"
+        className="pointer-events-none sticky top-0 z-20 h-[4.875rem] px-[max(0.5rem,calc(var(--inset)_-_1.25rem))] pt-3.5"
         ref={header}
       >
         <div
-          className="pointer-events-auto mx-auto grid h-full max-w-[92.5rem] grid-cols-[1fr_auto_1fr] items-center border border-transparent border-b-hair bg-paper/62 px-5 backdrop-blur-[16px] transition-[margin,border-radius,border-color,box-shadow] duration-500 ease-out data-[scrolled]:mt-2.5 data-[scrolled]:rounded-[1.625rem] data-[scrolled]:border-hair data-[scrolled]:shadow-[0_10px_30px_color-mix(in_srgb,var(--color-ink)_8%,transparent)]"
+          className="pointer-events-auto mx-auto grid h-full max-w-[92.5rem] grid-cols-[1fr_auto_1fr] items-center border border-transparent bg-paper/62 px-5 backdrop-blur-[16px] transition-[border-radius,border-color,box-shadow] duration-500 ease-out data-[scrolled]:rounded-[1.625rem] data-[scrolled]:border-hair data-[scrolled]:shadow-[0_10px_30px_color-mix(in_srgb,var(--color-ink)_8%,transparent)]"
           data-scrolled={scrolled ? '' : undefined}
         >
         <Logo label="NearPaws, home" className="justify-self-start" />
@@ -191,7 +191,7 @@ function Logo({ label, className = '', onPanel = false }: { label?: string; clas
       aria-label={label ?? 'NearPaws, home'}
     >
       <BrandLogo
-        className={`${onPanel ? 'h-20 [--logo-counter:var(--color-panel)]' : 'h-12 md:h-16'}`}
+        className={`${onPanel ? 'h-16 [--logo-counter:var(--color-panel)]' : 'h-10 md:h-12'}`}
       />
     </Link>
   )
