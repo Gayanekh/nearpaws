@@ -19,13 +19,13 @@ interface SampleCaregiver {
 const CAREGIVERS: SampleCaregiver[] = [
   {
     key: 'lead',
-    slug: 'mara',
-    name: 'Mara',
-    price: 42,
-    place: 'Maple Grove, near the community garden',
-    style: '6 years’ experience · Calm and routine-led. Quiet days, steady walks and lots of couch time.',
-    tags: ['At the caregiver’s home', 'At your home', 'Either handover'],
-    photo: { src: '/img/meet-mara.jpg', alt: 'Portrait of a smiling woman with long dark hair in warm evening light (stock photo)', width: 1100, height: 1568, position: '50% 34%' },
+    slug: 'leo',
+    name: 'Leo',
+    price: 30,
+    place: 'Cedar Park, tree-lined avenue',
+    style: '7 years’ experience · Cat specialist, very quiet home. Peaceful visits and stays for cats and small pets.',
+    tags: ['At the caregiver’s home', 'At your home'],
+    photo: { src: '/img/meet-leo.jpg', alt: 'Portrait of a young man with curly hair and a dark hat (stock photo)', width: 1100, height: 1650, position: '50% 45%' },
   },
   {
     key: 'a',
@@ -39,13 +39,13 @@ const CAREGIVERS: SampleCaregiver[] = [
   },
   {
     key: 'b',
-    slug: 'leo',
-    name: 'Leo',
-    price: 30,
-    place: 'Cedar Park, tree-lined avenue',
-    style: '7 years’ experience · Cat specialist, very quiet home. Peaceful visits and stays for cats and small pets.',
-    tags: ['At the caregiver’s home', 'At your home'],
-    photo: { src: '/img/meet-leo.jpg', alt: 'Portrait of a young man with curly hair and a dark hat (stock photo)', width: 1100, height: 1650, position: '50% 25%' },
+    slug: 'mara',
+    name: 'Mara',
+    price: 42,
+    place: 'Maple Grove, near the community garden',
+    style: '6 years’ experience · Calm and routine-led. Quiet days, steady walks and lots of couch time.',
+    tags: ['At the caregiver’s home', 'At your home', 'Either handover'],
+    photo: { src: '/img/meet-mara.jpg', alt: 'Portrait of a smiling woman with long dark hair in warm evening light (stock photo)', width: 1100, height: 1568, position: '50% 8%' },
   },
 ]
 
