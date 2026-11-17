@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ROUTES } from './routes'
-import { CAREGIVER_PETS } from './data/caregiverPhotos'
 import { Eyebrow } from './ui/Eyebrow'
-import { PetBadge } from './ui/PetBadge'
 import { TextLink } from './ui/TextLink'
 
 interface SampleCaregiver {
@@ -107,8 +105,7 @@ export function NpCaregivers() {
                     loading="lazy"
                     style={{ objectPosition: c.photo.position }}
                   />
-                  {CAREGIVER_PETS[c.slug] && <PetBadge photo={CAREGIVER_PETS[c.slug]!} className="right-4 bottom-4 size-20" />}
-                <p className={`absolute bottom-0 left-0 z-2 flex items-baseline gap-[0.6rem] bg-accent font-sans text-label/[1.3] font-medium text-ink ${layout.price}`}>
+                  <p className={`absolute bottom-0 left-0 z-2 flex items-baseline gap-[0.6rem] bg-accent font-sans text-label/[1.3] font-medium text-ink ${layout.price}`}>
                     <b className={`font-slab leading-none font-medium tabular-nums ${layout.amount}`}>{`$${c.price}`}</b>
                     <span>/ night &middot; sample price</span>
                   </p>

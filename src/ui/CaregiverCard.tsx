@@ -1,7 +1,6 @@
 import { CARE_TYPE_LABELS, HANDOVER_LABELS } from '../data/content'
 import type { Caregiver } from '../types'
-import { CAREGIVER_PETS, CAREGIVER_PHOTOS } from '../data/caregiverPhotos'
-import { PetBadge } from './PetBadge'
+import { CAREGIVER_PHOTOS } from '../data/caregiverPhotos'
 import { Link } from 'react-router-dom'
 import { ROUTES } from '../routes'
 
@@ -13,10 +12,9 @@ import { ROUTES } from '../routes'
 export function CaregiverCard({ caregiver }: { caregiver: Caregiver }) {
   const { id, name, neighborhood, experienceYears, careStyle, pricePerNight, careTypes, handover } = caregiver
   const photo = CAREGIVER_PHOTOS[id]
-  const pet = CAREGIVER_PETS[id]
   return (
     <article className="group relative flex flex-col bg-panel focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ink">
-      <div className="relative aspect-[4/3] overflow-hidden bg-panel">
+      <div className="aspect-[4/3] overflow-hidden bg-panel">
         {photo && (
           <img
             src={photo.src}
@@ -28,7 +26,6 @@ export function CaregiverCard({ caregiver }: { caregiver: Caregiver }) {
             className="size-full object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.03]"
           />
         )}
-        {pet && <PetBadge photo={pet} />}
       </div>
       <div className="flex flex-1 flex-col p-6">
         <p className="mb-1 text-caption text-muted">{neighborhood}</p>
