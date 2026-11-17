@@ -6,6 +6,8 @@ interface SampleReview {
   quote: string
   by: string
   about: string
+  /** A stock portrait of the (invented) reviewer, shown small beside the name. */
+  person: { src: string; position: string }
   photo: { src: string; alt: string; width: number; height: number; position: string }
 }
 
@@ -15,18 +17,21 @@ const REVIEWS: SampleReview[] = [
     quote: 'She followed our dog’s feeding routine to the letter.',
     by: 'Illustrative owner',
     about: 'About Mara',
+    person: { src: '/img/person-alex.jpg', position: '80% 40%' },
     photo: { src: '/img/rev-1.jpg', alt: 'A brown and white dog on a beach (stock photo)', width: 1200, height: 800, position: '62% 50%' },
   },
   {
     quote: 'A real home, not a kennel. We were so relieved.',
     by: 'Illustrative owner',
     about: 'About Sam',
+    person: { src: '/img/person-jordan.jpg', position: '50% 40%' },
     photo: { src: '/img/rev-2.jpg', alt: 'A golden puppy wearing a red collar (stock photo)', width: 1200, height: 800, position: '8% 50%' },
   },
   {
     quote: 'Our shy cat was relaxed on day one.',
     by: 'Illustrative owner',
     about: 'About Elena',
+    person: { src: '/img/person-reviewer.jpg', position: '50% 50%' },
     photo: { src: '/img/rev-3.jpg', alt: 'A tabby cat peeking out from under a blanket (stock photo)', width: 1200, height: 750, position: '50% 50%' },
   },
 ]
@@ -61,10 +66,21 @@ export function NpReviews() {
           <div data-rv="l" id="reviewBox">
             <span className="mt-5 mb-2 block h-[0.5em] overflow-visible font-slab text-[clamp(8rem,17vw,16rem)] leading-none font-light text-accent" aria-hidden="true">&ldquo;</span>
             <blockquote className="min-h-[4.8em] font-slab text-[clamp(1.75rem,1rem+2.8vw,3.5rem)] leading-[1.2] font-light tracking-tight text-ink" id="quote">{review.quote}</blockquote>
-            <p className="mt-6 font-sans text-ui/[1.5] font-medium text-ink" id="quoteBy">
-              {review.by}
-              <span className="block text-caption font-normal text-muted">{`${review.about} · sample review`}</span>
-            </p>
+            <div className="mt-6 flex items-center gap-4">
+              <img
+                className="size-14 shrink-0 rounded-full object-cover"
+                src={review.person.src}
+                alt=""
+                width={56}
+                height={56}
+                loading="lazy"
+                style={{ objectPosition: review.person.position }}
+              />
+              <p className="font-sans text-ui/[1.5] font-medium text-ink" id="quoteBy">
+                {review.by}
+                <span className="block text-caption font-normal text-muted">{`${review.about} · sample review`}</span>
+              </p>
+            </div>
             <div className="mt-7 mb-8 -ml-3 flex items-center gap-1">
               <ArrowButton direction="prev" id="revPrev" aria-label="Previous review" onClick={() => show(index - 1)} />
               <ArrowButton direction="next" id="revNext" aria-label="Next review" onClick={() => show(index + 1)} />
