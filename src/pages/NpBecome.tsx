@@ -131,7 +131,7 @@ export function NpBecome() {
             options={Object.entries(PET_SIZE_LABELS).map(([value, label]) => ({ value, label }))} />
           <TextAreaField id="about" label="About you and your experience" required hint="A few sentences is plenty." value={values.about} onChange={(v) => set('about', v)} error={errors['about']} />
           <TextAreaField id="rules" label="House rules" hint="For example: other pets, guests, alone time." value={values.rules} onChange={(v) => set('rules', v)} />
-          <ChoiceGroup variant="chips" id="agree" legend="Prototype notice" type="checkbox" required selected={values.agree} onChange={(v) => set('agree', v)} error={errors['agree']}
+          <ChoiceGroup id="agree" legend="Prototype notice" type="checkbox" required selected={values.agree} onChange={(v) => set('agree', v)} error={errors['agree']}
             options={[{ value: 'ok', label: 'I understand this application is not sent or saved anywhere.' }]} />
           <Button type="submit" className="mt-8 w-full rounded-[0.875rem]">Preview my application</Button>
         </form>
