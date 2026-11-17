@@ -15,7 +15,7 @@ interface FieldProps {
   children: (aria: FieldAria) => ReactNode
 }
 
-/** Shared shell of a form field: the label above, an optional hint, the control, and a linked error message. */
+/** Shared shell of a form field: the label above, the control, an optional hint under it, and a linked error message. The hint sits under the control so that fields side by side always line up. */
 export function Field({ id, label, hint, error, required, children }: FieldProps) {
   const hintId = hint ? `${id}-hint` : undefined
   const errorId = error ? `${id}-error` : undefined
@@ -25,8 +25,8 @@ export function Field({ id, label, hint, error, required, children }: FieldProps
       <label htmlFor={id} className="mb-2 block font-sans text-ui font-medium tracking-ui text-ink">
         {label} <OptionalMark required={required} />
       </label>
-      {hint && <p id={hintId} className="mb-2 text-caption text-muted">{hint}</p>}
       {children({ 'aria-describedby': describedBy, 'aria-invalid': error ? true : undefined, 'aria-required': required || undefined })}
+      {hint && <p id={hintId} className="mt-2 text-caption text-muted">{hint}</p>}
       <FieldError id={errorId} message={error} />
     </div>
   )
