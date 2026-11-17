@@ -57,7 +57,7 @@ export function NpOwnerDashboard() {
         </div>
       ) : (
         <div className="mt-12 grid gap-12 lg:grid-cols-[24rem_minmax(0,1fr)] lg:items-start lg:gap-16">
-          <div className="bg-panel p-6">
+          <div className="bg-panel p-6 lg:sticky lg:top-24 lg:max-h-[calc(100dvh-7rem)] lg:overflow-y-auto">
             <h2 className={heading}>Requests</h2>
             <RequestList
               requests={mine}
