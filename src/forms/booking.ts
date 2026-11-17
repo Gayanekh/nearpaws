@@ -1,4 +1,6 @@
-import { isBlank, isEmail, isPhone, todayIso } from '../utils/validation'
+import { CAREGIVERS } from '../data/content'
+import { firstBusyDay } from '../data/availability'
+import { formatDate, isBlank, isEmail, isPhone, todayIso } from '../utils/validation'
 import type { Errors } from '../utils/validation'
 
 /** The three steps of the booking request. Shared by the original page and the redesigned page. */
@@ -20,6 +22,11 @@ export function validateBookingStep(step: number, v: BookingValues): Errors {
     else if (v.start < todayIso()) e['start'] = 'The start date cannot be in the past.'
     if (!v.end) e['end'] = 'Choose an end date.'
     else if (v.start && v.end < v.start) e['end'] = 'The end date must be on or after the start date.'
+    const chosen = CAREGIVERS.find((c) => c.id === v.caregiver)
+    if (chosen && v.start && v.end && !e['start'] && !e['end']) {
+      const busy = firstBusyDay(chosen.id, v.start, v.end)
+      if (busy) e['start'] = `${chosen.name} is not available on ${formatDate(busy)}. Choose other days or a different caregiver.`
+    }
     if (!v.handover[0]) e['handover'] = 'Choose how handover should work.'
     if (isBlank(v.ownerName)) e['ownerName'] = 'Enter your name.'
     if (isBlank(v.email)) e['email'] = 'Enter your email address.'

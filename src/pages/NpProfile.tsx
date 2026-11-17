@@ -1,7 +1,11 @@
+import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { CAREGIVERS, CARE_TYPE_LABELS, HANDOVER_LABELS, PET_SIZE_LABELS } from '../data/content'
 import { CAREGIVER_PHOTOS } from '../data/caregiverPhotos'
+import type { Caregiver } from '../types'
+import { formatDate, nightsBetween } from '../utils/validation'
 import { ROUTES } from '../routes'
+import { AvailabilityCalendar } from '../ui/AvailabilityCalendar'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
 import { CheckList } from '../ui/CheckList'
@@ -128,30 +132,54 @@ export function NpProfile() {
           </div>
         </div>
 
-        <aside aria-label="Care options and price" className="bg-accent p-8 lg:sticky lg:top-8">
-          <Badge>Illustrative sample</Badge>
-          <p className="mt-6 mb-6 text-body-dense text-ink">
-            <strong className="font-slab text-numeral font-medium">${c.pricePerNight}</strong> / night{' '}
-            <span className="text-caption">(sample price)</span>
-          </p>
-          <FactList
-            stacked
-            onAccent
-            items={[
-              { term: 'Care types', text: c.careTypes.map((t) => CARE_TYPE_LABELS[t]).join(' · ') },
-              { term: 'Pet sizes', text: c.petSizes.map((s) => PET_SIZE_LABELS[s]).join(' · ') },
-              { term: 'Animals', text: c.animals.join(', ') },
-              { term: 'Handover', text: HANDOVER_LABELS[c.handover] },
-              { term: 'Experience', text: `${c.experienceYears} years · ${c.careStyle}` },
-              { term: 'Availability', text: 'Sample only: most weekends open' },
-            ]}
-          />
-          <Button variant="ink" to={`${ROUTES.book}?caregiver=${c.id}`} className="mt-8 w-full">
-            Request care with {c.name}
-          </Button>
-          <p className="mt-4 text-caption text-ink">Only an approximate neighborhood is shown. No request is actually sent.</p>
-        </aside>
+        <RequestBlock key={c.id} c={c} />
       </div>
     </section>
+  )
+}
+
+/**
+ * The tan request block: price, facts, the caregiver's sample availability, and the way into the booking form. The days the
+ * visitor picks are passed to the booking page in the link, so the form starts with them filled in. Its state is the
+ * visitor's choice only; nothing is saved.
+ */
+function RequestBlock({ c }: { c: Caregiver }) {
+  const [range, setRange] = useState({ start: '', end: '' })
+  const complete = range.start !== '' && range.end !== ''
+  const nights = complete ? nightsBetween(range.start, range.end) : 0
+  const query = complete ? `?caregiver=${c.id}&start=${range.start}&end=${range.end}` : `?caregiver=${c.id}`
+  const summary = complete
+    ? `${formatDate(range.start)} to ${formatDate(range.end)}, ${nights === 0 ? 'a one-day visit' : `${nights} ${nights === 1 ? 'night' : 'nights'}, sample estimate $${c.pricePerNight * nights} (illustrative)`}.`
+    : range.start
+      ? `From ${formatDate(range.start)}. Now pick your last day.`
+      : 'Pick your first and last day. Busy days cannot be chosen.'
+  return (
+    <aside aria-label="Care options, price and availability" className="bg-accent p-8">
+      <Badge>Illustrative sample</Badge>
+      <p className="mt-6 mb-6 text-body-dense text-ink">
+        <strong className="font-slab text-numeral font-medium">${c.pricePerNight}</strong> / night{' '}
+        <span className="text-caption">(sample price)</span>
+      </p>
+      <h2 className="mb-3 font-slab text-title font-medium text-ink">Choose your days</h2>
+      <AvailabilityCalendar caregiverId={c.id} start={range.start} end={range.end} onChange={(start, end) => setRange({ start, end })} />
+      <p className="mt-4 min-h-12 text-body-dense text-ink" aria-live="polite">{summary}</p>
+      <Button variant="ink" to={`${ROUTES.book}${query}`} className="mt-4 w-full">
+        {complete ? 'Continue with these days' : `Request care with ${c.name}`}
+      </Button>
+      <p className="mt-4 text-caption text-ink">Availability is illustrative. Only an approximate neighborhood is shown. No request is actually sent.</p>
+      <div className="mt-8">
+        <FactList
+          stacked
+          onAccent
+          items={[
+            { term: 'Care types', text: c.careTypes.map((t) => CARE_TYPE_LABELS[t]).join(' · ') },
+            { term: 'Pet sizes', text: c.petSizes.map((s) => PET_SIZE_LABELS[s]).join(' · ') },
+            { term: 'Animals', text: c.animals.join(', ') },
+            { term: 'Handover', text: HANDOVER_LABELS[c.handover] },
+            { term: 'Experience', text: `${c.experienceYears} years · ${c.careStyle}` },
+          ]}
+        />
+      </div>
+    </aside>
   )
 }

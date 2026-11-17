@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 import { CAREGIVERS, CARE_TYPE_LABELS, HANDOVER_LABELS, PET_SIZE_LABELS } from '../data/content'
 import { EMPTY_BOOKING, STEP_LABELS, validateBookingStep } from '../forms/booking'
 import type { BookingValues } from '../forms/booking'
+import { firstBusyDay } from '../data/availability'
 import { formatDate, nightsBetween, todayIso } from '../utils/validation'
 import type { Errors } from '../utils/validation'
 import { ROUTES } from '../routes'
@@ -33,7 +34,22 @@ export function NpBooking() {
   useDocumentTitle('Request care')
   const [params] = useSearchParams()
   const preselected = CAREGIVERS.some((c) => c.id === params.get('caregiver')) ? params.get('caregiver')! : ''
-  const [values, setValues] = useState<BookingValues>({ ...EMPTY_BOOKING, caregiver: preselected })
+  // Days chosen on the caregiver's page arrive as ?start= and ?end=; they are used only if they are still valid.
+  const startParam = params.get('start') ?? ''
+  const endParam = params.get('end') ?? ''
+  const daysFromProfile =
+    preselected !== '' &&
+    /^\d{4}-\d{2}-\d{2}$/.test(startParam) &&
+    /^\d{4}-\d{2}-\d{2}$/.test(endParam) &&
+    startParam >= todayIso() &&
+    endParam >= startParam &&
+    !firstBusyDay(preselected, startParam, endParam)
+  const [values, setValues] = useState<BookingValues>({
+    ...EMPTY_BOOKING,
+    caregiver: preselected,
+    start: daysFromProfile ? startParam : '',
+    end: daysFromProfile ? endParam : '',
+  })
   const [step, setStep] = useState(0)
   const [errors, setErrors] = useState<Errors>({})
   const [done, setDone] = useState(false)
