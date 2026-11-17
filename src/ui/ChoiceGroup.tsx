@@ -11,9 +11,7 @@ interface ChoiceGroupProps {
   required?: boolean
   hint?: string
   /** "list": a box and a label per row (default). "chips": soft pill buttons side by side; the chosen ones are filled with ink. */
-  variant?: 'list' | 'chips' | 'segmented'
-  /** With variant="segmented": one option per row (for narrow columns) instead of side by side. */
-  stacked?: boolean
+  variant?: 'list' | 'chips'
 }
 
 /**
@@ -21,10 +19,8 @@ interface ChoiceGroupProps {
  * keyboard operable); the box next to the label is drawn from it. Selected state is an ink fill with a mark inside
  * (a dot for radios, a check for checkboxes), so it is never shown by color alone.
  * With variant="chips" each option is a soft pill that fills with ink (and turns its text light) when chosen.
- * With variant="segmented" the options sit in one rounded tan track and the chosen one is an ink pill inside it, like a
- * segmented control.
  */
-export function ChoiceGroup({ id, legend, type, options, selected, onChange, error, required, hint, variant = 'list', stacked = false }: ChoiceGroupProps) {
+export function ChoiceGroup({ id, legend, type, options, selected, onChange, error, required, hint, variant = 'list' }: ChoiceGroupProps) {
   const toggle = (value: string) => {
     if (type === 'radio') return onChange([value])
     onChange(selected.includes(value) ? selected.filter((v) => v !== value) : [...selected, value])
@@ -37,25 +33,7 @@ export function ChoiceGroup({ id, legend, type, options, selected, onChange, err
         {legend} <OptionalMark required={required} />
       </legend>
       {hint && <p className="mb-2 text-caption text-muted">{hint}</p>}
-      {variant === 'segmented' ? (
-        <div className={`rounded-[1.5rem] bg-accent/30 p-1.5 ${stacked ? 'grid gap-1' : 'inline-flex max-w-full flex-wrap gap-1'}`}>
-          {options.map((o) => (
-            <label key={o.value} className="cursor-pointer">
-              <input
-                type={type}
-                name={id}
-                value={o.value}
-                checked={selected.includes(o.value)}
-                onChange={() => toggle(o.value)}
-                className="peer sr-only"
-              />
-              <span className="flex min-h-11 items-center rounded-full px-5 py-2 text-left font-sans text-ui font-medium text-copy transition-colors duration-200 hover:text-ink peer-checked:bg-ink peer-checked:text-paper peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ink">
-                {o.label}
-              </span>
-            </label>
-          ))}
-        </div>
-      ) : variant === 'chips' ? (
+      {variant === 'chips' ? (
         <div className="flex flex-wrap gap-2.5">
           {options.map((o) => (
             <label key={o.value} className="cursor-pointer">
