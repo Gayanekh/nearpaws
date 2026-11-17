@@ -72,6 +72,8 @@ export function NpDirectory() {
               options={AREAS.map((a) => ({ value: a, label: a }))}
             />
             <ChoiceGroup
+              variant="segmented"
+              stacked
               id="filter-care"
               legend="Care type"
               type="radio"
@@ -80,6 +82,8 @@ export function NpDirectory() {
               options={Object.entries(CARE_TYPE_LABELS).map(([value, label]) => ({ value, label }))}
             />
             <ChoiceGroup
+              variant="segmented"
+              stacked
               id="filter-size"
               legend="Pet size"
               type="radio"
