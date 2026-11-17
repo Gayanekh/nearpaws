@@ -52,9 +52,9 @@ export function ChoiceGroup({ id, legend, type, options, selected, onChange, err
           ))}
         </div>
       ) : (
-      <div className="grid gap-1">
+      <div className="grid gap-2">
         {options.map((o) => (
-          <label key={o.value} className="flex min-h-11 cursor-pointer items-start gap-3 py-2">
+          <label key={o.value} className="flex cursor-pointer items-center gap-2 ">
             <input
               type={type}
               name={id}
@@ -65,16 +65,16 @@ export function ChoiceGroup({ id, legend, type, options, selected, onChange, err
             />
             <span
               aria-hidden="true"
-              className={`mt-px grid size-6 shrink-0 place-items-center border border-field-border bg-paper text-paper transition-colors duration-200 peer-checked:border-ink peer-checked:bg-ink peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ink [&>svg]:opacity-0 peer-checked:[&>svg]:opacity-100 ${round ? 'rounded-full' : ''}`}
+              className={` grid size-4 shrink-0 place-items-center border border-field-border bg-paper text-paper transition-colors duration-200 peer-checked:border-ink peer-checked:bg-ink peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ink [&>svg]:opacity-0 peer-checked:[&>svg]:opacity-100 ${round ? 'rounded-full' : ''}`}
             >
               {round ? (
-                <svg viewBox="0 0 24 24" className="size-2.5 fill-current"><circle cx="12" cy="12" r="12" /></svg>
+                <svg viewBox="0 0 24 24" className="size-2 fill-current"><circle cx="12" cy="12" r="12" /></svg>
               ) : (
-                <svg viewBox="0 0 24 24" className="size-4 fill-none stroke-current stroke-[2.5]"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
+                <svg viewBox="0 0 24 24" className="size-3 fill-none stroke-current stroke-[3]"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
               )}
             </span>
             <span className="grid">
-              <span className="text-body-dense text-ink">{o.label}</span>
+              <span className="text-body-dense text-ink font-sm">{o.label}</span>
               {o.description && <span className="text-caption text-muted">{o.description}</span>}
             </span>
           </label>
