@@ -13,7 +13,12 @@ npm install
 npm run dev      # http://localhost:5173
 npm run build    # type-check + production build into dist/
 npm run lint
+npm run storybook        # http://localhost:6006, every UI piece with its states
+npm run build-storybook  # static build into storybook-static/
+npm run test:a11y        # axe check of every story (build Storybook first)
 ```
+
+**Storybook on Windows:** start and build it from PowerShell or Command Prompt. From Git Bash the story paths come out wrong and no story loads. It also needs the Microsoft Visual C++ Redistributable (`winget install Microsoft.VCRedist.2015+.x64`). The a11y script uses the Playwright Chromium (`npx playwright-core install chromium` once, if it is missing).
 
 ## Screens
 
@@ -42,7 +47,7 @@ styled with utilities in its own file.
 - `src/styles/tailwind.css`: **the design tokens** (colors, fonts, type scale, breakpoints, the hero's layout variants).
   `np.css` is a small base layer (self-hosted fonts, CSS variables, reset); `motion.css` holds the scroll-reveal and hero entrance
   motion, driven by `data-` attributes.
-- `src/ui/`: design-system primitives (Button, TextLink, Eyebrow, PageTitle, form fields, Badge, StatusBadge, FactList, ...).
+- `src/ui/`: design-system primitives (Button, TextLink, Eyebrow, PageTitle, form fields, Badge, StatusBadge, FactList, ...). Each has a `*.stories.tsx` next to it with its states; config is in `.storybook/`.
 - `src/pages/`: one file per screen. `src/Np*.tsx`: the shell (`NpLayout`) and the home-page sections.
 - `src/forms/`: validation and empty values for the booking and caregiver forms. `src/useNpMotion.ts`: scroll motion.
 - `DESIGN.md`: the design specification. `design-preview/index.html` (git tag `preview-approved`) is the frozen visual and
