@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom'
 import { CAREGIVERS } from '../data/content'
 import { useDemo } from '../demo/useDemo'
 import { ROUTES } from '../routes'
+import { BackLink } from '../ui/BackLink'
 import { Button } from '../ui/Button'
 import { PageTitle } from '../ui/PageTitle'
 import { PhotoField } from '../ui/PhotoField'
@@ -67,6 +68,7 @@ export function NpMyProfile() {
 
   return (
     <section className={page}>
+      <BackLink to={isCaregiver ? ROUTES.caregiverDashboard : ROUTES.dashboard}>Back to my dashboard</BackLink>
       <PageTitle eyebrow="Demo profile" title="My profile">
         Change your details and photo. This is a demonstration: it is kept only in this browser tab and nothing is sent anywhere.
         {isCaregiver && ' Your photo, name, area, tagline, about text and price also appear on your card and profile page.'}
@@ -97,7 +99,6 @@ export function NpMyProfile() {
 
         <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
           <Button soft type="submit">Save changes</Button>
-          <TextLink to={isCaregiver ? ROUTES.caregiverDashboard : ROUTES.dashboard}>Back to my dashboard</TextLink>
           {isCaregiver && sample && <TextLink to={ROUTES.caregiver(sample.id)}>See my public profile</TextLink>}
         </div>
         <p role="status" className="mt-4 min-h-6 text-body-dense font-medium text-ink">{saved ? 'Saved. Your changes are shown across the site.' : ''}</p>
