@@ -1,9 +1,9 @@
 /**
- * The NearPaws logo: a cat and a dog above a small wordmark, as supplied (vector, "original palette"): the drawing is
- * warm brown (--color-logo) and the wordmark dusty rose (--color-logo-rose). The small cut-outs (eyes, pads, the openings of
- * the letters) are drawn in the color of the surface behind it, which is paper by default and can be set with
+ * The NearPaws logo: a cat and a dog above the wordmark, as supplied (vector, "original palette"): the drawing is warm
+ * brown (--color-logo) and the wordmark dusty rose (--color-logo-rose). The small cut-outs (eyes, pads, the openings of the
+ * letters) are drawn in the color of the surface behind it, which is paper by default and can be set with
  * `--logo-counter` (for example on the panel color in the footer).
- * Shapes 4 to 15 are the wordmark; it is drawn at 60% around its center, as in the supplied file.
+ * Shapes 4 to 15 are the wordmark.
  */
 const INK = 'var(--color-logo)'
 const ROSE = 'var(--color-logo-rose)'
@@ -42,13 +42,10 @@ const WORD_TO = 16
 /** Decorative: the link or heading around it carries the accessible name. */
 export function BrandLogo({ className = '' }: { className?: string }) {
   return (
-    <svg viewBox="303 262 415 462" aria-hidden="true" className={`w-auto ${className}`}>
-      {SHAPES.map(([fill, d], i) => (i < WORD_FROM || i >= WORD_TO ? <path key={i} fill={fill} d={d} /> : null))}
-      <g transform="translate(512 633) scale(0.6) translate(-512 -621)">
-        {SHAPES.slice(WORD_FROM, WORD_TO).map(([fill, d], i) => (
-          <path key={i} fill={fill === INK ? ROSE : fill} d={d} />
-        ))}
-      </g>
+    <svg viewBox="176 262 668 475" aria-hidden="true" className={`w-auto ${className}`}>
+      {SHAPES.map(([fill, d], i) => (
+        <path key={i} fill={i >= WORD_FROM && i < WORD_TO && fill === INK ? ROSE : fill} d={d} />
+      ))}
     </svg>
   )
 }

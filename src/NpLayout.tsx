@@ -184,7 +184,7 @@ function Logo({ label, className = '', onPanel = false }: { label?: string; clas
       aria-label={label ?? 'NearPaws, home'}
     >
       <BrandLogo
-        className={`${onPanel ? 'h-16 [--logo-counter:var(--color-panel)]' : 'h-11 md:h-12'}`}
+        className={`${onPanel ? 'h-16 [--logo-counter:var(--color-panel)]' : 'h-10 md:h-12'}`}
       />
     </Link>
   )
