@@ -95,7 +95,7 @@ export function NpLayout() {
         ref={header}
       >
         <div
-          className="pointer-events-auto mx-auto grid h-full max-w-[92.5rem] grid-cols-[1fr_auto_1fr] items-center border border-transparent bg-paper/62 px-5 backdrop-blur-[16px] transition-[border-radius,border-color,box-shadow] duration-500 ease-out data-[scrolled]:rounded-[1.625rem] data-[scrolled]:border-hair data-[scrolled]:shadow-[0_10px_30px_color-mix(in_srgb,var(--color-ink)_8%,transparent)]"
+          className="pointer-events-auto mx-auto grid h-full max-w-[92.5rem] grid-cols-[1fr_auto_1fr] items-center border border-transparent bg-paper/62 px-5 backdrop-blur-[16px] transition-[border-radius,border-color,box-shadow] duration-500 ease-out data-[scrolled]:rounded-[0.75rem] data-[scrolled]:border-hair data-[scrolled]:shadow-[0_10px_30px_color-mix(in_srgb,var(--color-ink)_8%,transparent)]"
           data-scrolled={scrolled ? '' : undefined}
         >
         <Logo label="NearPaws, home" className="justify-self-start" />
@@ -126,7 +126,7 @@ export function NpLayout() {
         </div>
         </div>
         <nav
-          className={`pointer-events-auto absolute top-full right-0 left-0 mx-[max(0.5rem,calc(var(--inset)_-_1.25rem))] mt-4 rounded-[1.625rem] border border-hair bg-paper/90 px-6 pt-2 pb-4 backdrop-blur-[16px] ${open ? 'block' : 'hidden'}`}
+          className={`pointer-events-auto absolute top-full right-0 left-0 mx-[max(0.5rem,calc(var(--inset)_-_1.25rem))] mt-4 rounded-[0.75rem] border border-hair bg-paper/90 px-6 pt-2 pb-4 backdrop-blur-[16px] ${open ? 'block' : 'hidden'}`}
           id="mobileNav"
           aria-label="Menu"
           data-menu=""
@@ -202,7 +202,7 @@ function Logo({ label, className = '', onPanel = false }: { label?: string; clas
       aria-label={label ?? 'NearPaws, home'}
     >
       <BrandLogo
-        className={`${onPanel ? 'h-16 [--logo-counter:var(--color-panel)]' : 'h-10 md:h-12'}`}
+        className={`${onPanel ? 'h-16' : 'h-10 md:h-12'}`}
       />
     </Link>
   )

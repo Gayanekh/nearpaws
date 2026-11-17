@@ -40,8 +40,7 @@
   --color-field-border: #857c70;
   --color-error: #a3261b;
   --color-success: #2f6b4f;
-  --color-logo: #443c37; /* the logo drawing */
-  --color-logo-rose: #c88a7a; /* the logo wordmark */
+  --color-logo: #443c37; /* the logo */
   --color-hair: color-mix(in srgb, var(--color-ink) 16%, transparent); /* hairline rules */
 
   /* Type: families and weights */
