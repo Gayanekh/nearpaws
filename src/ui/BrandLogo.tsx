@@ -1,7 +1,7 @@
 /**
  * The NearPaws logo: a cat and a dog above a small wordmark, as supplied (vector, transparent version). It is one color
  * (--color-logo, warm brown); the eyes, the pads and the openings of the letters are real holes, so it sits on any surface.
- * The wordmark is drawn at 60% around its center, as in the supplied file.
+ * The wordmark is drawn at 75% around its center, as in the supplied file.
  */
 type Shape = readonly [holes: boolean, d: string]
 
@@ -29,11 +29,11 @@ const WORD: ReadonlyArray<Shape> = [
 /** Decorative: the link or heading around it carries the accessible name. */
 export function BrandLogo({ className = '' }: { className?: string }) {
   return (
-    <svg viewBox="303 262 415 462" aria-hidden="true" className={`w-auto fill-logo ${className}`}>
+    <svg viewBox="259 264 502 478" aria-hidden="true" className={`w-auto fill-logo ${className}`}>
       {MARK.map(([holes, d]) => (
         <path key={d} d={d} fillRule={holes ? 'evenodd' : undefined} />
       ))}
-      <g transform="translate(512 633) scale(0.6) translate(-512 -621)">
+      <g transform="translate(512 633) scale(0.75) translate(-512 -621)">
         {WORD.map(([holes, d]) => (
           <path key={d} d={d} fillRule={holes ? 'evenodd' : undefined} />
         ))}
