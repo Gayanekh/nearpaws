@@ -130,7 +130,7 @@ export function NpBecome() {
           <TextAreaField id="rules" label="House rules" hint="For example: other pets, guests, alone time." value={values.rules} onChange={(v) => set('rules', v)} />
           <ChoiceGroup id="agree" legend="Prototype notice" type="checkbox" required selected={values.agree} onChange={(v) => set('agree', v)} error={errors['agree']}
             options={[{ value: 'ok', label: 'I understand this application is not sent or saved anywhere.' }]} />
-          <Button type="submit" className="mt-8 w-full rounded-[0.875rem]">Preview my application</Button>
+          <Button type="submit" soft className="mt-8 w-full">Preview my application</Button>
         </form>
       </div>
     </section>

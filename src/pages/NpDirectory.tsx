@@ -87,7 +87,7 @@ export function NpDirectory() {
               onChange={setPetSize}
               options={Object.entries(PET_SIZE_LABELS).map(([value, label]) => ({ value, label }))}
             />
-            <Button variant="secondary" onClick={reset} disabled={!hasFilters} className="w-full">
+            <Button soft onClick={reset} disabled={!hasFilters} className="w-full">
               Clear filters
             </Button>
           </form>
