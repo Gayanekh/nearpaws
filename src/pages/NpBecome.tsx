@@ -74,7 +74,7 @@ export function NpBecome() {
 
   return (
     <section className={page}>
-      <div className="grid gap-8 border border-hair bg-[linear-gradient(135deg,var(--color-panel),var(--color-paper))] p-4 sm:p-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:gap-10 lg:p-8">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:gap-14">
         <div className="flex flex-col">
           <header>
             <Eyebrow>Become a caregiver</Eyebrow>

@@ -88,7 +88,7 @@ export function NpBooking() {
   if (needSignIn && !done) {
     return (
       <section className={page}>
-        <div className="border border-hair bg-[linear-gradient(135deg,var(--color-panel),var(--color-paper))] p-5 sm:p-8 lg:p-10">
+        <div>
           <header className="max-w-[40rem]">
             <Eyebrow>Request care</Eyebrow>
             <h1 className="font-slab text-section font-light tracking-tight text-ink">Sign in to send your request</h1>
