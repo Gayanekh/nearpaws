@@ -53,7 +53,11 @@ export function FieldError({ id, message }: { id?: string; message?: string }) {
   )
 }
 
-/** Class list of a text-like control (input, select, textarea): square, 1px border, 48px high, 2px ink focus ring. */
+/**
+ * The one definition of how a text-like control (input, select, textarea) looks, used by TextField, SelectField and
+ * TextAreaField and therefore by every form of the app: 44px high, 0.875rem rounded corners, a 1px border, and a 2px ink
+ * focus ring. Change the look of all inputs here and nowhere else.
+ */
 export const controlClasses =
-  'block h-12 w-full border border-field-border bg-paper px-4 font-sans text-body-dense text-ink ' +
+  'block h-11 w-full rounded-[0.875rem] border border-field-border bg-paper px-4 font-sans text-body-dense text-ink ' +
   'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink aria-[invalid=true]:border-error'

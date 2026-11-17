@@ -26,9 +26,6 @@ const STEPS = [
   { title: 'Welcome pets', text: 'Then you would receive requests, agree the details and share updates.', icon: 'M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z' },
 ] as const
 
-/** The form's controls are soft here: rounded corners on text fields, selects and text areas. */
-const softControls = '[&_input:not([type=checkbox],[type=radio])]:rounded-[0.875rem] [&_select]:rounded-[0.875rem] [&_textarea]:rounded-[0.875rem]'
-
 /**
  * Become a caregiver (/become-a-caregiver): one illustrative application form that validates in the browser and sends
  * nothing. Values and every validation message come from the same module as the original page
@@ -113,7 +110,7 @@ export function NpBecome() {
           </div>
         </div>
 
-        <form onSubmit={submit} noValidate className={`rounded-[1.5rem] border border-hair bg-paper p-5 sm:p-8 ${softControls}`}>
+        <form onSubmit={submit} noValidate className="rounded-[1.5rem] border border-hair bg-paper p-5 sm:p-8">
           <ErrorSummary errors={errors} />
           <div className={row}>
             <TextField id="name" label="Your name" required autoComplete="off" value={values.name} onChange={(v) => set('name', v)} error={errors['name']} />
