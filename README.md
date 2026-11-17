@@ -8,6 +8,8 @@ caregiver's home or the owner's home. "NearPaws" is a temporary brand name.
 - App: https://nearpaws.vercel.app
 - Component library (Storybook, 95 stories with accessibility checks): https://nearpaws-storybook.vercel.app
 
+A longer write-up (what it does, how it was built, the component library) is in [docs/case-study.md](docs/case-study.md).
+
 The two are separate Vercel projects built from this one repository. The Storybook project builds with `npm run build-storybook` and publishes `storybook-static`; the app builds with `npm run build`.
 
 **Not real:** no backend, database, login, payment, booking or messaging. Caregivers, prices, reviews and availability are
