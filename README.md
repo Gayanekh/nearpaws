@@ -24,12 +24,13 @@ npm run lint
 | `/caregivers/:id` | Caregiver profile |
 | `/book` | 3-step booking and pet-intake form, mock confirmation |
 | `/become-a-caregiver` | Application form, mock confirmation |
-| `/booking-status` | Request status with all four states (requested, more info, confirmed, declined) |
-| `/caregiver-dashboard` | Caregiver view: requests, pet details, availability, updates |
+| `/sign-in` | Demo sign-in: choose a sample pet owner or caregiver (no real accounts or passwords) |
+| `/dashboard` | Pet owner dashboard: the requests sent and their status, replies, care updates (sign-in needed) |
+| `/caregiver-dashboard` | Caregiver dashboard: requests received, accept, ask a question or decline, post updates, availability (sign-in needed) |
 | `/internal/admin` | Admin review of applications and support cases (not linked publicly) |
 | `*` | 404 |
 
-The sample booking status and caregiver dashboard are linked from the confirmation screens of the booking and caregiver forms.
+The demo has two kinds of sample people: pet owners and caregivers. A request sent from the booking form (as a sample owner) appears in that owner's dashboard and in the dashboard of the caregiver it was sent to; the caregiver can accept, ask a question or decline, and the owner sees the new status. The state is kept only in the browser tab (sessionStorage); "Reset demo" in the account menu returns it to the start. There is no server.
 
 ## Where things live
 

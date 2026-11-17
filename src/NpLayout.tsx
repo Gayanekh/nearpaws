@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, Outlet, useLocation } from 'react-router-dom'
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { BRAND } from './data/content'
 import { ROUTES } from './routes'
+import { useDemo } from './demo/useDemo'
+import { AccountMenu } from './ui/AccountMenu'
 import { BrandLogo } from './ui/BrandLogo'
 import { Button } from './ui/Button'
 import { useNpMotion } from './useNpMotion'
@@ -11,7 +13,9 @@ import { useNpMotion } from './useNpMotion'
  * on navigation: to the #section a link names, or back to the top.
  */
 export function NpLayout() {
-  const { pathname, hash, key } = useLocation()
+  const { pathname, hash, key, state } = useLocation()
+  const { account, signOut } = useDemo()
+  const navigate = useNavigate()
   const root = useRef<HTMLDivElement>(null)
   const header = useRef<HTMLElement>(null)
   const menuButton = useRef<HTMLButtonElement>(null)
@@ -76,6 +80,16 @@ export function NpLayout() {
     }
   }, [])
 
+  // Signing out goes home first and signs out there (once per visit to that page), so a dashboard does not redirect to the
+  // sign-in page on the way.
+  const signedOutAt = useRef('')
+  useEffect(() => {
+    if ((state as { signOut?: boolean } | null)?.signOut && signedOutAt.current !== key) {
+      signedOutAt.current = key
+      signOut()
+    }
+  }, [state, key, signOut])
+
   // Menu: Escape closes it (and returns focus to its button); so does growing past the desktop breakpoint.
   useEffect(() => {
     if (!open) return
@@ -123,8 +137,8 @@ export function NpLayout() {
         </nav>
         <div className="col-start-3 flex items-center gap-2 justify-self-end">
           <div className="hidden items-center gap-2 md:flex">
+            {account ? <AccountMenu /> : <Link className={navLink} to={ROUTES.signIn}>Sign in</Link>}
             <Button className="min-h-11! gap-3! px-5! py-2.5!" to={ROUTES.caregivers}>Find a caregiver</Button>
-            <Button className="min-h-11! gap-3! px-5! py-2.5!" variant="secondary" to={ROUTES.become}>Become a caregiver</Button>
           </div>
           <button
             className={`${iconButton} lg:hidden`}
@@ -156,9 +170,25 @@ export function NpLayout() {
           {SECTION_LINKS.map((s) => (
             <Link key={s.id} className={mobileLink} to={`${ROUTES.home}#${s.id}`}>{s.label}</Link>
           ))}
+          <Link className={mobileLink} to={ROUTES.become}>Become a caregiver</Link>
           <div className="grid gap-3 pt-4 md:hidden">
             <Button to={ROUTES.caregivers}>Find a caregiver</Button>
-            <Button variant="secondary" to={ROUTES.become}>Become a caregiver</Button>
+            {account ? (
+              <>
+                <Button variant="secondary" to={account.role === 'owner' ? ROUTES.dashboard : ROUTES.caregiverDashboard}>Dashboard</Button>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    setOpen(false)
+                    navigate(ROUTES.home, { state: { signOut: true } })
+                  }}
+                >
+                  Sign out
+                </Button>
+              </>
+            ) : (
+              <Button variant="secondary" to={ROUTES.signIn}>Sign in</Button>
+            )}
           </div>
         </nav>
       </header>
@@ -181,6 +211,7 @@ export function NpLayout() {
               <li><Link className={footerLink} to={ROUTES.caregivers}>Find a caregiver</Link></li>
               <li><Link className={footerLink} to={`${ROUTES.home}#how`}>How it works</Link></li>
               <li><Link className={footerLink} to={ROUTES.become}>Become a caregiver</Link></li>
+              <li><Link className={footerLink} to={ROUTES.signIn}>Sign in</Link></li>
             </ul>
           </nav>
           <div>

@@ -16,5 +16,12 @@ export const todayIso = () => toIso(new Date())
 export const formatDate = (iso: string) =>
   iso ? new Date(`${iso}T12:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : ''
 
+/** "Dec 14, 2026 to Dec 18, 2026 (4 nights)" for a stay. */
+export const formatStay = (start: string, end: string) => {
+  const nights = nightsBetween(start, end)
+  const length = nights === 0 ? 'one day' : `${nights} ${nights === 1 ? 'night' : 'nights'}`
+  return `${formatDate(start)} to ${formatDate(end)} (${length})`
+}
+
 export const nightsBetween = (start: string, end: string) =>
   Math.max(0, Math.round((new Date(end).getTime() - new Date(start).getTime()) / 86_400_000))

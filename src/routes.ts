@@ -5,7 +5,9 @@ export const ROUTES = {
   caregiver: (id: string) => `/caregivers/${id}`,
   book: '/book',
   become: '/become-a-caregiver',
-  status: '/booking-status',
-  dashboard: '/caregiver-dashboard',
+  signIn: '/sign-in',
+  /** The pet owner's dashboard. */
+  dashboard: '/dashboard',
+  caregiverDashboard: '/caregiver-dashboard',
   admin: '/internal/admin',
 } as const

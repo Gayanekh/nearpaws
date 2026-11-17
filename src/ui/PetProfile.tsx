@@ -7,15 +7,16 @@ export function PetProfile({ pet }: { pet: SamplePet }) {
     <article className="bg-panel p-6">
       <h3 className="font-slab text-display-md font-normal text-ink">{pet.name}</h3>
       <p className="mt-1 mb-4 text-body-dense text-muted">
-        {pet.species} · {pet.breed} · {pet.age} · {pet.size}
+        {[pet.species, pet.breed, pet.age, pet.size].filter(Boolean).join(' · ')}
       </p>
       <FactList
         stacked
         items={[
           { term: 'Food', text: pet.food },
-          { term: 'Must not eat', text: pet.avoid },
+          ...(pet.avoid ? [{ term: 'Must not eat', text: pet.avoid }] : []),
           { term: 'Medication', text: pet.medication },
           { term: 'Behavior', text: pet.behavior },
+          ...(pet.routine ? [{ term: 'Routine', text: pet.routine }] : []),
         ]}
       />
     </article>

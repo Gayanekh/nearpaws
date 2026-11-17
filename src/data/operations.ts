@@ -1,26 +1,16 @@
-// Fictional sample data for the status, caregiver-dashboard and admin screens.
-import type { RequestStatus } from './statusLabels'
+// Fictional sample data: the pets used by the demo requests, and the admin screen.
 
 export interface SamplePet {
   name: string
   species: string
-  breed: string
+  breed?: string
   age: string
   size: string
   food: string
-  avoid: string
+  avoid?: string
   medication: string
   behavior: string
-}
-
-export interface SampleRequest {
-  id: string
-  owner: string
-  pet: SamplePet
-  dates: string
-  careType: string
-  status: RequestStatus
-  note: string
+  routine?: string
 }
 
 export const SAMPLE_PETS: Record<string, SamplePet> = {
@@ -46,17 +36,6 @@ export const SAMPLE_PETS: Record<string, SamplePet> = {
     behavior: 'Very energetic, jumps up on people. Gets along with other dogs.',
   },
 }
-
-export const SAMPLE_REQUESTS: SampleRequest[] = [
-  { id: 'r1', owner: 'Owner A', pet: SAMPLE_PETS['biscuit']!, dates: '14–18 Dec (4 nights)', careType: "At the caregiver's home", status: 'requested', note: 'Waiting for your reply.' },
-  { id: 'r2', owner: 'Owner B', pet: SAMPLE_PETS['juniper']!, dates: '20–22 Dec (2 nights)', careType: 'At the owner’s home', status: 'more-info', note: 'You asked about the thyroid dose timing.' },
-  { id: 'r3', owner: 'Owner C', pet: SAMPLE_PETS['otto']!, dates: '27 Dec – 2 Jan (6 nights)', careType: "At the caregiver's home", status: 'confirmed', note: 'Care plan agreed.' },
-]
-
-export const SAMPLE_UPDATES = [
-  { when: 'Today, 09:10', text: 'Otto finished his breakfast and had a long walk by the river. Photo attached.' },
-  { when: 'Yesterday, 19:45', text: 'Settled in well. Slept in the living room bed.' },
-]
 
 export const SAMPLE_APPLICATIONS = [
   { id: 'a1', name: 'Applicant 1', area: 'Riverside', submitted: '2 days ago', checks: { identity: true, experience: true, space: true, references: false } },

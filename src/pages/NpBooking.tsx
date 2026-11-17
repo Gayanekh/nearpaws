@@ -2,6 +2,8 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { CAREGIVERS, CARE_TYPE_LABELS, HANDOVER_LABELS, PET_SIZE_LABELS } from '../data/content'
+import { OWNERS } from '../data/demo'
+import { useDemo } from '../demo/useDemo'
 import { EMPTY_BOOKING, STEP_LABELS, validateBookingStep } from '../forms/booking'
 import type { BookingValues } from '../forms/booking'
 import { firstBusyDay } from '../data/availability'
@@ -9,6 +11,7 @@ import { formatDate, nightsBetween, todayIso } from '../utils/validation'
 import type { Errors } from '../utils/validation'
 import { ROUTES } from '../routes'
 import { Button } from '../ui/Button'
+import { Eyebrow } from '../ui/Eyebrow'
 import { ChoiceGroup } from '../ui/ChoiceGroup'
 import { ErrorSummary } from '../ui/ErrorSummary'
 import { FactList } from '../ui/FactList'
@@ -16,7 +19,6 @@ import { MockConfirmation } from '../ui/MockConfirmation'
 import { PageTitle } from '../ui/PageTitle'
 import { SelectField } from '../ui/SelectField'
 import { StepIndicator } from '../ui/StepIndicator'
-import { TextLink } from '../ui/TextLink'
 import { TextAreaField } from '../ui/TextAreaField'
 import { TextField } from '../ui/TextField'
 import { useDocumentTitle } from '../useDocumentTitle'
@@ -53,6 +55,8 @@ export function NpBooking() {
   const [step, setStep] = useState(0)
   const [errors, setErrors] = useState<Errors>({})
   const [done, setDone] = useState(false)
+  const [needSignIn, setNeedSignIn] = useState(false)
+  const { account, signIn, createRequest } = useDemo()
 
   const set = <K extends keyof BookingValues>(key: K, value: BookingValues[K]) => {
     setValues((prev) => ({ ...prev, [key]: value }))
@@ -70,9 +74,51 @@ export function NpBooking() {
     if (step < STEP_LABELS.length - 1) {
       setStep(step + 1)
       window.scrollTo({ top: 0 })
-    } else {
+    } else if (account?.role === 'owner') {
+      createRequest(account.id, values)
       setDone(true)
+    } else {
+      setNeedSignIn(true)
+      window.scrollTo({ top: 0 })
     }
+  }
+
+  // The last step is sent as a pet owner: a signed-out visitor (or a caregiver) picks a sample owner first.
+  if (needSignIn && !done) {
+    return (
+      <section className={page}>
+        <div className="rounded-[1.75rem] border border-hair bg-[linear-gradient(135deg,var(--color-panel),var(--color-paper))] p-5 sm:p-8 lg:p-10">
+          <header className="max-w-[40rem]">
+            <Eyebrow>Request care</Eyebrow>
+            <h1 className="font-slab text-section font-light tracking-tight text-ink">Sign in to send your request</h1>
+            <p className="mt-5 text-lead text-copy">
+              {account ? `You are signed in as ${account.name}, a caregiver. ` : ''}Requests are sent as a pet owner. This is a
+              demonstration: choose a sample owner. There are no real accounts or passwords.
+            </p>
+          </header>
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2" aria-label="Sample pet owners">
+            {OWNERS.map((o) => (
+              <li key={o.id} className="flex flex-col rounded-[1.25rem] border border-hair bg-paper p-5">
+                <h2 className="font-slab text-title font-medium text-ink">{o.name}</h2>
+                <p className="mt-1 mb-5 flex-1 text-body-dense text-copy">{o.blurb}</p>
+                <Button
+                  soft
+                  className="w-full"
+                  onClick={() => {
+                    signIn(o.id)
+                    createRequest(o.id, values)
+                    setDone(true)
+                  }}
+                >
+                  Send as {o.name.split(' ')[0]}
+                </Button>
+              </li>
+            ))}
+          </ul>
+          <Button soft variant="secondary" className="mt-8" onClick={() => setNeedSignIn(false)}>Back to the form</Button>
+        </div>
+      </section>
+    )
   }
 
   if (done) {
@@ -82,7 +128,7 @@ export function NpBooking() {
           title="Request preview complete"
           actions={
             <>
-              <Button to={ROUTES.home}>Back to home</Button>
+              <Button to={ROUTES.dashboard}>Go to my dashboard</Button>
               <Button to={ROUTES.caregivers} variant="secondary">Browse caregivers</Button>
             </>
           }
@@ -99,8 +145,9 @@ export function NpBooking() {
               ]}
             />
           </div>
-          <p className="mt-8">
-            <TextLink to={ROUTES.status}>See a sample booking status</TextLink>
+          <p className="mt-8 max-w-[34rem] text-body-dense text-copy">
+            Your request is now in your dashboard as “Requested”. This is a demonstration: it is kept only in this browser tab, and the
+            caregiver’s answer is part of the demo.
           </p>
         </MockConfirmation>
       </section>
@@ -119,7 +166,7 @@ export function NpBooking() {
   return (
     <section className={page}>
       <PageTitle eyebrow="Request care" title="Tell us about your pet">
-        Three short steps. This is a prototype: nothing is sent or saved, and your answers disappear when you leave.
+        Three short steps. This is a prototype: nothing is sent. Your request is kept only in this browser tab, so you can follow it in your dashboard.
       </PageTitle>
 
       <div className="mt-12 grid gap-12 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start lg:gap-16">
@@ -208,7 +255,7 @@ export function NpBooking() {
                   <TextField id="contactName" label="Contact name" required value={values.contactName} onChange={(v) => set('contactName', v)} error={errors['contactName']} />
                   <TextField id="contactPhone" type="tel" label="Contact phone" required hint="Use a made-up number for this demo." value={values.contactPhone} onChange={(v) => set('contactPhone', v)} error={errors['contactPhone']} />
                 </div>
-                <p className="text-body-dense text-muted">Please do not enter real personal details. Nothing is stored or sent.</p>
+                <p className="text-body-dense text-muted">Please do not enter real personal details. Nothing is sent; the demo keeps it only in this browser tab.</p>
               </>
             )}
 

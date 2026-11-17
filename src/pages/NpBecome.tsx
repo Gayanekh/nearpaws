@@ -65,7 +65,7 @@ export function NpBecome() {
             Thanks, {values.name}. In a real service, this is where the team would review your application and follow up.
           </p>
           <p className="mt-6">
-            <TextLink to={ROUTES.dashboard}>See a sample caregiver dashboard</TextLink>
+            <TextLink to={`${ROUTES.signIn}?role=caregiver`}>Sign in as a sample caregiver</TextLink>
           </p>
         </MockConfirmation>
       </section>

@@ -3,7 +3,7 @@ import { Eyebrow } from './ui/Eyebrow'
 const FAQS = [
   {
     q: 'Is this a real booking service?',
-    a: 'No. This is an interactive prototype. Nothing you enter is sent or saved, and caregivers, prices and reviews are fictional.',
+    a: 'No. This is an interactive prototype. Nothing you enter is sent anywhere, and caregivers, prices and reviews are fictional.',
   },
   {
     q: 'Where would my pet stay?',

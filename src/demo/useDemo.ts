@@ -1,0 +1,32 @@
+import { createContext, useContext } from 'react'
+import type { BookingValues } from '../forms/booking'
+import type { Account, CareRequest } from '../data/demo'
+
+/** What the rest of the app can read and do in the demo. The state itself lives in DemoProvider. */
+export interface DemoApi {
+  account: Account | null
+  requests: CareRequest[]
+  signIn: (accountId: string) => void
+  signOut: () => void
+  reset: () => void
+  /** Adds a request for an owner from the booking form's answers; returns its id. */
+  createRequest: (ownerId: string, values: BookingValues) => string
+  /** Owner: cancel a request. */
+  cancel: (id: string) => void
+  /** Owner: answer the caregiver's question; the request goes back to "Requested". */
+  reply: (id: string, text: string) => void
+  /** Caregiver: accept, ask a question (status "More information needed") or decline. */
+  accept: (id: string) => void
+  ask: (id: string, text: string) => void
+  decline: (id: string) => void
+  /** Caregiver: post a care update on a confirmed stay. */
+  sendUpdate: (id: string, text: string) => void
+}
+
+export const DemoContext = createContext<DemoApi | null>(null)
+
+export function useDemo(): DemoApi {
+  const api = useContext(DemoContext)
+  if (!api) throw new Error('useDemo must be used inside <DemoProvider>')
+  return api
+}
