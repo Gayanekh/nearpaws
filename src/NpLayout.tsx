@@ -7,7 +7,7 @@ import { Button } from './ui/Button'
 import { useNpMotion } from './useNpMotion'
 
 /**
- * Shell of the app: a header that stays at the top while the page scrolls, main and footer, from the approved design preview. It also moves the page
+ * Shell of the app: a header that comes back when the page is scrolled up (and goes away when it is scrolled down), main and footer, from the approved design preview. It also moves the page
  * on navigation: to the #section a link names, or back to the top.
  */
 export function NpLayout() {
@@ -17,10 +17,26 @@ export function NpLayout() {
   const menuButton = useRef<HTMLButtonElement>(null)
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-
-  // The header is flat at the top of the page and becomes a floating pill as soon as the page is scrolled.
+  const [hidden, setHidden] = useState(false)
+  const openRef = useRef(false)
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
+    openRef.current = open
+  }, [open])
+
+  // The header is flat at the top of the page and becomes a floating pill as soon as the page is scrolled. It is only on
+  // screen while the visitor scrolls up (towards the top): scrolling down moves it away, scrolling up brings it back.
+  // It stays while the menu is open or while something inside it has keyboard focus.
+  useEffect(() => {
+    let last = window.scrollY
+    const onScroll = () => {
+      const y = window.scrollY
+      setScrolled(y > 8)
+      const delta = y - last
+      if (y < 80) setHidden(false)
+      else if (delta > 6 && !openRef.current) setHidden(true)
+      else if (delta < -6) setHidden(false)
+      if (Math.abs(delta) > 6 || y < 80) last = y
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -91,7 +107,8 @@ export function NpLayout() {
       </a>
 
       <header
-        className="pointer-events-none sticky top-0 z-20 h-[4.875rem] px-[max(0.5rem,calc(var(--inset)_-_1.25rem))] pt-3.5"
+        className={`pointer-events-none sticky top-0 z-20 h-[4.875rem] px-[max(0.5rem,calc(var(--inset)_-_1.25rem))] pt-3.5 transition-transform duration-300 ease-out ${hidden ? '-translate-y-[calc(100%+1rem)]' : ''}`}
+        onFocus={() => setHidden(false)}
         ref={header}
       >
         <div
@@ -116,7 +133,10 @@ export function NpLayout() {
             aria-expanded={open}
             aria-controls="mobileNav"
             aria-label="Menu"
-            onClick={() => setOpen((o) => !o)}
+            onClick={() => {
+              setOpen((o) => !o)
+              setHidden(false)
+            }}
           >
             <span className="grid w-6 justify-items-end gap-[0.4rem]" aria-hidden="true">
               <span className="block h-[1.5px] w-full bg-ink" />
