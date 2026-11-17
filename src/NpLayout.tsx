@@ -121,7 +121,7 @@ export function NpLayout() {
       </a>
 
       <header
-        className={`group/hdr pointer-events-none sticky flow-root top-0 z-20 h-[clamp(4.5rem,9vw,8rem)] px-[max(0.5rem,calc(var(--inset)_-_1.25rem))] transition-transform duration-300 ease-out ${hidden ? '-translate-y-[calc(100%+1rem)]' : ''}`}
+        className={`group/hdr pointer-events-none sticky flow-root top-0 z-20 h-[clamp(4.5rem,9vw,6.1875rem)] px-[max(0.5rem,calc(var(--inset)_-_1.25rem))] transition-transform duration-300 ease-out ${hidden ? '-translate-y-[calc(100%+1rem)]' : ''}`}
         onFocus={() => setHidden(false)}
         ref={header}
         data-scrolled={scrolled ? '' : undefined}
