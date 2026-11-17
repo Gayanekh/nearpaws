@@ -12,6 +12,10 @@ A pet-care marketplace prototype with its own component library.
 
 NearPaws is a prototype for a pet-care service. A pet owner looks for a caregiver who will look after their pet, either at the caregiver's home or at the owner's. It is a front-end demonstration only: there is no backend and there are no payments, and the caregivers, prices and reviews are fictional. The goal was to design and build a complete, believable product experience, and a maintainable design system behind it.
 
+## My Role & Process
+
+I led the design and development of the project, using Claude Code as an AI-assisted coding tool to support implementation.
+
 ## What you can do in the app
 
 - **Landing page:** a hero with a sample-stay slider, care options, caregivers, how it works, reviews and an FAQ.
@@ -52,7 +56,6 @@ The code lives in one GitHub repository. Two Vercel projects build from it: the 
 
 A real backend and authentication, running the accessibility check in CI on every push, mapping components to code with Figma Code Connect, and unit tests for the booking validation.
 
-## Credits and notes
+## Content Disclaimer
 
-- Photos are stock photos (Unsplash) of people who are not the fictional caregivers. Prices, reviews and availability are invented, and each page says so.
-- I directed the design and the build, working with an AI coding assistant (Claude Code).
+NearPaws is a fictional concept project. The caregiver photos are stock images sourced from Unsplash and do not represent actual caregivers. All prices, reviews, and availability details are fictional and included for demonstration purposes.
