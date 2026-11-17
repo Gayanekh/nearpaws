@@ -88,7 +88,7 @@ export function NpBooking() {
   if (needSignIn && !done) {
     return (
       <section className={page}>
-        <div>
+        <div className="rounded-[0.75rem] border border-hair bg-[linear-gradient(135deg,var(--color-panel),var(--color-paper))] p-5 sm:p-8 lg:p-10">
           <header className="max-w-[40rem]">
             <Eyebrow>Request care</Eyebrow>
             <h1 className="font-slab text-section font-light tracking-tight text-ink">Sign in to send your request</h1>
@@ -99,7 +99,7 @@ export function NpBooking() {
           </header>
           <ul className="mt-10 grid gap-4 sm:grid-cols-2" aria-label="Sample pet owners">
             {OWNERS.map((o) => (
-              <li key={o.id} className="flex flex-col border border-hair bg-paper p-5">
+              <li key={o.id} className="flex flex-col rounded-[0.75rem] border border-hair bg-paper p-5">
                 <h2 className="font-slab text-title font-medium text-ink">{o.name}</h2>
                 <p className="mt-1 mb-5 flex-1 text-body-dense text-copy">{o.blurb}</p>
                 <Button

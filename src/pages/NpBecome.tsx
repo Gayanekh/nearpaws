@@ -74,7 +74,7 @@ export function NpBecome() {
 
   return (
     <section className={page}>
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:gap-14">
+      <div className="grid gap-8 rounded-[0.75rem] border border-hair bg-[linear-gradient(135deg,var(--color-panel),var(--color-paper))] p-4 sm:p-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:gap-10 lg:p-8">
         <div className="flex flex-col">
           <header>
             <Eyebrow>Become a caregiver</Eyebrow>
@@ -98,7 +98,7 @@ export function NpBecome() {
               </li>
             ))}
           </ol>
-          <div className="relative mt-10 hidden min-h-64 flex-1 overflow-hidden bg-panel lg:block">
+          <div className="relative mt-10 hidden min-h-64 flex-1 overflow-hidden rounded-[0.75rem] bg-panel lg:block">
             <img
               className="absolute inset-0 size-full object-cover object-[60%_30%]"
               src="/img/hero-pip.jpg"
@@ -110,7 +110,7 @@ export function NpBecome() {
           </div>
         </div>
 
-        <form onSubmit={submit} noValidate className="border border-hair bg-paper p-5 sm:p-8">
+        <form onSubmit={submit} noValidate className="rounded-[0.75rem] border border-hair bg-paper p-5 sm:p-8">
           <ErrorSummary errors={errors} />
           <div className={row}>
             <TextField id="name" label="Your name" required autoComplete="off" value={values.name} onChange={(v) => set('name', v)} error={errors['name']} />

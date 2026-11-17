@@ -47,7 +47,7 @@ export function NpSignIn() {
 
   return (
     <section className={page}>
-      <div>
+      <div className="rounded-[0.75rem] border border-hair bg-[linear-gradient(135deg,var(--color-panel),var(--color-paper))] p-5 sm:p-8 lg:p-10">
         <header className="max-w-[40rem]">
           <Eyebrow>Demo sign-in</Eyebrow>
           <h1 className="font-slab text-section font-light tracking-tight text-ink">Sign in</h1>
@@ -85,7 +85,7 @@ export function NpSignIn() {
 
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" aria-label={role === 'owner' ? 'Sample pet owners' : 'Sample caregivers'}>
           {ACCOUNTS.filter((a) => a.role === role).map((a) => (
-            <li key={a.id} className="flex flex-col border border-hair bg-paper p-5">
+            <li key={a.id} className="flex flex-col rounded-[0.75rem] border border-hair bg-paper p-5">
               {a.photo && (
                 <img
                   src={a.photo.src}
