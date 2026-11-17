@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 export function TextLink({ to, children }: { to: string; children: ReactNode }) {
   return (
     <Link className="group inline-flex min-h-11 items-center gap-[0.6rem] py-3 font-sans text-ui font-medium text-ink no-underline" to={to}>
-      <span className="pb-[0.15rem] [background:linear-gradient(var(--color-accent),var(--color-accent))_0_100%/100%_2px_no-repeat]">{children}</span>
+      <span className="pb-[0.4rem] [background:linear-gradient(var(--color-accent),var(--color-accent))_0_100%/100%_2px_no-repeat]">{children}</span>
       <svg
         viewBox="0 0 36 16"
         aria-hidden="true"
