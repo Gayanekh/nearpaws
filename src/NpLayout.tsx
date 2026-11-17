@@ -137,7 +137,7 @@ export function NpLayout() {
           ))}
         </nav>
         <div className="col-start-3 flex items-center gap-2 justify-self-end">
-          <div className="hidden items-center gap-2 md:flex">
+          <div className="hidden items-center gap-6 md:flex">
             {account ? <AccountMenu /> : <Link className={navLink} to={ROUTES.signIn}>Sign in</Link>}
             <Button className="min-h-11! gap-3! px-5! py-2.5!" to={ROUTES.caregivers}>Find a caregiver</Button>
           </div>
