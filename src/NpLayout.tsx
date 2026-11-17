@@ -104,14 +104,8 @@ export function NpLayout() {
           <NavLink className={navLink} to={ROUTES.become} end>Become a caregiver</NavLink>
         </nav>
         <div className="col-start-3 flex items-center gap-1 justify-self-end">
-          <button className={iconButton} type="button" aria-label="Search (not available in this prototype)">
-            <svg viewBox="0 0 24 24" aria-hidden="true" className={iconStroke}>
-              <circle cx="10.5" cy="10.5" r="6.5" />
-              <path d="m15.5 15.5 5 5" />
-            </svg>
-          </button>
           <button
-            className={iconButton}
+            className={`${iconButton} md:hidden`}
             type="button"
             ref={menuButton}
             aria-expanded={open}
@@ -177,7 +171,6 @@ const navLink =
   'inline-block py-[0.875rem] font-sans text-ui font-medium tracking-ui text-ink no-underline transition-[background-size] duration-280 ease-out [background:linear-gradient(var(--color-accent),var(--color-accent))_0_calc(100%-0.5rem)/0_2px_no-repeat] hover:[background-size:100%_2px] focus-visible:[background-size:100%_2px] aria-[current=page]:[background-size:100%_2px]'
 const mobileLink = 'block border-b border-hair py-4 font-sans text-[1rem]/[1.4] font-medium text-ink no-underline'
 const iconButton = 'grid size-11 place-items-center text-ink'
-const iconStroke = 'size-[1.375rem] fill-none stroke-current stroke-[1.5] [stroke-linecap:round] [stroke-linejoin:round]'
 const footerHeading = 'mb-4 font-sans text-label font-semibold tracking-label text-accent-ink uppercase'
 const footerLink =
   'inline-block py-2 font-medium text-ink no-underline hover:underline hover:decoration-accent hover:decoration-2 hover:underline-offset-[0.3em]'
