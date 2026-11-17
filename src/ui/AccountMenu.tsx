@@ -45,9 +45,13 @@ export function AccountMenu() {
         onClick={() => setOpen((o) => !o)}
         className="inline-flex min-h-11 items-center gap-3 rounded-[0.875rem] border border-ink bg-paper px-4 font-sans text-ui font-medium tracking-ui text-ink transition-colors duration-200 ease-out hover:bg-ink hover:text-paper"
       >
-        <span aria-hidden="true" className="grid size-6 place-items-center rounded-full bg-accent text-label font-semibold text-ink">
-          {first[0]}
-        </span>
+        {account.photo ? (
+          <img src={account.photo.src} alt="" className="size-6 rounded-full object-cover" style={{ objectPosition: account.photo.position }} />
+        ) : (
+          <span aria-hidden="true" className="grid size-6 place-items-center rounded-full bg-accent text-label font-semibold text-ink">
+            {first[0]}
+          </span>
+        )}
         {first}
       </button>
       {open && (

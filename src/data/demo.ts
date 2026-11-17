@@ -1,6 +1,8 @@
 import type { BookingValues } from '../forms/booking'
 import type { CareType, Handover } from '../types'
 import { firstBusyDay } from './availability'
+import { CAREGIVER_PHOTOS, OWNER_PHOTOS } from './caregiverPhotos'
+import type { CaregiverPhoto } from './caregiverPhotos'
 import { CAREGIVERS, PET_SIZE_LABELS } from './content'
 import { SAMPLE_PETS } from './operations'
 import type { SamplePet } from './operations'
@@ -22,6 +24,8 @@ export interface Account {
   blurb: string
   /** For a caregiver account: the id of the sample caregiver it belongs to. */
   caregiverId?: string
+  /** A portrait (stock photo). */
+  photo?: CaregiverPhoto
 }
 
 export interface RequestMessage {
@@ -51,8 +55,8 @@ export interface CareRequest {
 }
 
 export const OWNERS: Account[] = [
-  { id: 'owner-alex', role: 'owner', name: 'Alex Morgan', blurb: 'Owner of Biscuit, Juniper and Otto. Three requests in different states.' },
-  { id: 'owner-jordan', role: 'owner', name: 'Jordan Lee', blurb: 'Owner of Waffles. One request that was declined.' },
+  { id: 'owner-alex', role: 'owner', name: 'Alex Morgan', blurb: 'Owner of Biscuit, Juniper and Otto. Three requests in different states.', photo: OWNER_PHOTOS['owner-alex'] },
+  { id: 'owner-jordan', role: 'owner', name: 'Jordan Lee', blurb: 'Owner of Waffles. One request that was declined.', photo: OWNER_PHOTOS['owner-jordan'] },
 ]
 
 export const CAREGIVER_ACCOUNTS: Account[] = CAREGIVERS.map((c) => ({
@@ -61,6 +65,7 @@ export const CAREGIVER_ACCOUNTS: Account[] = CAREGIVERS.map((c) => ({
   name: c.name,
   blurb: `${c.area}. ${c.experienceYears} years of experience.`,
   caregiverId: c.id,
+  photo: CAREGIVER_PHOTOS[c.id],
 }))
 
 export const ACCOUNTS: Account[] = [...OWNERS, ...CAREGIVER_ACCOUNTS]
@@ -126,7 +131,7 @@ export function seedRequests(): CareRequest[] {
       ownerId: 'owner-jordan',
       caregiverId: 'theo',
       pet: {
-        name: 'Waffles', species: 'Dog', breed: 'Corgi', age: '3 years', size: 'Small',
+        name: 'Waffles', species: 'Dog', breed: 'Corgi', age: '3 years', size: 'Small', photo: '/img/rev-2.jpg',
         food: 'Half a cup of dry food twice a day',
         avoid: 'Cheese',
         medication: 'None',
@@ -166,6 +171,7 @@ export function requestFromBooking(id: string, ownerId: string, values: BookingV
       medication: values.medication,
       behavior: values.behavior,
       routine: values.routine,
+      photo: values.petPhoto || undefined,
     },
     start: values.start,
     end: values.end,

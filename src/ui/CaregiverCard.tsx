@@ -19,8 +19,8 @@ export function CaregiverCard({ caregiver }: { caregiver: Caregiver }) {
           <img
             src={photo.src}
             alt={photo.alt}
-            width={1400}
-            height={1050}
+            width={photo.width}
+            height={photo.height}
             loading="lazy"
             style={{ objectPosition: photo.position }}
             className="size-full object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.03]"

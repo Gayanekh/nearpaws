@@ -25,7 +25,7 @@ const CAREGIVERS: SampleCaregiver[] = [
     place: 'Maple Grove, near the community garden',
     style: '6 years’ experience · Calm and routine-led. Quiet days, steady walks and lots of couch time.',
     tags: ['At the caregiver’s home', 'At your home', 'Either handover'],
-    photo: { src: '/img/prof-mara.jpg', alt: 'A siamese cat sitting by a window (stock photo)', width: 1400, height: 1750, position: '50% 35%' },
+    photo: { src: '/img/person-mara.jpg', alt: 'Portrait of a smiling woman with short blond hair (stock photo)', width: 900, height: 506, position: '50% 30%' },
   },
   {
     key: 'a',
@@ -35,7 +35,7 @@ const CAREGIVERS: SampleCaregiver[] = [
     place: 'Old Orchard, quiet residential street',
     style: '9 years’ experience · Gentle, experienced with medication. Patient care for older pets and special routines.',
     tags: ['At the caregiver’s home', 'At your home'],
-    photo: { src: '/img/prof-priya.jpg', alt: 'A brown and white dog standing on a woodland path (stock photo)', width: 1100, height: 825, position: '62% 50%' },
+    photo: { src: '/img/person-priya.jpg', alt: 'Portrait of a smiling woman with long curly dark hair (stock photo)', width: 900, height: 675, position: '50% 25%' },
   },
   {
     key: 'b',
@@ -45,7 +45,7 @@ const CAREGIVERS: SampleCaregiver[] = [
     place: 'Cedar Park, tree-lined avenue',
     style: '7 years’ experience · Cat specialist, very quiet home. Peaceful visits and stays for cats and small pets.',
     tags: ['At the caregiver’s home', 'At your home'],
-    photo: { src: '/img/prof-elena.jpg', alt: 'A ginger tabby cat lying calmly on a wooden floor (stock photo)', width: 1200, height: 800, position: '40% 50%' },
+    photo: { src: '/img/person-elena.jpg', alt: 'Portrait of a laughing woman with her hair up (stock photo)', width: 900, height: 1350, position: '50% 30%' },
   },
 ]
 

@@ -53,9 +53,9 @@ export function NpProfile() {
           {photo && (
             <img
               src={photo.src}
-              alt={`${c.name}’s care space. ${photo.alt}`}
-              width={1400}
-              height={1050}
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
               style={{ objectPosition: photo.position }}
               className="size-full object-cover"
             />

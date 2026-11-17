@@ -11,25 +11,27 @@ export interface SamplePet {
   medication: string
   behavior: string
   routine?: string
+  /** A photograph of the pet: a file in public/img, or a data URL from the booking form. */
+  photo?: string
 }
 
 export const SAMPLE_PETS: Record<string, SamplePet> = {
   biscuit: {
-    name: 'Biscuit', species: 'Dog', breed: 'Beagle mix', age: '4 years', size: 'Medium',
+    name: 'Biscuit', species: 'Dog', breed: 'Beagle mix', age: '4 years', size: 'Medium', photo: '/img/hero-biscuit.jpg',
     food: 'One cup dry food at 8:00 and 18:00',
     avoid: 'Chicken (allergy), grapes',
     medication: 'None',
     behavior: 'Friendly with children. Nervous around fireworks and loud trucks. Pulls on the leash.',
   },
   juniper: {
-    name: 'Juniper', species: 'Cat', breed: 'Domestic shorthair', age: '9 years', size: 'Small',
+    name: 'Juniper', species: 'Cat', breed: 'Domestic shorthair', age: '9 years', size: 'Small', photo: '/img/opt-own.jpg',
     food: 'Half a can of wet food twice a day',
     avoid: 'Dairy',
     medication: 'Thyroid tablet with breakfast',
     behavior: 'Shy with strangers, hides for the first day. Keep the door closed.',
   },
   otto: {
-    name: 'Otto', species: 'Dog', breed: 'Labrador', age: '2 years', size: 'Large',
+    name: 'Otto', species: 'Dog', breed: 'Labrador', age: '2 years', size: 'Large', photo: '/img/prof-priya.jpg',
     food: 'Two cups dry food, morning and evening',
     avoid: 'Nothing known',
     medication: 'None',

@@ -73,6 +73,17 @@ export function NpSignIn() {
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" aria-label={role === 'owner' ? 'Sample pet owners' : 'Sample caregivers'}>
           {ACCOUNTS.filter((a) => a.role === role).map((a) => (
             <li key={a.id} className="flex flex-col rounded-[1.25rem] border border-hair bg-paper p-5">
+              {a.photo && (
+                <img
+                  src={a.photo.src}
+                  alt={a.photo.alt}
+                  width={a.photo.width}
+                  height={a.photo.height}
+                  loading="lazy"
+                  className="mb-4 size-20 rounded-full object-cover"
+                  style={{ objectPosition: a.photo.position }}
+                />
+              )}
               <h2 className="font-slab text-title font-medium text-ink">{a.name}</h2>
               <p className="mt-1 mb-5 flex-1 text-body-dense text-copy">{a.blurb}</p>
               <Button soft variant="secondary" onClick={() => choose(a)} className="w-full">

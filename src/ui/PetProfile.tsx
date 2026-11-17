@@ -5,10 +5,15 @@ import { FactList } from './FactList'
 export function PetProfile({ pet }: { pet: SamplePet }) {
   return (
     <article className="bg-panel p-6">
-      <h3 className="font-slab text-display-md font-normal text-ink">{pet.name}</h3>
-      <p className="mt-1 mb-4 text-body-dense text-muted">
-        {[pet.species, pet.breed, pet.age, pet.size].filter(Boolean).join(' · ')}
-      </p>
+      <div className="mb-4 flex items-center gap-5">
+        {pet.photo && (
+          <img src={pet.photo} alt={`${pet.name}, ${pet.species.toLowerCase()}`} className="size-24 shrink-0 rounded-[0.875rem] object-cover" />
+        )}
+        <div>
+          <h3 className="font-slab text-display-md font-normal text-ink">{pet.name}</h3>
+          <p className="mt-1 text-body-dense text-muted">{[pet.species, pet.breed, pet.age, pet.size].filter(Boolean).join(' · ')}</p>
+        </div>
+      </div>
       <FactList
         stacked
         items={[

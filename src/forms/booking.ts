@@ -8,7 +8,7 @@ export const STEP_LABELS = ['Care & dates', 'Your pet', 'Routine & emergency']
 
 export const EMPTY_BOOKING = {
   caregiver: '', careType: [] as string[], handover: [] as string[], start: '', end: '', ownerName: '', email: '',
-  petName: '', species: '', size: '', age: '', vaccinated: '', food: '', medication: '',
+  petName: '', petPhoto: '', species: '', size: '', age: '', vaccinated: '', food: '', medication: '',
   routine: '', behavior: '', contactName: '', contactPhone: '',
 }
 export type BookingValues = typeof EMPTY_BOOKING

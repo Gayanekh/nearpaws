@@ -17,6 +17,7 @@ import { ErrorSummary } from '../ui/ErrorSummary'
 import { FactList } from '../ui/FactList'
 import { MockConfirmation } from '../ui/MockConfirmation'
 import { PageTitle } from '../ui/PageTitle'
+import { PhotoField } from '../ui/PhotoField'
 import { SelectField } from '../ui/SelectField'
 import { StepIndicator } from '../ui/StepIndicator'
 import { TextAreaField } from '../ui/TextAreaField'
@@ -238,6 +239,7 @@ export function NpBooking() {
                     options={Object.entries(PET_SIZE_LABELS).map(([value, label]) => ({ value, label }))} />
                   <TextField id="age" label="Age" hint="For example “4 years”" value={values.age} onChange={(v) => set('age', v)} />
                 </div>
+                <PhotoField id="petPhoto" label="Photo of your pet" hint="Optional. It is shown to the caregiver and stays in this browser tab." value={values.petPhoto} onChange={(v) => set('petPhoto', v)} />
                 <SelectField id="vaccinated" label="Vaccinations up to date?" required value={values.vaccinated} onChange={(v) => set('vaccinated', v)} error={errors['vaccinated']}
                   options={[{ value: 'Yes', label: 'Yes' }, { value: 'No', label: 'No' }, { value: 'Not sure', label: 'Not sure' }]} />
                 <TextAreaField id="food" label="Food and allergies" required hint="Brand, amounts, times, and anything your pet cannot eat. Write “None” if nothing applies." value={values.food} onChange={(v) => set('food', v)} error={errors['food']} />
@@ -271,7 +273,7 @@ export function NpBooking() {
         <aside aria-label="Your request so far" className="bg-panel p-8 lg:sticky lg:top-8">
           <h2 className="mb-4 font-slab text-title font-medium text-ink">Your request so far</h2>
           <FactList stacked items={summary} />
-          <p className="mt-4 text-caption text-muted">Nothing is sent or saved. This summary only reflects what you have typed here.</p>
+          <p className="mt-4 text-caption text-muted">Nothing is sent. This summary only reflects what you have typed here.</p>
         </aside>
       </div>
     </section>

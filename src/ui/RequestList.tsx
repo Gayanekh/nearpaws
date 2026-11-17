@@ -20,14 +20,17 @@ export function RequestList({ requests, selectedId, onSelect, who }: RequestList
             type="button"
             aria-pressed={selectedId === r.id}
             onClick={() => onSelect(r.id)}
-            className="grid w-full gap-2 border border-transparent bg-paper px-4 py-3 text-left text-body-dense text-ink transition-colors duration-200 ease-out hover:border-ink aria-pressed:bg-ink aria-pressed:text-paper"
+            className="flex w-full items-center gap-4 border border-transparent bg-paper px-4 py-3 text-left text-body-dense text-ink transition-colors duration-200 ease-out hover:border-ink aria-pressed:bg-ink aria-pressed:text-paper"
           >
-            <span>
-              <strong className="font-semibold">{r.pet.name}</strong> · {who(r)}
-            </span>
-            <span className="text-caption">{formatStay(r.start, r.end)}</span>
-            <span>
-              <StatusBadge status={r.status} />
+            {r.pet.photo && <img src={r.pet.photo} alt="" className="size-14 shrink-0 rounded-[0.625rem] object-cover" />}
+            <span className="grid min-w-0 gap-2">
+              <span>
+                <strong className="font-semibold">{r.pet.name}</strong> · {who(r)}
+              </span>
+              <span className="text-caption">{formatStay(r.start, r.end)}</span>
+              <span>
+                <StatusBadge status={r.status} />
+              </span>
             </span>
           </button>
         </li>
