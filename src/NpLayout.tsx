@@ -170,7 +170,8 @@ export function NpLayout() {
           {SECTION_LINKS.map((s) => (
             <Link key={s.id} className={mobileLink} to={`${ROUTES.home}#${s.id}`}>{s.label}</Link>
           ))}
-          <Link className={mobileLink} to={ROUTES.become}>Become a caregiver</Link>
+          {/* Phones only: from md up the header has no "Become a caregiver" (it stays in the footer). */}
+          <Link className={`${mobileLink} md:hidden`} to={ROUTES.become}>Become a caregiver</Link>
           <div className="grid gap-3 pt-4 md:hidden">
             <Button to={ROUTES.caregivers}>Find a caregiver</Button>
             {account ? (
