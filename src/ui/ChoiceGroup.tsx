@@ -1,17 +1,19 @@
+import type { ReactNode } from 'react'
 import { FieldError, OptionalMark } from './Field'
 
 interface ChoiceGroupProps {
   id: string
   legend: string
   type: 'radio' | 'checkbox'
-  options: { value: string; label: string; description?: string }[]
+  options: { value: string; label: string; description?: string; /** Shown before the label in the segmented variant. */ icon?: ReactNode }[]
   selected: string[]
   onChange: (selected: string[]) => void
   error?: string
   required?: boolean
   hint?: string
   /** "list": a box and a label per row (default). "chips": soft pill buttons side by side; the chosen ones are filled with ink. */
-  variant?: 'list' | 'chips'
+  /** "segmented": the options side by side on one soft track; the chosen one is a filled ink pill (for a choice of one). */
+  variant?: 'list' | 'chips' | 'segmented'
 }
 
 /**
@@ -33,7 +35,26 @@ export function ChoiceGroup({ id, legend, type, options, selected, onChange, err
         {legend} <OptionalMark required={required} />
       </legend>
       {hint && <p className="mb-2 text-caption text-muted">{hint}</p>}
-      {variant === 'chips' ? (
+      {variant === 'segmented' ? (
+        <div className="inline-flex max-w-full flex-wrap gap-1 rounded-[1.75rem] bg-accent/35 p-1.5">
+          {options.map((o) => (
+            <label key={o.value} className="cursor-pointer">
+              <input
+                type={type}
+                name={id}
+                value={o.value}
+                checked={selected.includes(o.value)}
+                onChange={() => toggle(o.value)}
+                className="peer sr-only"
+              />
+              <span className="inline-flex min-h-12 items-center gap-2.5 rounded-full px-6 font-sans text-ui font-medium text-copy transition-colors duration-200 hover:text-ink peer-checked:bg-ink peer-checked:font-semibold peer-checked:text-paper peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ink">
+                {o.icon}
+                {o.label}
+              </span>
+            </label>
+          ))}
+        </div>
+      ) : variant === 'chips' ? (
         <div className="flex flex-wrap gap-2.5">
           {options.map((o) => (
             <label key={o.value} className="cursor-pointer">

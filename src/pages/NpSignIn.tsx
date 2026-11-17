@@ -10,6 +10,19 @@ import { Eyebrow } from '../ui/Eyebrow'
 import { TextLink } from '../ui/TextLink'
 import { useDocumentTitle } from '../useDocumentTitle'
 
+const icon = 'size-5 shrink-0 fill-none stroke-current stroke-[1.5]'
+const PawIcon = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" className={icon}>
+    <circle cx="8" cy="9" r="1.8" /><circle cx="16" cy="9" r="1.8" /><circle cx="5.5" cy="13.5" r="1.6" /><circle cx="18.5" cy="13.5" r="1.6" />
+    <path d="M12 12.5c-2.6 0-4.5 2.2-4.5 4 0 1.5 1.4 2 2.6 1.6.8-.3 1.3-.4 1.9-.4s1.1.1 1.9.4c1.2.4 2.6-.1 2.6-1.6 0-1.8-1.9-4-4.5-4Z" strokeLinejoin="round" />
+  </svg>
+)
+const HomeIcon = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" className={icon}>
+    <path d="M4 11 12 4l8 7v8.5H4V11Z" strokeLinejoin="round" /><path d="M10 19.5v-5h4v5" strokeLinejoin="round" />
+  </svg>
+)
+
 const page = 'mx-auto w-full max-w-360 px-(--inset) pt-16 pb-(--section) md:pt-24'
 
 /** Only paths inside the app are followed after signing in. */
@@ -59,13 +72,13 @@ export function NpSignIn() {
             id="role"
             legend="I am a"
             type="radio"
-            variant="chips"
+            variant="segmented"
             required
             selected={[role]}
             onChange={(v) => setRole(v[0] as Role)}
             options={[
-              { value: 'owner', label: 'Pet owner' },
-              { value: 'caregiver', label: 'Caregiver' },
+              { value: 'owner', label: 'Pet owner', icon: <PawIcon /> },
+              { value: 'caregiver', label: 'Caregiver', icon: <HomeIcon /> },
             ]}
           />
         </div>
