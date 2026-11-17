@@ -68,7 +68,7 @@ export function NpMyProfile() {
   return (
     <section className={page}>
       <div className="mb-10">
-        <TextLink to={isCaregiver ? ROUTES.caregiverDashboard : ROUTES.dashboard}>Back to my dashboard</TextLink>
+        <TextLink back to={isCaregiver ? ROUTES.caregiverDashboard : ROUTES.dashboard}>Back to my dashboard</TextLink>
       </div>
       <PageTitle eyebrow="Demo profile" title="My profile">
         Change your details and photo. This is a demonstration: it is kept only in this browser tab and nothing is sent anywhere.

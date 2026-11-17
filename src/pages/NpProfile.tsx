@@ -44,7 +44,7 @@ export function NpProfile() {
   return (
     <section className="mx-auto w-full max-w-360 px-(--inset) pt-10 pb-(--section) md:pt-14">
       <div className="mb-10">
-        <TextLink to={ROUTES.caregivers}>Back to all caregivers</TextLink>
+        <TextLink back to={ROUTES.caregivers}>Back to all caregivers</TextLink>
       </div>
 
       <div className="grid gap-10 lg:grid-cols-2 lg:items-end lg:gap-16">
