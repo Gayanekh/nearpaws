@@ -125,13 +125,13 @@ export function NpBecome() {
               options={['Apartment', 'House with garden', 'House without garden', 'Other'].map((o) => ({ value: o, label: o }))} />
           </div>
           <TextField id="experience" label="Years of pet-care experience" type="number" min={0} max={60} value={values.experience} onChange={(v) => set('experience', v)} />
-          <ChoiceGroup id="careTypes" legend="Care you could offer" type="checkbox" required selected={values.careTypes} onChange={(v) => set('careTypes', v)} error={errors['careTypes']}
+          <ChoiceGroup variant="chips" id="careTypes" legend="Care you could offer" type="checkbox" required selected={values.careTypes} onChange={(v) => set('careTypes', v)} error={errors['careTypes']}
             options={Object.entries(CARE_TYPE_LABELS).map(([value, label]) => ({ value, label }))} />
-          <ChoiceGroup id="sizes" legend="Pet sizes you are comfortable with" type="checkbox" required selected={values.sizes} onChange={(v) => set('sizes', v)} error={errors['sizes']}
+          <ChoiceGroup variant="chips" id="sizes" legend="Pet sizes you are comfortable with" type="checkbox" required selected={values.sizes} onChange={(v) => set('sizes', v)} error={errors['sizes']}
             options={Object.entries(PET_SIZE_LABELS).map(([value, label]) => ({ value, label }))} />
           <TextAreaField id="about" label="About you and your experience" required hint="A few sentences is plenty." value={values.about} onChange={(v) => set('about', v)} error={errors['about']} />
           <TextAreaField id="rules" label="House rules" hint="For example: other pets, guests, alone time." value={values.rules} onChange={(v) => set('rules', v)} />
-          <ChoiceGroup id="agree" legend="Prototype notice" type="checkbox" required selected={values.agree} onChange={(v) => set('agree', v)} error={errors['agree']}
+          <ChoiceGroup variant="chips" id="agree" legend="Prototype notice" type="checkbox" required selected={values.agree} onChange={(v) => set('agree', v)} error={errors['agree']}
             options={[{ value: 'ok', label: 'I understand this application is not sent or saved anywhere.' }]} />
           <Button type="submit" className="mt-8 w-full rounded-[0.875rem]">Preview my application</Button>
         </form>

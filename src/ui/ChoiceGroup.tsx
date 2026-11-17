@@ -10,14 +10,18 @@ interface ChoiceGroupProps {
   error?: string
   required?: boolean
   hint?: string
+  /** "list": a box and a label per row (default). "chips": soft pill buttons side by side; the chosen ones are filled with ink. */
+  variant?: 'list' | 'chips'
 }
 
 /**
  * Radio or checkbox options in a labelled fieldset. The native input stays in the page (hidden, still focusable and
  * keyboard operable); the box next to the label is drawn from it. Selected state is an ink fill with a mark inside
  * (a dot for radios, a check for checkboxes), so it is never shown by color alone.
+ * With variant="chips" each option is a pill that fills with ink when chosen and shows a check mark, so the state is not
+ * carried by color alone there either.
  */
-export function ChoiceGroup({ id, legend, type, options, selected, onChange, error, required, hint }: ChoiceGroupProps) {
+export function ChoiceGroup({ id, legend, type, options, selected, onChange, error, required, hint, variant = 'list' }: ChoiceGroupProps) {
   const toggle = (value: string) => {
     if (type === 'radio') return onChange([value])
     onChange(selected.includes(value) ? selected.filter((v) => v !== value) : [...selected, value])
@@ -30,6 +34,28 @@ export function ChoiceGroup({ id, legend, type, options, selected, onChange, err
         {legend} <OptionalMark required={required} />
       </legend>
       {hint && <p className="mb-2 text-caption text-muted">{hint}</p>}
+      {variant === 'chips' ? (
+        <div className="flex flex-wrap gap-2.5">
+          {options.map((o) => (
+            <label key={o.value} className="cursor-pointer">
+              <input
+                type={type}
+                name={id}
+                value={o.value}
+                checked={selected.includes(o.value)}
+                onChange={() => toggle(o.value)}
+                className="peer sr-only"
+              />
+              <span className="inline-flex min-h-11 items-center rounded-[1.375rem] border border-hair bg-paper px-5 py-2 text-left font-sans text-ui font-medium text-ink transition-colors duration-200 hover:border-ink peer-checked:border-ink peer-checked:bg-ink peer-checked:text-paper peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ink [&>svg]:size-4 [&>svg]:w-0 [&>svg]:shrink-0 [&>svg]:overflow-hidden [&>svg]:fill-none [&>svg]:stroke-current [&>svg]:stroke-[2.5] [&>svg]:transition-[width,margin] [&>svg]:duration-200 peer-checked:[&>svg]:mr-2 peer-checked:[&>svg]:w-4">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m5 12.5 4.5 4.5L19 7.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                {o.label}
+              </span>
+            </label>
+          ))}
+        </div>
+      ) : (
       <div className="grid gap-1">
         {options.map((o) => (
           <label key={o.value} className="flex min-h-11 cursor-pointer items-start gap-3 py-2">
@@ -58,6 +84,7 @@ export function ChoiceGroup({ id, legend, type, options, selected, onChange, err
           </label>
         ))}
       </div>
+      )}
       <FieldError id={errorId} message={error} />
     </fieldset>
   )
