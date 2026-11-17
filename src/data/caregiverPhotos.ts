@@ -13,11 +13,11 @@ export interface CaregiverPhoto {
 }
 
 export const CAREGIVER_PHOTOS: Record<string, CaregiverPhoto> = {
-  mara: { src: '/img/person-mara.jpg', alt: 'Portrait of a smiling woman with short blond hair (stock photo)', position: '50% 30%', width: 1800, height: 1013 },
+  mara: { src: '/img/meet-mara.jpg', alt: 'Portrait of a smiling woman with long dark hair in warm evening light (stock photo)', position: '50% 36%', width: 1100, height: 1568 },
   jonas: { src: '/img/person-jonas.jpg', alt: 'Portrait of a smiling man with a short beard (stock photo)', position: '50% 35%', width: 1600, height: 900 },
-  priya: { src: '/img/person-priya.jpg', alt: 'Portrait of a smiling woman with long curly dark hair (stock photo)', position: '50% 25%', width: 1600, height: 1200 },
+  priya: { src: '/img/meet-priya.jpg', alt: 'Portrait of a woman with long wavy brown hair outdoors (stock photo)', position: '50% 48%', width: 1100, height: 1650 },
   theo: { src: '/img/person-theo.jpg', alt: 'Portrait of a smiling man with a full beard (stock photo)', position: '50% 35%', width: 1600, height: 900 },
-  elena: { src: '/img/person-elena.jpg', alt: 'Portrait of a laughing woman with her hair up (stock photo)', position: '50% 30%', width: 1200, height: 1800 },
+  leo: { src: '/img/meet-leo.jpg', alt: 'Portrait of a young man with curly hair and a dark hat (stock photo)', position: '50% 28%', width: 1100, height: 1650 },
   sam: { src: '/img/person-sam.jpg', alt: 'Portrait of a smiling young man with round glasses (stock photo)', position: '50% 30%', width: 1600, height: 900 },
 }
 

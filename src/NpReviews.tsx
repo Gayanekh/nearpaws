@@ -17,7 +17,7 @@ const REVIEWS: SampleReview[] = [
     quote: 'She followed our dog’s feeding routine to the letter.',
     by: 'Illustrative owner',
     about: 'About Mara',
-    person: { src: '/img/person-alex.jpg', position: '80% 40%' },
+    person: { src: '/img/person-reviewer.jpg', position: '50% 50%' },
     photo: { src: '/img/rev-1.jpg', alt: 'A brown and white dog on a beach (stock photo)', width: 1200, height: 800, position: '62% 50%' },
   },
   {
@@ -30,8 +30,8 @@ const REVIEWS: SampleReview[] = [
   {
     quote: 'Our shy cat was relaxed on day one.',
     by: 'Illustrative owner',
-    about: 'About Elena',
-    person: { src: '/img/person-reviewer.jpg', position: '50% 50%' },
+    about: 'About Leo',
+    person: { src: '/img/person-alex.jpg', position: '80% 40%' },
     photo: { src: '/img/rev-3.jpg', alt: 'A tabby cat peeking out from under a blanket (stock photo)', width: 1200, height: 750, position: '50% 50%' },
   },
 ]

@@ -23,12 +23,22 @@ interface DemoState {
 
 const KEY = 'nearpaws-demo-v1'
 
+/** Elena of an earlier version of the demo is Leo now (id and all): carry a stored tab over. */
+const renamed = (s: DemoState): DemoState => {
+  const id = (v: string | null) => (v === 'caregiver-elena' ? 'caregiver-leo' : v)
+  return {
+    accountId: id(s.accountId),
+    requests: s.requests.map((r) => (r.caregiverId === 'elena' ? { ...r, caregiverId: 'leo' } : r)),
+    profiles: Object.fromEntries(Object.entries(s.profiles).map(([k, v]) => [id(k) as string, v])),
+  }
+}
+
 const initialState = (): DemoState => {
   try {
     const raw = sessionStorage.getItem(KEY)
     if (raw) {
       const parsed = JSON.parse(raw) as DemoState
-      if (Array.isArray(parsed.requests)) return { ...parsed, profiles: parsed.profiles ?? {} }
+      if (Array.isArray(parsed.requests)) return renamed({ ...parsed, profiles: parsed.profiles ?? {} })
     }
   } catch {
     // Storage is unavailable or unreadable: start from the sample data.

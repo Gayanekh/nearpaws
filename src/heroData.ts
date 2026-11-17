@@ -34,7 +34,7 @@ export const HERO_SLIDES: HeroSlide[] = [
   },
   {
     name: 'Miso',
-    place: 'Sample visits from Elena · Cedar Park',
+    place: 'Sample visits from Leo · Cedar Park',
     px: '12%',
     py: '35%',
     words: ['Quiet', 'Calm', 'Loving'],
