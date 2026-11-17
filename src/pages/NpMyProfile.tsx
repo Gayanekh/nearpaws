@@ -4,7 +4,6 @@ import { Navigate } from 'react-router-dom'
 import { CAREGIVERS } from '../data/content'
 import { useDemo } from '../demo/useDemo'
 import { ROUTES } from '../routes'
-import { BackLink } from '../ui/BackLink'
 import { Button } from '../ui/Button'
 import { PageTitle } from '../ui/PageTitle'
 import { PhotoField } from '../ui/PhotoField'
@@ -68,7 +67,9 @@ export function NpMyProfile() {
 
   return (
     <section className={page}>
-      <BackLink to={isCaregiver ? ROUTES.caregiverDashboard : ROUTES.dashboard}>Back to my dashboard</BackLink>
+      <div className="mb-10">
+        <TextLink to={isCaregiver ? ROUTES.caregiverDashboard : ROUTES.dashboard}>Back to my dashboard</TextLink>
+      </div>
       <PageTitle eyebrow="Demo profile" title="My profile">
         Change your details and photo. This is a demonstration: it is kept only in this browser tab and nothing is sent anywhere.
         {isCaregiver && ' Your photo, name, area, tagline, about text and price also appear on your card and profile page.'}

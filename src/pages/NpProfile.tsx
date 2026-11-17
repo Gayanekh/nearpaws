@@ -6,12 +6,12 @@ import type { Caregiver } from '../types'
 import { formatDate, nightsBetween } from '../utils/validation'
 import { ROUTES } from '../routes'
 import { AvailabilityCalendar } from '../ui/AvailabilityCalendar'
-import { BackLink } from '../ui/BackLink'
 import { Badge } from '../ui/Badge'
 import { Button } from '../ui/Button'
 import { CheckList } from '../ui/CheckList'
 import { Eyebrow } from '../ui/Eyebrow'
 import { FactList } from '../ui/FactList'
+import { TextLink } from '../ui/TextLink'
 import { useDocumentTitle } from '../useDocumentTitle'
 
 const sectionHeading = 'mb-5 font-slab text-display-md font-normal text-ink'
@@ -43,7 +43,9 @@ export function NpProfile() {
 
   return (
     <section className="mx-auto w-full max-w-360 px-(--inset) pt-10 pb-(--section) md:pt-14">
-      <BackLink to={ROUTES.caregivers}>Back to all caregivers</BackLink>
+      <div className="mb-10">
+        <TextLink to={ROUTES.caregivers}>Back to all caregivers</TextLink>
+      </div>
 
       <div className="grid gap-10 lg:grid-cols-2 lg:items-end lg:gap-16">
         <div className="aspect-[4/3] overflow-hidden bg-panel lg:aspect-[4/5]">
