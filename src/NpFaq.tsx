@@ -32,6 +32,7 @@ export function NpFaq() {
   return (
     <section
       className="bg-panel py-(--section) group-data-[mo]/np:overflow-x-clip"
+      id="faq"
       aria-labelledby="faq-h"
       data-clip=""
     >

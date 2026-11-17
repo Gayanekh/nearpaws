@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 import { BRAND } from './data/content'
 import { ROUTES } from './routes'
 import { BrandLogo } from './ui/BrandLogo'
+import { Button } from './ui/Button'
 import { useNpMotion } from './useNpMotion'
 
 /**
@@ -72,7 +73,7 @@ export function NpLayout() {
     return () => document.removeEventListener('keydown', onKey)
   }, [open])
   useEffect(() => {
-    const query = window.matchMedia('(min-width:900px)')
+    const query = window.matchMedia('(min-width:75rem)')
     const onChange = (e: MediaQueryListEvent) => e.matches && setOpen(false)
     query.addEventListener('change', onChange)
     return () => query.removeEventListener('change', onChange)
@@ -98,14 +99,18 @@ export function NpLayout() {
           data-scrolled={scrolled ? '' : undefined}
         >
         <Logo label="NearPaws, home" className="justify-self-start" />
-        <nav className="hidden md:flex md:justify-self-center md:gap-[clamp(1.75rem,4.6vw,5.5rem)]" aria-label="Main">
-          <NavLink className={navLink} to={ROUTES.caregivers} end>Find a caregiver</NavLink>
-          <Link className={navLink} to={`${ROUTES.home}#how`}>How it works</Link>
-          <NavLink className={navLink} to={ROUTES.become} end>Become a caregiver</NavLink>
+        <nav className="hidden lg:flex lg:justify-self-center lg:gap-[clamp(1rem,2.4vw,2.5rem)]" aria-label="Main">
+          {SECTION_LINKS.map((s) => (
+            <Link key={s.id} className={navLink} to={`${ROUTES.home}#${s.id}`}>{s.label}</Link>
+          ))}
         </nav>
-        <div className="col-start-3 flex items-center gap-1 justify-self-end">
+        <div className="col-start-3 flex items-center gap-2 justify-self-end">
+          <div className="hidden items-center gap-2 md:flex">
+            <Button className="min-h-11! gap-3! px-5! py-2.5!" to={ROUTES.caregivers}>Find a caregiver</Button>
+            <Button className="min-h-11! gap-3! px-5! py-2.5!" variant="secondary" to={ROUTES.become}>Become a caregiver</Button>
+          </div>
           <button
-            className={`${iconButton} md:hidden`}
+            className={`${iconButton} lg:hidden`}
             type="button"
             ref={menuButton}
             aria-expanded={open}
@@ -128,9 +133,13 @@ export function NpLayout() {
           data-open={open ? '' : undefined}
           onClick={(e) => (e.target as HTMLElement).closest('a') && setOpen(false)}
         >
-          <NavLink className={mobileLink} to={ROUTES.caregivers} end>Find a caregiver</NavLink>
-          <Link className={mobileLink} to={`${ROUTES.home}#how`}>How it works</Link>
-          <NavLink className={mobileLink} to={ROUTES.become} end>Become a caregiver</NavLink>
+          {SECTION_LINKS.map((s) => (
+            <Link key={s.id} className={mobileLink} to={`${ROUTES.home}#${s.id}`}>{s.label}</Link>
+          ))}
+          <div className="grid gap-3 pt-4 md:hidden">
+            <Button to={ROUTES.caregivers}>Find a caregiver</Button>
+            <Button variant="secondary" to={ROUTES.become}>Become a caregiver</Button>
+          </div>
         </nav>
       </header>
 
@@ -166,6 +175,15 @@ export function NpLayout() {
     </div>
   )
 }
+
+/** Links to the sections of the home page (the ids are set on the sections themselves). */
+const SECTION_LINKS = [
+  { id: 'options', label: 'Care options' },
+  { id: 'caregivers', label: 'Caregivers' },
+  { id: 'how', label: 'How it works' },
+  { id: 'reviews', label: 'Reviews' },
+  { id: 'faq', label: 'FAQ' },
+] as const
 
 const navLink =
   'inline-block py-[0.875rem] font-sans text-ui font-medium tracking-ui text-ink no-underline transition-[background-size] duration-280 ease-out [background:linear-gradient(var(--color-accent),var(--color-accent))_0_calc(100%-0.5rem)/0_2px_no-repeat] hover:[background-size:100%_2px] focus-visible:[background-size:100%_2px] aria-[current=page]:[background-size:100%_2px]'

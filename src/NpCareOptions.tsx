@@ -62,6 +62,7 @@ export function NpCareOptions() {
   return (
     <section
       className="grid bg-paper group-data-[mo]/np:overflow-x-clip md:grid-cols-2"
+      id="options"
       aria-labelledby="options-h"
       data-clip=""
     >

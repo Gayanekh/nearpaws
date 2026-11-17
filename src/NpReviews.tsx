@@ -53,7 +53,7 @@ export function NpReviews() {
   const show = (n: number) => setIndex((n + count) % count)
 
   return (
-    <section className="overflow-hidden bg-paper py-(--section)" aria-labelledby="rev-h">
+    <section className="overflow-hidden bg-paper py-(--section)" id="reviews" aria-labelledby="rev-h">
       <div className="mx-auto grid max-w-360 gap-12 px-(--inset) md:grid-cols-[7fr_5fr] md:items-center md:gap-[clamp(3rem,7vw,8rem)]">
         <div>
           <Eyebrow data-rv="l">Illustrative reviews</Eyebrow>
