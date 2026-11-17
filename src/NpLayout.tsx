@@ -121,12 +121,13 @@ export function NpLayout() {
       </a>
 
       <header
-        className={`pointer-events-none sticky top-0 z-20 h-[4.875rem] px-[max(0.5rem,calc(var(--inset)_-_1.25rem))] pt-3.5 transition-transform duration-300 ease-out ${hidden ? '-translate-y-[calc(100%+1rem)]' : ''}`}
+        className={`group/hdr pointer-events-none sticky flow-root top-0 z-20 h-[clamp(4.5rem,9vw,8rem)] px-[max(0.5rem,calc(var(--inset)_-_1.25rem))] transition-transform duration-300 ease-out ${hidden ? '-translate-y-[calc(100%+1rem)]' : ''}`}
         onFocus={() => setHidden(false)}
         ref={header}
+        data-scrolled={scrolled ? '' : undefined}
       >
         <div
-          className="pointer-events-auto mx-auto grid h-full max-w-[92.5rem] grid-cols-[1fr_auto_1fr] items-center border border-transparent bg-paper/62 px-5 backdrop-blur-[16px] transition-[border-radius,border-color,box-shadow] duration-500 ease-out data-[scrolled]:rounded-[0.75rem] data-[scrolled]:border-hair data-[scrolled]:shadow-[0_10px_30px_color-mix(in_srgb,var(--color-ink)_8%,transparent)]"
+          className="pointer-events-auto mx-auto grid h-full data-[scrolled]:mt-3.5 data-[scrolled]:h-16 max-w-[92.5rem] grid-cols-[1fr_auto_1fr] items-center border border-transparent bg-paper/62 px-5 backdrop-blur-[16px] transition-[height,margin,border-radius,border-color,box-shadow] duration-500 ease-out data-[scrolled]:rounded-[0.75rem] data-[scrolled]:border-hair data-[scrolled]:shadow-[0_10px_30px_color-mix(in_srgb,var(--color-ink)_8%,transparent)]"
           data-scrolled={scrolled ? '' : undefined}
         >
         <Logo label="NearPaws, home" className="justify-self-start" />
@@ -160,7 +161,7 @@ export function NpLayout() {
         </div>
         </div>
         <nav
-          className={`pointer-events-auto absolute top-full right-0 left-0 mx-[max(0.5rem,calc(var(--inset)_-_1.25rem))] mt-4 rounded-[0.75rem] border border-hair bg-paper/90 px-6 pt-2 pb-4 backdrop-blur-[16px] ${open ? 'block' : 'hidden'}`}
+          className={`pointer-events-auto absolute top-full group-data-[scrolled]/hdr:top-[4.875rem] right-0 left-0 mx-[max(0.5rem,calc(var(--inset)_-_1.25rem))] mt-4 rounded-[0.75rem] border border-hair bg-paper/90 px-6 pt-2 pb-4 backdrop-blur-[16px] ${open ? 'block' : 'hidden'}`}
           id="mobileNav"
           aria-label="Menu"
           data-menu=""
