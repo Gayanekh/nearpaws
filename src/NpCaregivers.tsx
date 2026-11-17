@@ -45,7 +45,7 @@ const CAREGIVERS: SampleCaregiver[] = [
     place: 'Maple Grove, near the community garden',
     style: '6 years’ experience · Calm and routine-led. Quiet days, steady walks and lots of couch time.',
     tags: ['At the caregiver’s home', 'At your home', 'Either handover'],
-    photo: { src: '/img/meet-mara.jpg', alt: 'Portrait of a smiling woman with long dark hair in warm evening light (stock photo)', width: 1100, height: 1568, position: '50% 8%' },
+    photo: { src: '/img/meet-mara.jpg', alt: 'Portrait of a woman with long red hair looking to the side, with green leaves behind her (stock photo)', width: 1100, height: 1650, position: '50% 58%' },
   },
 ]
 
