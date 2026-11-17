@@ -9,8 +9,6 @@ export interface ProfileEdits {
   name?: string
   /** A photo chosen by the person (a small data URL). */
   photo?: string
-  phone?: string
-  city?: string
   /** Caregiver fields. */
   neighborhood?: string
   tagline?: string
@@ -25,8 +23,6 @@ export const uploadedPhoto = (src: string, name: string): CaregiverPhoto => ({
   src,
   alt: `Photo of ${name}`,
   position: '50% 50%',
-  width: 480,
-  height: 480,
 })
 
 /** A sample caregiver with the changes the caregiver made to their profile applied. */

@@ -7,9 +7,9 @@ export interface CaregiverPhoto {
   src: string
   alt: string
   position: string
-  /** Natural size of the file, for the width and height attributes. */
-  width: number
-  height: number
+  /** Natural size of the file, for the width and height attributes (a photo chosen by the person has none). */
+  width?: number
+  height?: number
 }
 
 export const CAREGIVER_PHOTOS: Record<string, CaregiverPhoto> = {

@@ -68,7 +68,7 @@ export function PhotoField({ id, label, hint, alt = 'Your pet', fallback, value,
               />
             </label>
             {value && (
-              <button type="button" className="text-caption font-medium text-ink underline decoration-accent decoration-2 underline-offset-[0.25em]" onClick={() => onChange('')}>
+              <button type="button" className="inline-flex min-h-11 items-center text-caption font-medium text-ink underline decoration-accent decoration-2 underline-offset-[0.25em]" onClick={() => onChange('')}>
                 Remove photo
               </button>
             )}
