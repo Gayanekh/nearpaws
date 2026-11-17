@@ -15,6 +15,6 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const PetOwner: Story = { render: () => <SignedInAs id="owner-alex" /> }
-export const Caregiver: Story = { render: () => <SignedInAs id="caregiver-mara" /> }
+export const Caregiver: Story = { render: () => <SignedInAs id="caregiver-noah" /> }
 /** Signed out: the menu draws nothing (the header shows "Sign in" instead). */
 export const SignedOut: Story = {}

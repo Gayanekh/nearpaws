@@ -23,12 +23,14 @@ interface DemoState {
 
 const KEY = 'nearpaws-demo-v1'
 
-/** Elena of an earlier version of the demo is Leo now (id and all): carry a stored tab over. */
+/** Elena and Mara of earlier versions of the demo are Leo and Noah now (id and all): carry a stored tab over. */
 const renamed = (s: DemoState): DemoState => {
-  const id = (v: string | null) => (v === 'caregiver-elena' ? 'caregiver-leo' : v)
+  const NEW_ID: Record<string, string> = { 'caregiver-elena': 'caregiver-leo', 'caregiver-mara': 'caregiver-noah' }
+  const NEW_CAREGIVER: Record<string, string> = { elena: 'leo', mara: 'noah' }
+  const id = (v: string | null) => (v && NEW_ID[v]) || v
   return {
     accountId: id(s.accountId),
-    requests: s.requests.map((r) => (r.caregiverId === 'elena' ? { ...r, caregiverId: 'leo' } : r)),
+    requests: s.requests.map((r) => (NEW_CAREGIVER[r.caregiverId] ? { ...r, caregiverId: NEW_CAREGIVER[r.caregiverId]! } : r)),
     profiles: Object.fromEntries(Object.entries(s.profiles).map(([k, v]) => [id(k) as string, v])),
   }
 }

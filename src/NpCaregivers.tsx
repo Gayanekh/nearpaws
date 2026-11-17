@@ -6,7 +6,7 @@ import { TextLink } from './ui/TextLink'
 interface SampleCaregiver {
   key: 'lead' | 'a' | 'b'
   /** The id of this caregiver on the existing /caregivers/:id profile page. */
-  slug: 'mara' | 'priya' | 'leo'
+  slug: 'noah' | 'priya' | 'leo'
   name: string
   price: number
   place: string
@@ -39,13 +39,13 @@ const CAREGIVERS: SampleCaregiver[] = [
   },
   {
     key: 'b',
-    slug: 'mara',
-    name: 'Mara',
+    slug: 'noah',
+    name: 'Noah',
     price: 42,
     place: 'Maple Grove, near the community garden',
     style: '6 years’ experience · Calm and routine-led. Quiet days, steady walks and lots of couch time.',
     tags: ['At the caregiver’s home', 'At your home', 'Either handover'],
-    photo: { src: '/img/meet-mara.jpg', alt: 'Portrait of a woman with long red hair looking to the side, with green leaves behind her (stock photo)', width: 1100, height: 1650, position: '50% 58%' },
+    photo: { src: '/img/meet-noah.jpg', alt: 'Close-up portrait of a young man with freckles and wavy blond hair, in a grey sweater (stock photo)', width: 1100, height: 1650, position: '50% 10%' },
   },
 ]
 

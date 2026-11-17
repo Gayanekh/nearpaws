@@ -84,7 +84,7 @@ export function seedRequests(): CareRequest[] {
     {
       id: 'r-biscuit',
       ownerId: 'owner-alex',
-      caregiverId: 'mara',
+      caregiverId: 'noah',
       pet: SAMPLE_PETS['biscuit']!,
       start: inDays(14),
       end: inDays(18),

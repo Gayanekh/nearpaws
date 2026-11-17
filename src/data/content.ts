@@ -29,14 +29,14 @@ export const HANDOVER_LABELS = {
 
 export const CAREGIVERS: Caregiver[] = [
   {
-    id: 'mara',
-    name: 'Mara',
+    id: 'noah',
+    name: 'Noah',
     neighborhood: 'Maple Grove, near the community garden',
     area: 'Maple Grove',
     experienceYears: 6,
     careStyle: 'Calm and routine-led',
     tagline: 'Quiet days, steady walks and lots of couch time.',
-    bio: 'Mara works from home and plans each day around walks, meals and naps. She has looked after shy and senior dogs for six years and sends a photo update every evening.',
+    bio: 'Noah works from home and plans each day around walks, meals and naps. He has looked after shy and senior dogs for six years and sends a photo update every evening.',
     careTypes: ['caregiver-home', 'owner-home'],
     petSizes: ['small', 'medium'],
     animals: ['Dogs', 'Cats'],
@@ -45,7 +45,7 @@ export const CAREGIVERS: Caregiver[] = [
     home: { type: 'Two-bedroom house', outdoor: 'Fenced back garden', otherPets: 'One senior cat', hours: 'Home most of the day' },
     houseRules: ['No more than two guests at a time', 'Pets sleep indoors, never alone outside', 'Updates shared once or twice a day'],
     includes: ['Two walks a day', 'Meals as you describe', 'Daily photo update'],
-    review: { quote: 'Sample review: She followed our dog’s feeding routine to the letter.', author: 'Illustrative owner' },
+    review: { quote: 'Sample review: He followed our dog’s feeding routine to the letter.', author: 'Illustrative owner' },
   },
   {
     id: 'jonas',

@@ -5,7 +5,7 @@ import { AvailabilityCalendar } from './AvailabilityCalendar'
 const meta = {
   title: 'Cards/AvailabilityCalendar',
   component: AvailabilityCalendar,
-  args: { caregiverId: 'mara', start: '', end: '', onChange: () => {} },
+  args: { caregiverId: 'noah', start: '', end: '', onChange: () => {} },
   /** Sits on the tan block of the profile page. */
   decorators: [(Story) => <div className="max-w-[22rem] bg-accent p-6"><Story /></div>],
   render: function Render(args) {

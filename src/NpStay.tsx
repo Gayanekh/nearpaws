@@ -53,7 +53,7 @@ export function NpStay() {
               </div>
             ))}
           </dl>
-          <Button className="group" to={ROUTES.caregiver('mara')}>
+          <Button className="group" to={ROUTES.caregiver('noah')}>
             {'See a sample profile '}
             <svg
               width="36"

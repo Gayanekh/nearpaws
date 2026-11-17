@@ -14,11 +14,11 @@ export interface HeroSlide {
 export const HERO_SLIDES: HeroSlide[] = [
   {
     name: 'Pip',
-    place: 'Sample stay with Mara · Maple Grove',
+    place: 'Sample stay with Noah · Maple Grove',
     px: '64%',
     py: '30%',
     words: ['Curious', 'Playful', 'Alert'],
-    facts: '4 nights · At Mara’s home · Daily photo update',
+    facts: '4 nights · At Noah’s home · Daily photo update',
     src: '/img/hero-pip.jpg',
     alt: 'A jack russell terrier looking at the camera against a soft peach wall',
   },

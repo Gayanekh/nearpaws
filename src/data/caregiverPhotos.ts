@@ -13,7 +13,7 @@ export interface CaregiverPhoto {
 }
 
 export const CAREGIVER_PHOTOS: Record<string, CaregiverPhoto> = {
-  mara: { src: '/img/meet-mara.jpg', alt: 'Portrait of a woman with long red hair looking to the side, with green leaves behind her (stock photo)', position: '50% 35%', width: 1100, height: 1650 },
+  noah: { src: '/img/meet-noah.jpg', alt: 'Close-up portrait of a young man with freckles and wavy blond hair, in a grey sweater (stock photo)', position: '50% 8%', width: 1100, height: 1650 },
   jonas: { src: '/img/person-jonas.jpg', alt: 'Portrait of a smiling man with a short beard (stock photo)', position: '50% 35%', width: 1600, height: 900 },
   priya: { src: '/img/meet-priya.jpg', alt: 'Portrait of a woman with long wavy brown hair outdoors (stock photo)', position: '50% 48%', width: 1100, height: 1650 },
   theo: { src: '/img/person-theo.jpg', alt: 'Portrait of a smiling man with a full beard (stock photo)', position: '50% 35%', width: 1600, height: 900 },

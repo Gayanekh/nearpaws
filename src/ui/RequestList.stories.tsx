@@ -8,7 +8,7 @@ const requests = seedRequests()
 const meta = {
   title: 'Dashboard/RequestList',
   component: RequestList,
-  args: { requests, selectedId: requests[0]!.id, onSelect: () => {}, who: (r) => (r.caregiverId === 'leo' ? 'Leo' : 'Mara') },
+  args: { requests, selectedId: requests[0]!.id, onSelect: () => {}, who: (r) => (r.caregiverId === 'leo' ? 'Leo' : 'Noah') },
   render: function Render(args) {
     const [id, setId] = useState(args.selectedId)
     return <div className="max-w-sm bg-panel p-6"><RequestList {...args} selectedId={id} onSelect={setId} /></div>

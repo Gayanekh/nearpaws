@@ -14,9 +14,9 @@ interface SampleReview {
 /** Three invented reviews, copy and crops from the approved preview. They are not from real people. */
 const REVIEWS: SampleReview[] = [
   {
-    quote: 'She followed our dog’s feeding routine to the letter.',
+    quote: 'He followed our dog’s feeding routine to the letter.',
     by: 'Illustrative owner',
-    about: 'About Mara',
+    about: 'About Noah',
     person: { src: '/img/person-reviewer.jpg', position: '50% 50%' },
     photo: { src: '/img/rev-1.jpg', alt: 'A brown and white dog on a beach (stock photo)', width: 1200, height: 800, position: '62% 50%' },
   },
