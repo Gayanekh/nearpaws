@@ -3,6 +3,13 @@
 An interactive **front-end prototype** for a pet-care service: owners find a caregiver who looks after their pet at the
 caregiver's home or the owner's home. "NearPaws" is a temporary brand name.
 
+**Live:**
+
+- App: https://nearpaws.vercel.app
+- Component library (Storybook, 95 stories with accessibility checks): https://nearpaws-storybook.vercel.app
+
+The two are separate Vercel projects built from this one repository. The Storybook project builds with `npm run build-storybook` and publishes `storybook-static`; the app builds with `npm run build`.
+
 **Not real:** no backend, database, login, payment, booking or messaging. Caregivers, prices, reviews and availability are
 fictional. Form input lives only in browser memory and is discarded on leaving the page.
 

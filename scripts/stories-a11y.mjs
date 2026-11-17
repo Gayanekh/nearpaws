@@ -3,6 +3,7 @@
  * and runs axe-core (WCAG 2.0/2.1/2.2 A and AA plus axe's best-practice rules) on it.
  *
  *   npm run build-storybook && npm run test:a11y
+ *   STORYBOOK_URL=https://nearpaws-storybook.vercel.app npm run test:a11y   (check a published Storybook instead)
  *
  * It exits with 1 when any story has a violation or does not render. It needs the Playwright Chromium browser
  * (`npx playwright-core install chromium` once, if it is not on the machine yet).
@@ -19,7 +20,9 @@ const axeSource = readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8')
 const ROOT = normalize(fileURLToPath(new URL('../storybook-static', import.meta.url)))
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.jpg': 'image/jpeg', '.png': 'image/png' }
 
-if (!existsSync(join(ROOT, 'index.json'))) {
+const REMOTE = process.env.STORYBOOK_URL?.replace(/\/$/, '')
+
+if (!REMOTE && !existsSync(join(ROOT, 'index.json'))) {
   console.error('storybook-static/index.json not found. Run "npm run build-storybook" first.')
   process.exit(1)
 }
@@ -34,10 +37,11 @@ const server = createServer((req, res) => {
   res.writeHead(200, { 'content-type': TYPES[extname(file)] ?? 'application/octet-stream' })
   createReadStream(file).pipe(res)
 })
-await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve))
-const origin = `http://127.0.0.1:${server.address().port}`
+if (!REMOTE) await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve))
+const origin = REMOTE ?? `http://127.0.0.1:${server.address().port}`
 
-const stories = Object.values(JSON.parse(readFileSync(join(ROOT, 'index.json'), 'utf8')).entries).filter((e) => e.type === 'story')
+const index = REMOTE ? await (await fetch(`${origin}/index.json`)).json() : JSON.parse(readFileSync(join(ROOT, 'index.json'), 'utf8'))
+const stories = Object.values(index.entries).filter((e) => e.type === 'story')
 const browser = await chromium.launch()
 const page = await (await browser.newContext({ viewport: { width: 1000, height: 900 } })).newPage()
 const pageErrors = []
@@ -62,7 +66,7 @@ for (const story of stories) {
 }
 
 await browser.close()
-server.close()
+if (!REMOTE) server.close()
 console.log(`${stories.length} stories checked, ${failures.length} problem${failures.length === 1 ? '' : 's'}.`)
 for (const f of failures) console.log(`  ${f}`)
 process.exit(failures.length ? 1 : 0)
