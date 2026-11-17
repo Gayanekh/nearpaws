@@ -15,6 +15,8 @@ export interface DemoApi {
   cancel: (id: string) => void
   /** Owner: answer the caregiver's question; the request goes back to "Requested". */
   reply: (id: string, text: string) => void
+  /** Owner: set (or, with an empty string, remove) the photo of the pet on a request. All of the owner's requests for the same pet get it. */
+  setPetPhoto: (id: string, photo: string) => void
   /** Caregiver: accept, ask a question (status "More information needed") or decline. */
   accept: (id: string) => void
   ask: (id: string, text: string) => void

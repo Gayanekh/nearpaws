@@ -64,6 +64,17 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       },
       cancel: (id) => change(id, withStatus('cancelled', 'owner', 'I cancelled this request.')),
       reply: (id, text) => change(id, withStatus('requested', 'owner', text)),
+      setPetPhoto: (id, photo) =>
+        setState((s) => {
+          const target = s.requests.find((r) => r.id === id)
+          if (!target) return s
+          return {
+            ...s,
+            requests: s.requests.map((r) =>
+              r.ownerId === target.ownerId && r.pet.name === target.pet.name ? { ...r, pet: { ...r.pet, photo: photo || undefined } } : r,
+            ),
+          }
+        }),
       accept: (id) => change(id, withStatus('confirmed', 'caregiver', 'I accepted this request. I will send updates during the stay.')),
       ask: (id, text) => change(id, withStatus('more-info', 'caregiver', text)),
       decline: (id) => change(id, withStatus('declined', 'caregiver', 'I am not able to take this booking.')),

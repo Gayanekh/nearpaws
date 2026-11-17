@@ -10,6 +10,7 @@ import { FactList } from '../ui/FactList'
 import { MessageThread } from '../ui/MessageThread'
 import { PageTitle } from '../ui/PageTitle'
 import { PetProfile } from '../ui/PetProfile'
+import { PhotoField } from '../ui/PhotoField'
 import { RequestList } from '../ui/RequestList'
 import { SafetyNote } from '../ui/SafetyNote'
 import { StatusBadge } from '../ui/StatusBadge'
@@ -38,7 +39,7 @@ const message = (status: CareRequest['status'], name: string) =>
  */
 export function NpOwnerDashboard() {
   useDocumentTitle('Your requests')
-  const { account, requests, cancel, reply } = useDemo()
+  const { account, requests, cancel, reply, setPetPhoto } = useDemo()
   const mine = requests.filter((r) => r.ownerId === account?.id)
   const [selectedId, setSelectedId] = useState('')
   const [answer, setAnswer] = useState('')
@@ -82,6 +83,7 @@ export function NpOwnerDashboard() {
               setAnswer('')
             }}
             onCancel={() => cancel(request.id)}
+            onPhoto={(photo) => setPetPhoto(request.id, photo)}
           />
         </div>
       )}
@@ -95,9 +97,10 @@ interface RequestDetailProps {
   setAnswer: (v: string) => void
   onReply: () => void
   onCancel: () => void
+  onPhoto: (photo: string) => void
 }
 
-function RequestDetail({ request: r, answer, setAnswer, onReply, onCancel }: RequestDetailProps) {
+function RequestDetail({ request: r, answer, setAnswer, onReply, onCancel, onPhoto }: RequestDetailProps) {
   const caregiver = caregiverOf(r)
   const nights = nightsBetween(r.start, r.end)
   const confirmed = r.status === 'confirmed'
@@ -194,6 +197,9 @@ function RequestDetail({ request: r, answer, setAnswer, onReply, onCancel }: Req
 
       <div>
         <h2 className={heading}>Your pet</h2>
+        <div className="mb-6 max-w-[32rem]">
+          <PhotoField id="pet-photo" label={`Photo of ${r.pet.name}`} hint="Shown to the caregiver. It stays in this browser tab." value={r.pet.photo ?? ''} onChange={onPhoto} />
+        </div>
         <PetProfile pet={r.pet} />
         <p className="mt-3 text-caption text-muted">Status: {STATUS_LABELS[r.status]}. Prototype: nothing is sent or stored outside this browser tab.</p>
       </div>

@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { ROUTES } from './routes'
+import { CAREGIVER_PETS } from './data/caregiverPhotos'
 import { Eyebrow } from './ui/Eyebrow'
+import { PetBadge } from './ui/PetBadge'
 import { TextLink } from './ui/TextLink'
 
 interface SampleCaregiver {
@@ -25,7 +27,7 @@ const CAREGIVERS: SampleCaregiver[] = [
     place: 'Maple Grove, near the community garden',
     style: '6 years’ experience · Calm and routine-led. Quiet days, steady walks and lots of couch time.',
     tags: ['At the caregiver’s home', 'At your home', 'Either handover'],
-    photo: { src: '/img/person-mara.jpg', alt: 'Portrait of a smiling woman with short blond hair (stock photo)', width: 900, height: 506, position: '50% 30%' },
+    photo: { src: '/img/person-mara.jpg', alt: 'Portrait of a smiling woman with short blond hair (stock photo)', width: 1800, height: 1013, position: '50% 30%' },
   },
   {
     key: 'a',
@@ -35,7 +37,7 @@ const CAREGIVERS: SampleCaregiver[] = [
     place: 'Old Orchard, quiet residential street',
     style: '9 years’ experience · Gentle, experienced with medication. Patient care for older pets and special routines.',
     tags: ['At the caregiver’s home', 'At your home'],
-    photo: { src: '/img/person-priya.jpg', alt: 'Portrait of a smiling woman with long curly dark hair (stock photo)', width: 900, height: 675, position: '50% 25%' },
+    photo: { src: '/img/person-priya.jpg', alt: 'Portrait of a smiling woman with long curly dark hair (stock photo)', width: 1600, height: 1200, position: '50% 25%' },
   },
   {
     key: 'b',
@@ -45,7 +47,7 @@ const CAREGIVERS: SampleCaregiver[] = [
     place: 'Cedar Park, tree-lined avenue',
     style: '7 years’ experience · Cat specialist, very quiet home. Peaceful visits and stays for cats and small pets.',
     tags: ['At the caregiver’s home', 'At your home'],
-    photo: { src: '/img/person-elena.jpg', alt: 'Portrait of a laughing woman with her hair up (stock photo)', width: 900, height: 1350, position: '50% 30%' },
+    photo: { src: '/img/person-elena.jpg', alt: 'Portrait of a laughing woman with her hair up (stock photo)', width: 1200, height: 1800, position: '50% 30%' },
   },
 ]
 
@@ -105,7 +107,8 @@ export function NpCaregivers() {
                     loading="lazy"
                     style={{ objectPosition: c.photo.position }}
                   />
-                  <p className={`absolute bottom-0 left-0 z-2 flex items-baseline gap-[0.6rem] bg-accent font-sans text-label/[1.3] font-medium text-ink ${layout.price}`}>
+                  {CAREGIVER_PETS[c.slug] && <PetBadge photo={CAREGIVER_PETS[c.slug]!} className="right-4 bottom-4 size-20" />}
+                <p className={`absolute bottom-0 left-0 z-2 flex items-baseline gap-[0.6rem] bg-accent font-sans text-label/[1.3] font-medium text-ink ${layout.price}`}>
                     <b className={`font-slab leading-none font-medium tabular-nums ${layout.amount}`}>{`$${c.price}`}</b>
                     <span>/ night &middot; sample price</span>
                   </p>
