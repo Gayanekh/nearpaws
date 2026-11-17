@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useDemo } from './demo/useDemo'
 import { ROUTES } from './routes'
 import { Eyebrow } from './ui/Eyebrow'
 import { TextLink } from './ui/TextLink'
@@ -73,6 +74,7 @@ const Arrow = ({ className }: { className: string }) => (
  * The profile names link to the existing caregiver profile pages (/caregivers/:id); the whole card is the link's target.
  */
 export function NpCaregivers() {
+  const { caregiver, caregiverPhoto } = useDemo()
   return (
     <section className="bg-panel py-(--section)" id="caregivers" aria-labelledby="cg-h">
       <div className="mx-auto max-w-360 px-(--inset)">
@@ -86,7 +88,9 @@ export function NpCaregivers() {
           </p>
         </header>
         <div className="grid gap-x-8 gap-y-14 md:grid-cols-[repeat(12,1fr)] md:items-start md:gap-y-20">
-          {CAREGIVERS.map((c) => {
+          {CAREGIVERS.map((sample) => {
+            const edited = caregiver(sample.slug)
+            const c = { ...sample, name: edited?.name.split(' ')[0] ?? sample.name, price: edited?.pricePerNight ?? sample.price, place: edited?.neighborhood ?? sample.place, photo: caregiverPhoto(sample.slug) ?? sample.photo }
             const layout = LAYOUT[c.key]
             return (
               <article

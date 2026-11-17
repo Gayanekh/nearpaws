@@ -57,14 +57,14 @@ export function NpBooking() {
   const [errors, setErrors] = useState<Errors>({})
   const [done, setDone] = useState(false)
   const [needSignIn, setNeedSignIn] = useState(false)
-  const { account, signIn, createRequest } = useDemo()
+  const { account, signIn, createRequest, caregiver: editedCaregiver } = useDemo()
 
   const set = <K extends keyof BookingValues>(key: K, value: BookingValues[K]) => {
     setValues((prev) => ({ ...prev, [key]: value }))
     if (errors[key as string]) setErrors(({ [key as string]: _removed, ...rest }) => rest)
   }
 
-  const caregiver = CAREGIVERS.find((c) => c.id === values.caregiver)
+  const caregiver = editedCaregiver(values.caregiver)
   const nights = values.start && values.end ? nightsBetween(values.start, values.end) : 0
 
   const next = (e: FormEvent) => {
@@ -186,7 +186,7 @@ export function NpBooking() {
                   value={values.caregiver}
                   placeholder="Help me choose"
                   onChange={(v) => set('caregiver', v)}
-                  options={CAREGIVERS.map((c) => ({ value: c.id, label: `${c.name}, ${c.area}` }))}
+                  options={CAREGIVERS.map((c) => ({ value: c.id, label: `${editedCaregiver(c.id)?.name ?? c.name}, ${c.area}` }))}
                 />
                 <ChoiceGroup
                   id="careType"

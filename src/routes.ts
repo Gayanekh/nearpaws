@@ -9,5 +9,7 @@ export const ROUTES = {
   /** The pet owner's dashboard. */
   dashboard: '/dashboard',
   caregiverDashboard: '/caregiver-dashboard',
+  /** The signed-in person's own profile. */
+  profile: '/profile',
   admin: '/internal/admin',
 } as const

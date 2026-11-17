@@ -10,6 +10,7 @@ import { NpDashboard } from './pages/NpDashboard'
 import { NpDirectory } from './pages/NpDirectory'
 import { NpNotFound } from './pages/NpNotFound'
 import { NpOwnerDashboard } from './pages/NpOwnerDashboard'
+import { NpMyProfile } from './pages/NpMyProfile'
 import { NpProfile } from './pages/NpProfile'
 import { NpSignIn } from './pages/NpSignIn'
 import { ROUTES } from './routes'
@@ -29,6 +30,7 @@ export function App() {
             <Route path="sign-in" element={<NpSignIn />} />
             <Route path="dashboard" element={<RequireRole role="owner"><NpOwnerDashboard /></RequireRole>} />
             <Route path="caregiver-dashboard" element={<RequireRole role="caregiver"><NpDashboard /></RequireRole>} />
+            <Route path="profile" element={<NpMyProfile />} />
             <Route path="booking-status" element={<Navigate to={ROUTES.dashboard} replace />} />
             <Route path="internal/admin" element={<NpAdmin />} />
             <Route path="*" element={<NpNotFound />} />

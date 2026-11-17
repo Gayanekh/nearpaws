@@ -1,6 +1,6 @@
 import { CARE_TYPE_LABELS, HANDOVER_LABELS } from '../data/content'
 import type { Caregiver } from '../types'
-import { CAREGIVER_PHOTOS } from '../data/caregiverPhotos'
+import { useDemo } from '../demo/useDemo'
 import { Link } from 'react-router-dom'
 import { ROUTES } from '../routes'
 
@@ -9,9 +9,11 @@ import { ROUTES } from '../routes'
  * shadow. The whole card is one link (the name carries it), so there is a single real link for screen readers.
  * On hover-capable devices the photograph scales by 1.03 over 400ms.
  */
-export function CaregiverCard({ caregiver }: { caregiver: Caregiver }) {
+export function CaregiverCard({ caregiver: sample }: { caregiver: Caregiver }) {
+  const { caregiver: edited, caregiverPhoto } = useDemo()
+  const caregiver = edited(sample.id) ?? sample
   const { id, name, neighborhood, experienceYears, careStyle, pricePerNight, careTypes, handover } = caregiver
-  const photo = CAREGIVER_PHOTOS[id]
+  const photo = caregiverPhoto(id)
   return (
     <article className="group relative flex flex-col bg-panel focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ink">
       <div className="aspect-[4/3] overflow-hidden bg-panel">

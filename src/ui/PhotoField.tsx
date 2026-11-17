@@ -6,6 +6,10 @@ interface PhotoFieldProps {
   id: string
   label: string
   hint?: string
+  /** Alt text of the preview. */
+  alt?: string
+  /** Shown while there is no chosen photo (for example the current portrait). It is not removable. */
+  fallback?: string
   /** The chosen photo as a data URL, or an empty string. */
   value: string
   onChange: (value: string) => void
@@ -16,7 +20,7 @@ interface PhotoFieldProps {
  * there is a photo, "Remove photo". The file is shrunk in the browser and never uploaded. The native file input stays in the
  * page (hidden, still focusable and keyboard operable); the visible button is its label.
  */
-export function PhotoField({ id, label, hint, value, onChange }: PhotoFieldProps) {
+export function PhotoField({ id, label, hint, alt = 'Your pet', fallback, value, onChange }: PhotoFieldProps) {
   const [error, setError] = useState('')
 
   const pick = async (file: File | undefined) => {
@@ -37,8 +41,8 @@ export function PhotoField({ id, label, hint, value, onChange }: PhotoFieldProps
     <Field id={id} label={label} hint={hint} error={error || undefined}>
       {(aria) => (
         <div className="flex items-center gap-4">
-          {value ? (
-            <img src={value} alt="Your pet" className="size-20 shrink-0 rounded-[0.875rem] object-cover" />
+          {value || fallback ? (
+            <img src={value || fallback} alt={alt} className="size-20 shrink-0 rounded-[0.875rem] object-cover" />
           ) : (
             <span aria-hidden="true" className="grid size-20 shrink-0 place-items-center rounded-[0.875rem] border border-dashed border-field-border text-muted">
               <svg viewBox="0 0 24 24" className="size-7 fill-none stroke-current stroke-[1.5]">
@@ -49,7 +53,7 @@ export function PhotoField({ id, label, hint, value, onChange }: PhotoFieldProps
           )}
           <div className="grid justify-items-start gap-2">
             <label className="inline-flex min-h-11 cursor-pointer items-center rounded-[0.875rem] border border-ink bg-paper px-5 font-sans text-ui font-medium tracking-ui text-ink transition-colors duration-200 ease-out focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ink hover:bg-ink hover:text-paper">
-              {value ? 'Choose another photo' : 'Choose a photo'}
+              {value || fallback ? 'Choose another photo' : 'Choose a photo'}
               <input
                 id={id}
                 name={id}

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CAREGIVERS, CARE_TYPE_LABELS } from '../data/content'
+import { CARE_TYPE_LABELS } from '../data/content'
 import type { CareRequest } from '../data/demo'
 import { STATUS_LABELS } from '../data/statusLabels'
 import { useDemo } from '../demo/useDemo'
@@ -20,8 +20,6 @@ import { formatDate, formatStay, nightsBetween } from '../utils/validation'
 
 const heading = 'mb-4 font-slab text-title font-medium text-ink'
 
-const caregiverOf = (r: CareRequest) => CAREGIVERS.find((c) => c.id === r.caregiverId)!
-
 /** What the owner is told about the state of the request. */
 const message = (status: CareRequest['status'], name: string) =>
   ({
@@ -39,7 +37,7 @@ const message = (status: CareRequest['status'], name: string) =>
  */
 export function NpOwnerDashboard() {
   useDocumentTitle('Your requests')
-  const { account, requests, cancel, reply, setPetPhoto } = useDemo()
+  const { account, requests, cancel, reply, setPetPhoto, caregiver } = useDemo()
   const mine = requests.filter((r) => r.ownerId === account?.id)
   const [selectedId, setSelectedId] = useState('')
   const [answer, setAnswer] = useState('')
@@ -68,7 +66,7 @@ export function NpOwnerDashboard() {
                 setSelectedId(id)
                 setAnswer('')
               }}
-              who={(r) => caregiverOf(r).name}
+              who={(r) => caregiver(r.caregiverId)?.name ?? ""}
             />
             <Button soft variant="secondary" to={ROUTES.caregivers} className="mt-6 w-full">New request</Button>
           </div>
@@ -101,7 +99,7 @@ interface RequestDetailProps {
 }
 
 function RequestDetail({ request: r, answer, setAnswer, onReply, onCancel, onPhoto }: RequestDetailProps) {
-  const caregiver = caregiverOf(r)
+  const caregiver = useDemo().caregiver(r.caregiverId)!
   const nights = nightsBetween(r.start, r.end)
   const confirmed = r.status === 'confirmed'
   const open = r.status === 'requested' || r.status === 'more-info' || confirmed

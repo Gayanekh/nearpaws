@@ -60,6 +60,7 @@ export function AccountMenu() {
             Signed in as {account.name} ({account.role === 'owner' ? 'pet owner' : 'caregiver'}). Demo only.
           </p>
           <Link className={item} to={dashboard} onClick={() => setOpen(false)}>Dashboard</Link>
+          <Link className={item} to={ROUTES.profile} onClick={() => setOpen(false)}>My profile</Link>
           <button
             type="button"
             className={item}

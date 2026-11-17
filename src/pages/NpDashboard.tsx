@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { CARE_TYPE_LABELS } from '../data/content'
-import { accountById } from '../data/demo'
 import type { CareRequest } from '../data/demo'
 import { useDemo } from '../demo/useDemo'
 import { Button } from '../ui/Button'
@@ -18,7 +17,6 @@ import { formatStay } from '../utils/validation'
 const DAYS = Array.from({ length: 14 }, (_, i) => i + 1)
 const heading = 'mb-4 font-slab text-title font-medium text-ink'
 
-const ownerOf = (r: CareRequest) => accountById(r.ownerId)?.name ?? 'Pet owner'
 
 /** What the caregiver is told about the state of the request. */
 const note = (r: CareRequest) =>
@@ -37,7 +35,8 @@ const note = (r: CareRequest) =>
  */
 export function NpDashboard() {
   useDocumentTitle('Caregiver dashboard')
-  const { account, requests, accept, ask, decline, sendUpdate } = useDemo()
+  const { account, requests, accept, ask, decline, sendUpdate, nameOf } = useDemo()
+  const ownerOf = (r: CareRequest) => nameOf(r.ownerId)
   const mine = requests.filter((r) => r.caregiverId === account?.caregiverId)
   const [selectedId, setSelectedId] = useState('')
   const [text, setText] = useState('')

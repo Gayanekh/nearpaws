@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { ReactNode } from 'react'
+import { CAREGIVER_PHOTOS } from '../data/caregiverPhotos'
+import { CAREGIVERS } from '../data/content'
 import { accountById, requestFromBooking, seedRequests } from '../data/demo'
+import { uploadedPhoto, withEdits } from '../data/profile'
+import type { Profiles } from '../data/profile'
 import type { CareRequest } from '../data/demo'
 import type { RequestStatus } from '../data/statusLabels'
 import { DemoContext } from './useDemo'
@@ -14,6 +18,7 @@ import type { DemoApi } from './useDemo'
 interface DemoState {
   accountId: string | null
   requests: CareRequest[]
+  profiles: Profiles
 }
 
 const KEY = 'nearpaws-demo-v1'
@@ -23,12 +28,12 @@ const initialState = (): DemoState => {
     const raw = sessionStorage.getItem(KEY)
     if (raw) {
       const parsed = JSON.parse(raw) as DemoState
-      if (Array.isArray(parsed.requests)) return parsed
+      if (Array.isArray(parsed.requests)) return { ...parsed, profiles: parsed.profiles ?? {} }
     }
   } catch {
     // Storage is unavailable or unreadable: start from the sample data.
   }
-  return { accountId: null, requests: seedRequests() }
+  return { accountId: null, requests: seedRequests(), profiles: {} }
 }
 
 
@@ -51,12 +56,30 @@ export function DemoProvider({ children }: { children: ReactNode }) {
       status,
       messages: text ? [...r.messages, { from, text }] : r.messages,
     })
+    const base = accountById(state.accountId)
+    const edits = base ? state.profiles[base.id] : undefined
+    const account = base && edits
+      ? { ...base, name: edits.name || base.name, photo: edits.photo ? uploadedPhoto(edits.photo, edits.name || base.name) : base.photo }
+      : base
     return {
-      account: accountById(state.accountId),
+      account,
+      profile: edits ?? {},
+      nameOf: (id) => state.profiles[id]?.name || accountById(id)?.name || 'Pet owner',
+      saveProfile: (changes) =>
+        setState((s) => (s.accountId ? { ...s, profiles: { ...s.profiles, [s.accountId]: { ...s.profiles[s.accountId], ...changes } } } : s)),
+      caregiver: (id) => {
+        const c = CAREGIVERS.find((item) => item.id === id)
+        return c && withEdits(c, state.profiles[`caregiver-${id}`])
+      },
+      caregiverPhoto: (id) => {
+        const edit = state.profiles[`caregiver-${id}`]
+        const name = edit?.name || CAREGIVERS.find((c) => c.id === id)?.name || ''
+        return edit?.photo ? uploadedPhoto(edit.photo, name) : CAREGIVER_PHOTOS[id]
+      },
       requests: state.requests,
       signIn: (accountId) => setState((s) => ({ ...s, accountId })),
       signOut: () => setState((s) => ({ ...s, accountId: null })),
-      reset: () => setState({ accountId: null, requests: seedRequests() }),
+      reset: () => setState({ accountId: null, requests: seedRequests(), profiles: {} }),
       createRequest: (ownerId, values) => {
         const id = `r-${Date.now()}`
         setState((s) => ({ ...s, requests: [requestFromBooking(id, ownerId, values), ...s.requests] }))

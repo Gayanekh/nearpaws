@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { CAREGIVERS, CARE_TYPE_LABELS, HANDOVER_LABELS, PET_SIZE_LABELS } from '../data/content'
-import { CAREGIVER_PHOTOS } from '../data/caregiverPhotos'
+import { CARE_TYPE_LABELS, HANDOVER_LABELS, PET_SIZE_LABELS } from '../data/content'
+import { useDemo } from '../demo/useDemo'
 import type { Caregiver } from '../types'
 import { formatDate, nightsBetween } from '../utils/validation'
 import { ROUTES } from '../routes'
@@ -23,7 +23,8 @@ const sectionHeading = 'mb-5 font-slab text-display-md font-normal text-ink'
  */
 export function NpProfile() {
   const { id } = useParams()
-  const c = CAREGIVERS.find((item) => item.id === id)
+  const { caregiver, caregiverPhoto } = useDemo()
+  const c = caregiver(id ?? '')
   useDocumentTitle(c ? `${c.name}, sample caregiver` : 'Caregiver not found')
 
   if (!c) {
@@ -37,7 +38,7 @@ export function NpProfile() {
     )
   }
 
-  const photo = CAREGIVER_PHOTOS[c.id]
+  const photo = caregiverPhoto(c.id)
 
   return (
     <section className="mx-auto w-full max-w-360 px-(--inset) pt-10 pb-(--section) md:pt-14">
