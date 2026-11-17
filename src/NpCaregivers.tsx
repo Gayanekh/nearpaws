@@ -25,7 +25,7 @@ const CAREGIVERS: SampleCaregiver[] = [
     place: 'Maple Grove, near the community garden',
     style: '6 years’ experience · Calm and routine-led. Quiet days, steady walks and lots of couch time.',
     tags: ['At the caregiver’s home', 'At your home', 'Either handover'],
-    photo: { src: '/img/person-mara.jpg', alt: 'Portrait of a smiling woman with short blond hair (stock photo)', width: 1800, height: 1013, position: '50% 30%' },
+    photo: { src: '/img/meet-mara.jpg', alt: 'Portrait of a smiling woman with long dark hair in warm evening light (stock photo)', width: 1100, height: 1568, position: '50% 34%' },
   },
   {
     key: 'a',
@@ -35,7 +35,7 @@ const CAREGIVERS: SampleCaregiver[] = [
     place: 'Old Orchard, quiet residential street',
     style: '9 years’ experience · Gentle, experienced with medication. Patient care for older pets and special routines.',
     tags: ['At the caregiver’s home', 'At your home'],
-    photo: { src: '/img/person-priya.jpg', alt: 'Portrait of a smiling woman with long curly dark hair (stock photo)', width: 1600, height: 1200, position: '50% 25%' },
+    photo: { src: '/img/meet-priya.jpg', alt: 'Portrait of a woman with long wavy brown hair outdoors (stock photo)', width: 1100, height: 1650, position: '50% 55%' },
   },
   {
     key: 'b',
